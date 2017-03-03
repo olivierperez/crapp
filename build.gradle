@@ -28,3 +28,24 @@ ext {
     cMinSdkVersion = 15
     cTargetSdkVersion = 25
 }
+
+ext {
+    version = [
+            dagger     : '2.9',
+            butterknife: '8.3.0'
+    ]
+
+    lib = [
+            appcompat         : 'com.android.support:appcompat-v7:25.2.0',
+
+            dagger            : "com.google.dagger:dagger:${version.dagger}",
+            daggerCompile     : "com.google.dagger:dagger-compiler:${version.dagger}",
+            jsr250            : 'javax.annotation:jsr250-api:1.0',
+
+            butterknife       : "com.jakewharton:butterknife:${version.butterknife}",
+            butterknifeCompile: "com.jakewharton:butterknife-compiler:${version.butterknife}",
+
+            junit             : 'junit:junit:4.12',
+            espresso          : 'com.android.support.test.espresso:espresso-core:2.2.2'
+    ]
+}
