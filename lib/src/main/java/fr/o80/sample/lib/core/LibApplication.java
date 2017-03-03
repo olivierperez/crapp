@@ -7,4 +7,6 @@ import android.app.Application;
  */
 
 public abstract class LibApplication extends Application {
+
+    protected abstract LibConfiguration buildLibconfiguration();
 }
