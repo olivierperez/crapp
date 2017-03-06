@@ -8,6 +8,7 @@
                  android:supportsRtl="true"
     >
 
+        <activity android:name=".presentation.ui.DashboardActivity"/>
     </application>
 
 </manifest>

@@ -7,6 +7,10 @@ public class LibConfiguration {
 
     private Feature homeFeature;
 
+    public Feature getHome() {
+        return homeFeature;
+    }
+
     public static class Builder {
 
         private Feature homeFeature;

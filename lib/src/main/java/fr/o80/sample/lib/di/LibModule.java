@@ -20,7 +20,7 @@ public class LibModule {
 
     @Provides
     @Singleton
-    public LibConfiguration provideLibConfiguration() {
+    LibConfiguration provideLibConfiguration() {
         return configuration;
     }
 }

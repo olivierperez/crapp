@@ -10,7 +10,7 @@ import fr.o80.sample.lib.core.LibConfiguration;
 public class AppApplication extends LibApplication {
 
     @Override
-    protected LibConfiguration buildLibconfiguration() {
+    protected LibConfiguration buildLibConfiguration() {
         return new LibConfiguration.Builder()
                 .homeFeature(new Dashboard())
                 .build();
