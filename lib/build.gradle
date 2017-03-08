@@ -36,6 +36,10 @@ dependencies {
     annotationProcessor lib.daggerCompile
     provided lib.jsr250
 
+    // UI
+    compile lib.butterknife
+    annotationProcessor lib.butterknifeCompile
+
     // Test
     androidTestCompile(lib.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
