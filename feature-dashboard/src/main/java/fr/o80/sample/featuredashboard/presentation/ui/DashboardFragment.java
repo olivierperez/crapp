@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.o80.sample.featuredashboard.DashboardService;
 import fr.o80.sample.featuredashboard.R;
+import fr.o80.sample.featuredashboard.R2;
 
 /**
  * @author Olivier Perez
@@ -22,6 +24,9 @@ public class DashboardFragment extends Fragment {
 
     @Inject
     protected DashboardService dashboardService;
+
+    @BindView(R2.id.textView)
+    protected TextView textView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((TextView)view.findViewById(R.id.textView)).setText(R.string.lorem_ipsum);
-        Toast.makeText(getContext(), dashboardService.getTitle(), Toast.LENGTH_SHORT).show();
+        textView.setText(R.string.lorem_ipsum);
+        Toast.makeText(getActivity(), dashboardService.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }
