@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion cCompileSdkVersion
+    buildToolsVersion cBuildToolsVersion
+
     defaultConfig {
+        minSdkVersion cMinSdkVersion
+        targetSdkVersion cTargetSdkVersion
         applicationId "fr.o80.sample.sampleapplication"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode cVersionCode
+        versionName cVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

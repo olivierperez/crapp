@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion cMinSdkVersion
         targetSdkVersion cTargetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode cVersionCode
+        versionName cVersionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
