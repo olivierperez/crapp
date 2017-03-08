@@ -28,6 +28,7 @@ android {
 dependencies {
     // Support
     compile lib.appcompat
+    compile lib.supportDesign
 
     // Dependency injection
     compile lib.dagger

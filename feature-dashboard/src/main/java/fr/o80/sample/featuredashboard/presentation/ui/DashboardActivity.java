@@ -3,6 +3,7 @@ package fr.o80.sample.featuredashboard.presentation.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -34,6 +35,9 @@ public class DashboardActivity extends AppCompatActivity {
                 .dashboardModule(new DashboardModule())
                 .build();
         component.inject(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         ((TextView)findViewById(R.id.textView)).setText(dashboardService.getTitle());
     }

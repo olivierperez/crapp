@@ -32,11 +32,15 @@ ext {
 ext {
     version = [
             dagger     : '2.9',
-            butterknife: '8.3.0'
+            butterknife: '8.3.0',
+            support    : '25.2.0'
     ]
 
     lib = [
-            appcompat         : 'com.android.support:appcompat-v7:25.2.0',
+            appcompat         : "com.android.support:appcompat-v7:${version.support}",
+            supportDesign     : "com.android.support:design:${version.support}",
+            recyclerView      : "com.android.support:recyclerview-v7:${version.support}",
+            cardView          : "comcom.android.support:cardview:${version.support}",
 
             dagger            : "com.google.dagger:dagger:${version.dagger}",
             daggerCompile     : "com.google.dagger:dagger-compiler:${version.dagger}",
@@ -44,6 +48,8 @@ ext {
 
             butterknife       : "com.jakewharton:butterknife:${version.butterknife}",
             butterknifeCompile: "com.jakewharton:butterknife-compiler:${version.butterknife}",
+
+            recyclerAnimator  : 'jp.wasabeef:recyclerview-animators:2.2.5',
 
             junit             : 'junit:junit:4.12',
             espresso          : 'com.android.support.test.espresso:espresso-core:2.2.2'
