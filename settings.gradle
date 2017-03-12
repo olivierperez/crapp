@@ -1,1 +1,1 @@
-include ':app', ':lib', ':feature-dashboard'
+include ':app', ':lib', ':feature-dashboard', ':feature-qr-scan'
