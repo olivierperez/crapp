@@ -39,6 +39,7 @@ dependencies {
     // UI
     compile lib.butterknife
     annotationProcessor lib.butterknifeCompile
+    compile lib.circleImageView
 
     // Test
     androidTestCompile(lib.espresso, {
