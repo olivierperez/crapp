@@ -29,6 +29,7 @@ dependencies {
 
     // Features
     compile project(path: ':feature-dashboard')
+    compile project(path: ':feature-qr-scan')
 
     // Support
     compile lib.appcompat

@@ -1,7 +1,8 @@
-package fr.o80.featureqrscan;
+package fr.o80.featureqrscan.feature;
 
 import android.content.Context;
 
+import fr.o80.featureqrscan.R;
 import fr.o80.sample.lib.core.Feature;
 
 /**
@@ -16,12 +17,12 @@ public class QRScan implements Feature {
 
     @Override
     public int getTitle() {
-        return R.string.feature_title;
+        return R.string.qrscan_title;
     }
 
     @Override
     public int getIcon() {
-        return 0;
+        return R.drawable.ic_qrscan_menu;
     }
 
 }

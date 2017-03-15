@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import fr.o80.sample.featuredashboard.DashboardService;
 import fr.o80.sample.lib.core.LibConfiguration;
+import fr.o80.sample.lib.dagger.FeatureScope;
 
 /**
  * @author Olivier Perez

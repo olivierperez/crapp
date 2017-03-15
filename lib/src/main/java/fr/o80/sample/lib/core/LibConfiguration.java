@@ -38,5 +38,10 @@ public class LibConfiguration {
             features.add(feature);
             return this;
         }
+
+        public Builder addFeature(Feature feature) {
+            features.add(feature);
+            return this;
+        }
     }
 }

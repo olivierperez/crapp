@@ -1,4 +1,4 @@
-package fr.o80.sample.featuredashboard.dagger;
+package fr.o80.sample.lib.dagger;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

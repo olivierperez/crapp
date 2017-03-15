@@ -20,7 +20,7 @@ public class Dashboard implements Feature {
 
     @Override
     public int getTitle() {
-        return R.string.feature_title;
+        return R.string.dashboard_title;
     }
 
     @Override
