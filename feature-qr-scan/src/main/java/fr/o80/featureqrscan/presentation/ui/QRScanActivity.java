@@ -23,7 +23,7 @@ public class QRScanActivity extends BaseDrawerActivity {
 
     @Override
     protected Fragment getInitFragment() {
-        return null;
+        return QRScanFragment.newInstance();
     }
 
     public QRScanComponent component() {
