@@ -1,38 +1,29 @@
 package fr.o80.featureqrscan.presentation.ui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.app.Fragment;
 
 import fr.o80.featureqrscan.DaggerQRScanComponent;
 import fr.o80.featureqrscan.QRScanComponent;
-import fr.o80.featureqrscan.R;
 import fr.o80.sample.lib.core.LibApplication;
+import fr.o80.sample.lib.core.ui.BaseDrawerActivity;
 
 /**
  * @author Olivier Perez
  */
-public class QRScanActivity extends AppCompatActivity {
+public class QRScanActivity extends BaseDrawerActivity {
 
     private QRScanComponent component;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple);
-
+    protected void initDagger() {
         component = DaggerQRScanComponent.builder()
                 .libComponent(((LibApplication) getApplication()).component())
                 .build();
+    }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        /*getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_container, new DashboardFragment())
-                .commit();*/
+    @Override
+    protected Fragment getInitFragment() {
+        return null;
     }
 
     public QRScanComponent component() {
