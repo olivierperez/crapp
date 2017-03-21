@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -20,6 +21,9 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
 
     @BindView(R2.id.navigation_view)
     protected LibNavigationView libNavigationView;
+
+    @BindView(R2.id.drawer_layout)
+    protected DrawerLayout drawer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
 
     @Override
     public void onFeatureClicked(Feature feature) {
+        drawer.closeDrawers();
         feature.open(this);
     }
 
