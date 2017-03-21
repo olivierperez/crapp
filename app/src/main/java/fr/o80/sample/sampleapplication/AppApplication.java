@@ -4,11 +4,18 @@ import fr.o80.featureqrscan.feature.QRScan;
 import fr.o80.sample.featuredashboard.feature.Dashboard;
 import fr.o80.sample.lib.core.LibApplication;
 import fr.o80.sample.lib.core.LibConfiguration;
+import io.victoralbertos.rx2_permissions_result.RxPermissionsResult;
 
 /**
  * @author Olivier Perez
  */
 public class AppApplication extends LibApplication {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        RxPermissionsResult.register(this);
+    }
 
     @Override
     protected LibConfiguration buildLibConfiguration() {

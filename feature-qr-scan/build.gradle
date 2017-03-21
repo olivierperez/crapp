@@ -41,6 +41,10 @@ dependencies {
     annotationProcessor lib.daggerCompile
     provided lib.jsr250
 
+    // Rx
+    compile lib.rxPermissions
+    compile lib.rxJava
+
     // Tests
     androidTestCompile(lib.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'

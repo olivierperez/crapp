@@ -34,6 +34,10 @@ dependencies {
     // Support
     compile lib.appcompat
 
+    // Rx
+    compile lib.rxPermissions
+    compile lib.rxJava
+
     // Tests
     androidTestCompile(lib.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'

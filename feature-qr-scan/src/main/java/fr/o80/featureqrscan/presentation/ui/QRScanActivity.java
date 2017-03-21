@@ -1,25 +1,48 @@
 package fr.o80.featureqrscan.presentation.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.journeyapps.barcodescanner.CaptureActivity;
+
+import io.reactivex.functions.Consumer;
+import io.victoralbertos.rx2_permissions_result.Result;
+import io.victoralbertos.rx2_permissions_result.RxPermissionsResult;
 
 /**
  * This class starts the QR code scanning and handle the result.
  *
  * @author Olivier Perez
  */
-public class QRScanActivity extends CaptureActivity {
+public class QRScanActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new IntentIntegrator(this).initiateScan();
+        String[] permissions = {Manifest.permission.CAMERA};
+
+        RxPermissionsResult.on(this)
+                .requestPermissions(permissions)
+                .subscribe(new Consumer<Result<QRScanActivity>>() {
+                               @Override
+                               public void accept(Result<QRScanActivity> result) throws Exception {
+                                   result.targetUI()
+                                           .goScan(result.permissions(), result.grantResults());
+                               }
+                           }
+                );
+    }
+
+    private void goScan(String[] permissions, int[] grantResults) {
+        if (Manifest.permission.CAMERA.equals(permissions[0]) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            new IntentIntegrator(this).initiateScan();
+        }
     }
 
     @Override

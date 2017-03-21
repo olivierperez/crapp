@@ -17,6 +17,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -27,7 +28,7 @@ task clean(type: Delete) {
 ext {
     cCompileSdkVersion = 25
     cBuildToolsVersion = "25.0.2"
-    cMinSdkVersion = 15
+    cMinSdkVersion = 16
     cTargetSdkVersion = 25
     cVersionCode = 1
     cVersionName = '1.0'
@@ -55,6 +56,9 @@ ext {
             circleImageView   : 'de.hdodenhof:circleimageview:1.3.0',
 
             recyclerAnimator  : 'jp.wasabeef:recyclerview-animators:2.2.5',
+
+            rxPermissions     : 'com.github.VictorAlbertos.RxPermissionsResult:rx2:0.0.4',
+            rxJava            : 'io.reactivex.rxjava2:rxjava:2.0.0',
 
             junit             : 'junit:junit:4.12',
             espresso          : 'com.android.support.test.espresso:espresso-core:2.2.2'
