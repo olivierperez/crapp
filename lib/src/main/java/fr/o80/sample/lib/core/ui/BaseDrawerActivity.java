@@ -32,12 +32,8 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
 
         ButterKnife.bind(this);
 
-        initDagger();
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        libNavigationView.setListener(this);
 
         FragmentManager fragmentManager = getFragmentManager();
         if (fragmentManager.findFragmentById(R.id.main_container) == null) {
@@ -50,6 +46,15 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
                         .commit();
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initDagger();
+
+        libNavigationView.setListener(this);
     }
 
     @Override

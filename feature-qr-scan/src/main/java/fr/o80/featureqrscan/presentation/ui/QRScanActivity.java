@@ -1,16 +1,17 @@
 package fr.o80.featureqrscan.presentation.ui;
 
 import android.Manifest;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import fr.o80.sample.lib.core.ui.BaseDrawerActivity;
 import io.reactivex.functions.Consumer;
 import io.victoralbertos.rx2_permissions_result.Result;
 import io.victoralbertos.rx2_permissions_result.RxPermissionsResult;
@@ -20,7 +21,7 @@ import io.victoralbertos.rx2_permissions_result.RxPermissionsResult;
  *
  * @author Olivier Perez
  */
-public class QRScanActivity extends AppCompatActivity {
+public class QRScanActivity extends BaseDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,18 @@ public class QRScanActivity extends AppCompatActivity {
     }
 
     @Override
+    protected Fragment getInitFragment() {
+        return QRScanHistory.newInstance();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
                 Log.d("QRScanActivity", "Cancelled scan");
-                finish();
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                // TODO Do somthing cool
             } else {
                 Log.d("QRScanActivity", "Scanned");
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_SHORT).show();

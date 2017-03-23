@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -26,9 +25,8 @@ public class DashboardFragment extends BaseFragment {
     protected TextView textView;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onResume() {
+        super.onResume();
         ((DashboardActivity)getActivity()).component().inject(this);
     }
 
@@ -36,7 +34,6 @@ public class DashboardFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         textView.setText(R.string.lorem_ipsum);
-        Toast.makeText(getActivity(), dashboardService.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
