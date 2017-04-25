@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- LibTheme -->
+    <style name="LibTheme" parent="BaseLibTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+</resources>

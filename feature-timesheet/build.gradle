@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion cCompileSdkVersion
@@ -7,31 +7,20 @@ android {
     defaultConfig {
         minSdkVersion cMinSdkVersion
         targetSdkVersion cTargetSdkVersion
-        applicationId "fr.o80.sample.sampleapplication"
         versionCode cVersionCode
         versionName cVersionName
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
 
-    signingConfigs {
-        debug {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('/home/A570709/perso/SampleApplication/debug.keystore')
-            storePassword 'android'
-        }
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
         }
         debug {
             debuggable true
             minifyEnabled false
-            signingConfig signingConfigs.debug
         }
     }
 }
@@ -39,16 +28,19 @@ android {
 dependencies {
     compile project(path: ':lib')
 
-    // Features
-    compile project(path: ':feature-dashboard')
-    compile project(path: ':feature-qr-scan')
-    compile project(path: ':feature-timesheet')
-
     // Support
     compile lib.appcompat
 
+    // UI
+    compile lib.butterknife
+    annotationProcessor lib.butterknifeCompile
+
+    // Dependency injection
+    compile lib.dagger
+    annotationProcessor lib.daggerCompile
+    provided lib.jsr250
+
     // Rx
-    compile lib.rxPermissions
     compile lib.rxJava
 
     // Tests

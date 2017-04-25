@@ -4,6 +4,7 @@ import fr.o80.featureqrscan.feature.QRScan;
 import fr.o80.sample.featuredashboard.feature.Dashboard;
 import fr.o80.sample.lib.core.LibApplication;
 import fr.o80.sample.lib.core.LibConfiguration;
+import fr.o80.sample.timesheet.Timesheet;
 import io.victoralbertos.rx2_permissions_result.RxPermissionsResult;
 
 /**
@@ -21,6 +22,7 @@ public class AppApplication extends LibApplication {
     protected LibConfiguration buildLibConfiguration() {
         return new LibConfiguration.Builder()
                 .homeFeature(new Dashboard())
+                .addFeature(new Timesheet())
                 .addFeature(new QRScan())
                 .build();
     }
