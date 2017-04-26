@@ -11,4 +11,8 @@
     <!-- LibTheme -->
     <style name="LibTheme" parent="BaseLibTheme"/>
 
+    <style name="LibTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="LibTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

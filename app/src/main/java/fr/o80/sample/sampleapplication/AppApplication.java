@@ -21,8 +21,8 @@ public class AppApplication extends LibApplication {
     @Override
     protected LibConfiguration buildLibConfiguration() {
         return new LibConfiguration.Builder()
-                .homeFeature(new Dashboard())
-                .addFeature(new Timesheet())
+                .homeFeature(new Timesheet())
+                .addFeature(new Dashboard())
                 .addFeature(new QRScan())
                 .build();
     }

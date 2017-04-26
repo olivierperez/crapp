@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -33,7 +34,7 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple);
+        setContentView(getLayoutId());
 
         ButterKnife.bind(this);
 
@@ -63,9 +64,16 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
         // Set the drawer toggle as the DrawerListener
         drawer.addDrawerListener(drawerToggle);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
 
+    }
+
+    protected int getLayoutId() {
+        return R.layout.activity_drawer_w_appbar;
     }
 
     @Override

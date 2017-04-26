@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import fr.o80.sample.lib.core.ui.BaseDrawerActivity;
+import fr.o80.sample.timesheet.R;
 
 /**
  * @author Olivier Perez
@@ -17,6 +18,11 @@ public class TimesheetActivity extends BaseDrawerActivity {
 
     @Override
     protected Fragment getInitFragment() {
-        return null;
+        return TimesheetEntriesFragment.newInstance();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_drawer_simple;
     }
 }

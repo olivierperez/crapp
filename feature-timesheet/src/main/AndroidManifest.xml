@@ -1,2 +1,7 @@
 <manifest package="fr.o80.sample.timesheet"
-          xmlns:android="http://schemas.android.com/apk/res/android"/>
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity android:name=".presentation.ui.TimesheetActivity"/>
+    </application>
+</manifest>
