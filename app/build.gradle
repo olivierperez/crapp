@@ -41,7 +41,6 @@ dependencies {
 
     // Features
     compile project(path: ':feature-dashboard')
-    compile project(path: ':feature-qr-scan')
     compile project(path: ':feature-timesheet')
 
     // Support
