@@ -14,9 +14,9 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.o80.sample.lib.R;
+import fr.o80.sample.lib.R2;
 import fr.o80.sample.lib.core.Feature;
-import sample.o80.fr.lib.R;
-import sample.o80.fr.lib.R2;
 
 /**
  * @author Olivier Perez

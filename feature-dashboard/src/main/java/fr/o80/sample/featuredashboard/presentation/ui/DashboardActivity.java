@@ -19,7 +19,6 @@ public class DashboardActivity extends BaseDrawerActivity {
     protected void initDagger() {
         component = DaggerDashboardComponent.builder()
                 .libComponent(((LibApplication) getApplication()).component())
-                .dashboardModule(new DashboardModule())
                 .build();
     }
 
