@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,6 +17,8 @@ import fr.o80.sample.timesheet.R;
 import fr.o80.sample.timesheet.R2;
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter;
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * @author Olivier Perez
@@ -27,6 +30,10 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
 
     @BindView(R2.id.recyclerView)
     protected RecyclerView recyclerView;
+
+    private TimesheetAdapter adapter;
+
+    private PublishSubject<Void> onInit = PublishSubject.create();
 
     public static TimesheetEntriesFragment newInstance() {
         return new TimesheetEntriesFragment();
@@ -42,7 +49,11 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
         super.onResume();
         ((TimesheetActivity) getActivity()).component().inject(this);
 
-        presenter.init();
+        adapter = new TimesheetAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        onInit.onNext(null);
     }
 
     @Override
@@ -59,5 +70,10 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
+    }
+
+    @Override
+    public Observable<Void> onInit() {
+        return onInit;
     }
 }

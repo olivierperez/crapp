@@ -24,6 +24,10 @@ android {
             minifyEnabled false
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -43,6 +47,10 @@ dependencies {
 
     // Rx
     compile lib.rxJava
+
+    annotationProcessor lib.autovalue
+    compile lib.autovalue
+    compile lib.timber
 
     // Tests
     androidTestCompile(lib.espresso, {
