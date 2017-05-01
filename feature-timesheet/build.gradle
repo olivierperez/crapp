@@ -48,8 +48,9 @@ dependencies {
     // Rx
     compile lib.rxJava
 
+    provided 'javax.annotation:jsr250-api:1.0'
+    provided lib.autovalue
     annotationProcessor lib.autovalue
-    compile lib.autovalue
     compile lib.timber
 
     // Tests

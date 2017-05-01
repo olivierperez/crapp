@@ -4,6 +4,8 @@ import com.google.auto.value.AutoValue;
 
 import java.util.List;
 
+import fr.o80.sample.timesheet.data.entity.TimeEntry;
+
 /**
  * @author Olivier Perez
  */
@@ -14,7 +16,7 @@ public abstract class EntryViewModel {
         return new AutoValue_EntryViewModel(true, false, null, null);
     }
 
-    public static EntryViewModel success(List<Object> entries) {
+    public static EntryViewModel success(List<TimeEntry> entries) {
         return new AutoValue_EntryViewModel(false, true, null, entries);
     }
 
@@ -25,5 +27,5 @@ public abstract class EntryViewModel {
     public abstract boolean loading();
     public abstract boolean succeeded();
     public abstract Throwable throwable();
-    public abstract List<Object> entries();
+    public abstract List<TimeEntry> entries();
 }

@@ -9,12 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import fr.o80.sample.lib.core.ui.BaseFragment;
 import fr.o80.sample.timesheet.R;
 import fr.o80.sample.timesheet.R2;
+import fr.o80.sample.timesheet.data.entity.TimeEntry;
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter;
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView;
 import io.reactivex.Observable;
@@ -75,5 +78,25 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
     @Override
     public Observable<Void> onInit() {
         return onInit;
+    }
+
+    @Override
+    public void showTimeEntries(List<TimeEntry> entries) {
+        adapter.setItems(entries);
+    }
+
+    @Override
+    public void showError() {
+        // TODO
+    }
+
+    @Override
+    public void showLoading() {
+        // TODO
+    }
+
+    @Override
+    public void hideLoading() {
+        // TODO
     }
 }
