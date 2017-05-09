@@ -10,6 +10,8 @@ android {
         applicationId "fr.o80.sample.sampleapplication"
         versionCode cVersionCode
         versionName cVersionName
+        multiDexEnabled true
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,6 +35,11 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.debug
         }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 }
 

@@ -10,6 +10,7 @@ android {
         targetSdkVersion cTargetSdkVersion
         versionCode cVersionCode
         versionName cVersionName
+        multiDexEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -30,6 +31,7 @@ dependencies {
     // Support
     compile lib.appcompat
     compile lib.supportDesign
+    compile lib.multidex
 
     // Dependency injection
     compile lib.dagger
