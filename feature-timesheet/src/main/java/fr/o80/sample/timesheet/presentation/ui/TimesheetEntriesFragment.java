@@ -14,6 +14,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import fr.o80.sample.lib.core.Irrelevant;
+import fr.o80.sample.lib.core.presenter.Presenter;
 import fr.o80.sample.lib.core.ui.BaseFragment;
 import fr.o80.sample.timesheet.R;
 import fr.o80.sample.timesheet.R2;
@@ -36,7 +38,7 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
 
     private TimesheetAdapter adapter;
 
-    private PublishSubject<Void> onInit = PublishSubject.create();
+    private PublishSubject<Irrelevant> onInit = PublishSubject.create();
 
     public static TimesheetEntriesFragment newInstance() {
         return new TimesheetEntriesFragment();
@@ -48,15 +50,25 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
     }
 
     @Override
+    protected Presenter presenter() {
+        return presenter;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((TimesheetActivity) getActivity()).component().inject(this);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        ((TimesheetActivity) getActivity()).component().inject(this);
 
         adapter = new TimesheetAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        onInit.onNext(null);
+        onInit.onNext(Irrelevant.INSTANCE);
     }
 
     @Override
@@ -76,7 +88,7 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
     }
 
     @Override
-    public Observable<Void> onInit() {
+    public Observable<Irrelevant> onInit() {
         return onInit;
     }
 

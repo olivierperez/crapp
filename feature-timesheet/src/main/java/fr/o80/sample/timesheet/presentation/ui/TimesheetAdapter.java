@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.o80.sample.timesheet.R;
 import fr.o80.sample.timesheet.R2;
 import fr.o80.sample.timesheet.data.entity.TimeEntry;
@@ -22,7 +23,7 @@ public class TimesheetAdapter extends RecyclerView.Adapter<TimesheetAdapter.Entr
 
     @Override
     public EntryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_timesheet, parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_timesheet, parent, false);
         return new EntryViewHolder(view);
     }
 
@@ -38,7 +39,7 @@ public class TimesheetAdapter extends RecyclerView.Adapter<TimesheetAdapter.Entr
 
     @Override
     public int getItemCount() {
-        return items == null ? 1 : items.size();
+        return items == null ? 0 : items.size();
     }
 
     public void setItems(List<TimeEntry> entries) {
@@ -56,6 +57,7 @@ public class TimesheetAdapter extends RecyclerView.Adapter<TimesheetAdapter.Entr
 
         public EntryViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         public void bind(TimeEntry timeEntry) {

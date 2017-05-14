@@ -11,6 +11,7 @@ import butterknife.BindView;
 import fr.o80.sample.featuredashboard.DashboardService;
 import fr.o80.sample.featuredashboard.R;
 import fr.o80.sample.featuredashboard.R2;
+import fr.o80.sample.lib.core.presenter.Presenter;
 import fr.o80.sample.lib.core.ui.BaseFragment;
 
 /**
@@ -39,5 +40,20 @@ public class DashboardFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_dashboard;
+    }
+
+    @Override
+    protected Presenter presenter() {
+        return null;
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 }

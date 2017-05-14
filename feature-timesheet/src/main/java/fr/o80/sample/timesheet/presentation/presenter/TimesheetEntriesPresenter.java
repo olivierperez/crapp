@@ -23,9 +23,10 @@ public class TimesheetEntriesPresenter extends Presenter<TimesheetEntriesView> {
 
     @Override
     public void attach(TimesheetEntriesView view) {
-        getView()
+        super.attach(view);
+        addDisposable(getView()
                 .onInit()
-                .flatMap(v ->
+                .flatMap(ignored ->
                         listEntries.all()
                                 .map(EntryViewModel::success)
                                 .startWith(EntryViewModel.inProgress())
@@ -41,7 +42,7 @@ public class TimesheetEntriesPresenter extends Presenter<TimesheetEntriesView> {
                         view.hideLoading();
                         view.showError();
                     }
-                });
+                }));
     }
 
 }

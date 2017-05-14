@@ -38,6 +38,9 @@ dependencies {
     annotationProcessor lib.daggerCompile
     provided lib.jsr250
 
+    // Rx
+    compile lib.rxJava
+
     // UI
     compile lib.butterknife
     annotationProcessor lib.butterknifeCompile

@@ -70,6 +70,8 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
             actionBar.setHomeButtonEnabled(true);
         }
 
+        initDagger();
+
     }
 
     protected int getLayoutId() {
@@ -87,8 +89,6 @@ public abstract class BaseDrawerActivity extends AppCompatActivity implements Li
     @Override
     protected void onResume() {
         super.onResume();
-
-        initDagger();
 
         libNavigationView.setListener(this);
     }

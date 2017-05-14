@@ -10,14 +10,18 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import fr.o80.sample.lib.core.presenter.Presenter;
+import fr.o80.sample.lib.core.presenter.PresenterView;
 
 /**
  * Base Fragment for every
+ *
  * @author Olivier Perez
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements PresenterView {
 
     private Unbinder unbinder;
+    private Presenter presenter;
 
     @Nullable
     @Override
@@ -33,7 +37,26 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter = presenter();
+        if (presenter != null) {
+            presenter.attach(this);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (presenter != null) {
+            presenter.dettach();
+        }
+        super.onPause();
+    }
+
     @LayoutRes
     protected abstract int getLayoutId();
+
+    protected abstract Presenter presenter();
 
 }

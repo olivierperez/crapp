@@ -1,5 +1,7 @@
 package fr.o80.sample.timesheet.presentation.model;
 
+import android.support.annotation.Nullable;
+
 import com.google.auto.value.AutoValue;
 
 import java.util.List;
@@ -25,7 +27,12 @@ public abstract class EntryViewModel {
     }
 
     public abstract boolean loading();
+
     public abstract boolean succeeded();
+
+    @Nullable
     public abstract Throwable throwable();
+
+    @Nullable
     public abstract List<TimeEntry> entries();
 }
