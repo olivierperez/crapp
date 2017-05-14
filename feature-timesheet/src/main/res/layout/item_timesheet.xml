@@ -4,24 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     card_view:cardCornerRadius="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/project_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             tools:text="Project one" />
 
         <TextView
             android:id="@+id/project_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Code AAA.BBB.ZZZ" />
+            tools:text="Code AAA.BBB.ZZZ"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
