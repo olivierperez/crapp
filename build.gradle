@@ -45,7 +45,7 @@ ext {
             appcompat         : "com.android.support:appcompat-v7:${version.support}",
             supportDesign     : "com.android.support:design:${version.support}",
             recyclerView      : "com.android.support:recyclerview-v7:${version.support}",
-            cardView          : "comcom.android.support:cardview:${version.support}",
+            cardView          : "com.android.support:cardview-v7:${version.support}",
             multidex          : 'com.android.support:multidex:1.0.1',
 
             dagger            : "com.google.dagger:dagger:${version.dagger}",
