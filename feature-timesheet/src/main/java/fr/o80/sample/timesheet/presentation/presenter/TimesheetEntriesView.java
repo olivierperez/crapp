@@ -2,7 +2,6 @@ package fr.o80.sample.timesheet.presentation.presenter;
 
 import java.util.List;
 
-import fr.o80.sample.lib.core.Irrelevant;
 import fr.o80.sample.lib.core.presenter.PresenterView;
 import fr.o80.sample.timesheet.data.entity.TimeEntry;
 import io.reactivex.Observable;
@@ -11,8 +10,6 @@ import io.reactivex.Observable;
  * @author Olivier Perez
  */
 public interface TimesheetEntriesView extends PresenterView {
-    Observable<Irrelevant> onInit();
-
     void showTimeEntries(List<TimeEntry> entries);
     void showError();
 }

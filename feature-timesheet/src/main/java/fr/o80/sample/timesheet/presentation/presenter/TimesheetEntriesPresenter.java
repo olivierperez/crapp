@@ -21,28 +21,22 @@ public class TimesheetEntriesPresenter extends Presenter<TimesheetEntriesView> {
         this.listEntries = listEntries;
     }
 
-    @Override
-    public void attach(TimesheetEntriesView view) {
-        super.attach(view);
-        addDisposable(getView()
-                .onInit()
-                .flatMap(ignored ->
-                        listEntries.all()
-                                .map(EntryViewModel::success)
-                                .startWith(EntryViewModel.inProgress())
-                                .onErrorReturn(EntryViewModel::error))
+    public void init() {
+        addDisposable(listEntries.all()
+                .map(EntryViewModel::success)
+                .startWith(EntryViewModel.inProgress())
+                .onErrorReturn(EntryViewModel::error)
                 .subscribe(result -> {
                     if (result.loading()) {
-                        view.showLoading();
+                        getView().showLoading();
                     } else if (result.succeeded()) {
-                        view.hideLoading();
-                        view.showTimeEntries(result.entries());
+                        getView().hideLoading();
+                        getView().showTimeEntries(result.entries());
                     } else {
                         Timber.e(result.throwable(), "Cannot load time entries");
-                        view.hideLoading();
-                        view.showError();
+                        getView().hideLoading();
+                        getView().showError();
                     }
                 }));
     }
-
 }

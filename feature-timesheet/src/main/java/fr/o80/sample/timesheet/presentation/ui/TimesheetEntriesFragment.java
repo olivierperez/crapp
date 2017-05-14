@@ -14,7 +14,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import fr.o80.sample.lib.core.Irrelevant;
 import fr.o80.sample.lib.core.presenter.Presenter;
 import fr.o80.sample.lib.core.ui.BaseFragment;
 import fr.o80.sample.timesheet.R;
@@ -22,8 +21,6 @@ import fr.o80.sample.timesheet.R2;
 import fr.o80.sample.timesheet.data.entity.TimeEntry;
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter;
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView;
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
 
 /**
  * @author Olivier Perez
@@ -37,8 +34,6 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
     protected RecyclerView recyclerView;
 
     private TimesheetAdapter adapter;
-
-    private PublishSubject<Irrelevant> onInit = PublishSubject.create();
 
     public static TimesheetEntriesFragment newInstance() {
         return new TimesheetEntriesFragment();
@@ -64,11 +59,13 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
     public void onResume() {
         super.onResume();
 
-        adapter = new TimesheetAdapter();
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (adapter == null) {
+            adapter = new TimesheetAdapter();
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        onInit.onNext(Irrelevant.INSTANCE);
+            presenter.init();
+        }
     }
 
     @Override
@@ -85,11 +82,6 @@ public class TimesheetEntriesFragment extends BaseFragment implements TimesheetE
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
-    }
-
-    @Override
-    public Observable<Irrelevant> onInit() {
-        return onInit;
     }
 
     @Override
