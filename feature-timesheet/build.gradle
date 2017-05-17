@@ -46,6 +46,12 @@ dependencies {
     annotationProcessor lib.daggerCompile
     provided lib.jsr250
 
+    // Data
+    annotationProcessor lib.dbflowCompile
+    compile lib.dbflowCore
+    compile lib.dbflow
+    compile lib.dbflowRx2
+
     // Rx
     compile lib.rxJava
 

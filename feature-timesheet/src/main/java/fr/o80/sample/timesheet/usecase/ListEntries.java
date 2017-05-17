@@ -1,12 +1,12 @@
 package fr.o80.sample.timesheet.usecase;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import fr.o80.sample.lib.dagger.FeatureScope;
 import fr.o80.sample.timesheet.data.entity.TimeEntry;
+import fr.o80.sample.timesheet.presentation.data.TimesheetRepository;
 import io.reactivex.Observable;
 
 /**
@@ -15,13 +15,14 @@ import io.reactivex.Observable;
 @FeatureScope
 public class ListEntries {
 
+    private final TimesheetRepository timesheetRepository;
+
     @Inject
-    public ListEntries() {
+    public ListEntries(TimesheetRepository timesheetRepository) {
+        this.timesheetRepository = timesheetRepository;
     }
 
     public Observable<List<TimeEntry>> all() {
-        return Observable.just(Arrays.asList(
-                TimeEntry.create("Mobile - Project 1", "AB.0123456789.02"),
-                TimeEntry.create("Stagiaire", "ST.9898989898.05")));
+        return timesheetRepository.all().toObservable();
     }
 }
