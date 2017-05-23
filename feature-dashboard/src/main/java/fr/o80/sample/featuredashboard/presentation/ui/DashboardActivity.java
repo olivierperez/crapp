@@ -4,7 +4,6 @@ import android.app.Fragment;
 
 import fr.o80.sample.featuredashboard.dagger.DaggerDashboardComponent;
 import fr.o80.sample.featuredashboard.dagger.DashboardComponent;
-import fr.o80.sample.featuredashboard.dagger.DashboardModule;
 import fr.o80.sample.lib.core.LibApplication;
 import fr.o80.sample.lib.core.ui.BaseDrawerActivity;
 

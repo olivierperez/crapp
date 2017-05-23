@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import fr.o80.sample.lib.di.DaggerLibComponent;
@@ -32,7 +33,16 @@ public abstract class LibApplication extends Application {
         component = DaggerLibComponent.builder()
                 .libModule(new LibModule(buildLibConfiguration()))
                 .build();
-        FlowManager.init(this);
+        FlowManager.init(new FlowConfig
+                .Builder(this)
+                .openDatabasesOnInit(true)
+                .build());
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        FlowManager.destroy();
     }
 
     public LibComponent component() {

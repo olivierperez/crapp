@@ -61,8 +61,8 @@ public class TimesheetAdapter extends RecyclerView.Adapter<TimesheetAdapter.Entr
         }
 
         public void bind(TimeEntry timeEntry) {
-            projectName.setText(timeEntry.project());
-            projectCode.setText(timeEntry.code());
+            projectName.setText(timeEntry.getProject());
+            projectCode.setText(timeEntry.getCode());
         }
     }
 }
