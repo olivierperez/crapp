@@ -28,35 +28,39 @@ android {
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile lib.kotlin
 
     // Support
-    compile lib.appcompat
-    compile lib.supportDesign
-    compile lib.multidex
+    api lib.appcompat
+    api lib.supportDesign
+    api lib.multidex
 
     // Dependency injection
-    compile lib.dagger
-    annotationProcessor lib.daggerCompile
-    provided lib.jsr250
+    implementation lib.dagger
+    kapt lib.daggerCompile
+    lib.jsr250
 
     // Rx
     compile lib.rxJava
 
     // Data
-    annotationProcessor lib.dbflowCompile
+    kapt lib.dbflowCompile
     compile lib.dbflowCore
     compile lib.dbflow
     compile lib.dbflowRx2
 
     // UI
     compile lib.butterknife
-    annotationProcessor lib.butterknifeCompile
+    kapt lib.butterknifeCompile
     compile lib.circleImageView
 
     // Test

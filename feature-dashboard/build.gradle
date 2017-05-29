@@ -27,12 +27,16 @@ android {
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile lib.kotlin
     compile project(path: ':lib')
 
     // Support
@@ -40,11 +44,11 @@ dependencies {
 
     // UI
     compile lib.butterknife
-    annotationProcessor lib.butterknifeCompile
+    kapt lib.butterknifeCompile
 
     // Dependency injection
     compile lib.dagger
-    annotationProcessor lib.daggerCompile
+    kapt lib.daggerCompile
     provided lib.jsr250
 
     // Tests

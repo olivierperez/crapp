@@ -29,6 +29,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
+
+}
+
+kapt {
+    generateStubs = true
 }
 
 repositories {
@@ -36,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile lib.kotlin
     compile project(path: ':lib')
 
     // Support
@@ -45,15 +50,15 @@ dependencies {
 
     // UI
     compile lib.butterknife
-    annotationProcessor lib.butterknifeCompile
+    kapt lib.butterknifeCompile
 
     // Dependency injection
     compile lib.dagger
-    annotationProcessor lib.daggerCompile
+    kapt lib.daggerCompile
     provided lib.jsr250
 
     // Data
-    annotationProcessor lib.dbflowCompile
+    kapt lib.dbflowCompile
     compile lib.dbflowCore
     compile lib.dbflow
     compile lib.dbflowRx2
@@ -63,7 +68,7 @@ dependencies {
 
     provided 'javax.annotation:jsr250-api:1.0'
     provided lib.autovalue
-    annotationProcessor lib.autovalue
+    kapt lib.autovalue
     compile lib.timber
 
     // Tests
