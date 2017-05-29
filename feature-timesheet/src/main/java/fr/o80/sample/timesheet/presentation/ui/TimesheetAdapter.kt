@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
-import fr.o80.sample.timesheet.R2
 import fr.o80.sample.timesheet.data.entity.TimeEntry
 
 /**
  * @author Olivier Perez
  */
-class TimesheetAdapter : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
+class TimesheetAdapter(val listener: (TimeEntry) -> Unit) : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
 
     private var items: List<TimeEntry>? = null
 
@@ -37,14 +36,15 @@ class TimesheetAdapter : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>(
 
     inner class EntryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val projectName: TextView by bindView(R2.id.project_name)
-        val projectCode: TextView by bindView(R2.id.project_code)
+        val projectName: TextView by bindView(R.id.project_name)
+        val projectCode: TextView by bindView(R.id.project_code)
 
         fun bind(timeEntry: TimeEntry) {
-            with (timeEntry) {
+            with(timeEntry) {
                 projectName.text = project
                 projectCode.text = code
             }
+            itemView.setOnClickListener { listener(timeEntry) }
         }
     }
 }

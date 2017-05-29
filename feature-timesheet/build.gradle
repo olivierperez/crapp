@@ -32,6 +32,9 @@ android {
 
 }
 
+// For AutoValue, to stop crying
+android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+
 kapt {
     generateStubs = true
 }

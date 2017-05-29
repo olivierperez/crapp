@@ -2,6 +2,7 @@ package fr.o80.sample.timesheet.presentation.presenter
 
 import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.dagger.FeatureScope
+import fr.o80.sample.timesheet.data.entity.TimeEntry
 import fr.o80.sample.timesheet.presentation.model.EntryViewModel
 import fr.o80.sample.timesheet.presentation.model.FailedEntryViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadedEntryViewModel
@@ -39,5 +40,9 @@ constructor(private val listEntries: ListEntries) : Presenter<TimesheetEntriesVi
                     }
                 }
         )
+    }
+
+    fun onTimeEntryClicked(timeEntry: TimeEntry) {
+        Timber.d("Time entry clicked: %s", timeEntry.project)
     }
 }

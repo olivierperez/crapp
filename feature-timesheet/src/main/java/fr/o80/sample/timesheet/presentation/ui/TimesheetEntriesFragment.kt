@@ -10,7 +10,6 @@ import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
-import fr.o80.sample.timesheet.R2
 import fr.o80.sample.timesheet.data.entity.TimeEntry
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView
@@ -24,7 +23,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
     @Inject
     lateinit var presenter: TimesheetEntriesPresenter
 
-    val recyclerView: RecyclerView by bindView(R2.id.recyclerView)
+    val recyclerView: RecyclerView by bindView(R.id.recyclerView)
 
     private var adapter: TimesheetAdapter? = null
 
@@ -45,7 +44,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         super.onResume()
 
         if (adapter == null) {
-            adapter = TimesheetAdapter()
+            adapter = TimesheetAdapter(presenter::onTimeEntryClicked)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(activity)
 

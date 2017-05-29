@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
         android:padding="8dp">
 
@@ -24,8 +25,8 @@
             android:id="@+id/project_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Code AAA.BBB.ZZZ"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="Code AAA.BBB.ZZZ" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
