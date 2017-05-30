@@ -67,8 +67,8 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         }
     }
 
-    override fun showTimeEntries(entries: List<TimeEntry>) {
-        adapter!!.setItems(entries)
+    override fun showTimeEntries(entries: List<TimeEntry>, showAdd: Boolean) {
+        adapter!!.setEntries(entries, showAdd)
     }
 
     override fun showError() {

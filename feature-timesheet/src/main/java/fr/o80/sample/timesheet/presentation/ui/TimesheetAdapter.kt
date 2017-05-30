@@ -12,25 +12,50 @@ import fr.o80.sample.timesheet.data.entity.TimeEntry
 /**
  * @author Olivier Perez
  */
-class TimesheetAdapter(val listener: (TimeEntry) -> Unit) : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
+class TimesheetAdapter(val listener: (TimeEntry?) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: List<TimeEntry>? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_timesheet, parent, false)
-        return EntryViewHolder(view)
+    companion object {
+        const val TYPE_ADD = 0
+        const val TYPE_PROJECT = 1
     }
 
-    override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
-        holder.bind(items!![position])
+    private var entries: List<TimeEntry>? = null
+
+    private var showAdd: Boolean = false
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == TYPE_ADD) {
+            AddViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_add, parent, false))
+        } else {
+            EntryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_timesheet, parent, false))
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is EntryViewHolder -> {
+                val timeEntry = entries!![position]
+                holder.bind(timeEntry)
+            }
+            is AddViewHolder -> {
+                holder.listen()
+            }
+        }
+
     }
 
     override fun getItemCount(): Int {
-        return if (items == null) 0 else items!!.size
+        val count = if (entries != null) entries!!.size else 0
+        return if (showAdd) 1 + count else count
     }
 
-    fun setItems(entries: List<TimeEntry>) {
-        items = entries
+    override fun getItemViewType(position: Int): Int {
+        return if (entries != null && position < entries!!.size) TYPE_PROJECT else TYPE_ADD
+    }
+
+    fun setEntries(entries: List<TimeEntry>, showAdd: Boolean) {
+        this.entries = entries
+        this.showAdd = showAdd
         notifyItemRangeInserted(0, entries.size)
     }
 
@@ -45,6 +70,12 @@ class TimesheetAdapter(val listener: (TimeEntry) -> Unit) : RecyclerView.Adapter
                 projectCode.text = code
             }
             itemView.setOnClickListener { listener(timeEntry) }
+        }
+    }
+
+    inner class AddViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun listen() {
+            itemView.setOnClickListener { listener(null) }
         }
     }
 }
