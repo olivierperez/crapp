@@ -53,23 +53,23 @@ repositories {
 }
 
 dependencies {
-    compile lib.kotlin
-    compile project(path: ':lib')
+    implementation lib.kotlin
+    implementation project(path: ':lib')
 
     // Features
-    compile project(path: ':feature-dashboard')
-    compile project(path: ':feature-timesheet')
+    implementation project(path: ':feature-dashboard')
+    implementation project(path: ':feature-timesheet')
 
     // Support
-    compile lib.appcompat
+    implementation lib.appcompat
 
     // Rx
-    compile lib.rxPermissions
-    compile lib.rxJava
+    implementation lib.rxPermissions
+    implementation lib.rxJava
 
     // Tests
-    androidTestCompile(lib.espresso, {
+    androidTestImplementation(lib.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile lib.junit
+    testImplementation lib.junit
 }
