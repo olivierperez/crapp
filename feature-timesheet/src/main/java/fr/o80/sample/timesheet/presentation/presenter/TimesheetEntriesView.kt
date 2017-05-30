@@ -7,6 +7,6 @@ import fr.o80.sample.timesheet.data.entity.TimeEntry
  * @author Olivier Perez
  */
 interface TimesheetEntriesView : PresenterView {
-    fun showTimeEntries(entries: List<TimeEntry>, showAdd: Boolean)
+    fun showTimeEntries(entries: List<TimeEntry>, showFAB: Boolean)
     fun showError()
 }

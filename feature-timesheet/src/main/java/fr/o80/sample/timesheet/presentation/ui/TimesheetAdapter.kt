@@ -12,7 +12,7 @@ import fr.o80.sample.timesheet.data.entity.TimeEntry
 /**
  * @author Olivier Perez
  */
-class TimesheetAdapter(val listener: (TimeEntry?) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TimesheetAdapter(val listener: (TimeEntry) -> Unit, val addListener: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         const val TYPE_ADD = 0
@@ -75,7 +75,7 @@ class TimesheetAdapter(val listener: (TimeEntry?) -> Unit) : RecyclerView.Adapte
 
     inner class AddViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun listen() {
-            itemView.setOnClickListener { listener(null) }
+            itemView.setOnClickListener { addListener() }
         }
     }
 }

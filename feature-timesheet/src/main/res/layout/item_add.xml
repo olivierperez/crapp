@@ -10,6 +10,6 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/desc_add_project"
         android:padding="12dp"
-        android:src="@drawable/ic_add" />
+        android:src="@drawable/ic_add_circle" />
 
 </FrameLayout>

@@ -1,6 +1,7 @@
 package fr.o80.sample.timesheet.presentation.ui
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -25,6 +26,8 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     val recyclerView: RecyclerView by bindView(R.id.recyclerView)
 
+    val fab: FloatingActionButton by bindView(R.id.fab)
+
     private var adapter: TimesheetAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -44,7 +47,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         super.onResume()
 
         if (adapter == null) {
-            adapter = TimesheetAdapter(presenter::onTimeEntryClicked)
+            adapter = TimesheetAdapter(presenter::onTimeEntryClicked, presenter::onAddClicked)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(activity)
 
@@ -67,8 +70,15 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         }
     }
 
-    override fun showTimeEntries(entries: List<TimeEntry>, showAdd: Boolean) {
-        adapter!!.setEntries(entries, showAdd)
+    override fun showTimeEntries(entries: List<TimeEntry>, showFAB: Boolean) {
+        if (showFAB) {
+            fab.visibility = View.VISIBLE
+            fab.setOnClickListener {presenter.onAddClicked()}
+            adapter!!.setEntries(entries, showAdd = false)
+        } else {
+            fab.visibility = View.GONE
+            adapter!!.setEntries(entries, showAdd = true)
+        }
     }
 
     override fun showError() {

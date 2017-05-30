@@ -30,7 +30,8 @@ constructor(private val listEntries: ListEntries) : Presenter<TimesheetEntriesVi
                         is LoadedEntryViewModel -> {
                             Timber.d("Loaded, %s", it.entries)
                             view.hideLoading()
-                            view.showTimeEntries(it.entries, it.entries.size < 5)
+                            val showFAB = it.entries.size > 4
+                            view.showTimeEntries(it.entries, showFAB)
                         }
                         is FailedEntryViewModel -> {
                             Timber.e(it.throwable, "Cannot load time entries")
@@ -42,11 +43,11 @@ constructor(private val listEntries: ListEntries) : Presenter<TimesheetEntriesVi
         )
     }
 
-    fun onTimeEntryClicked(timeEntry: TimeEntry?) {
-        if (timeEntry == null) {
-            Timber.d("Add time entry")
-        } else {
-            Timber.d("Time entry clicked: %s", timeEntry.project)
-        }
+    fun onTimeEntryClicked(timeEntry: TimeEntry) {
+        Timber.d("Time entry clicked: %s", timeEntry.project)
+    }
+
+    fun onAddClicked() {
+        Timber.d("Add time entry")
     }
 }
