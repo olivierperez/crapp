@@ -49,5 +49,6 @@ constructor(private val listEntries: ListEntries) : Presenter<TimesheetEntriesVi
 
     fun onAddClicked() {
         Timber.d("Add time entry")
+        view.goToCreateProject()
     }
 }

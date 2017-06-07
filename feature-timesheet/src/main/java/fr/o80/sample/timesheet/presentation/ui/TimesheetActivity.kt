@@ -3,7 +3,6 @@ package fr.o80.sample.timesheet.presentation.ui
 import android.app.Fragment
 import android.content.Context
 import android.content.Intent
-
 import fr.o80.sample.lib.core.LibApplication
 import fr.o80.sample.lib.core.ui.BaseDrawerActivity
 import fr.o80.sample.timesheet.R
@@ -33,6 +32,14 @@ class TimesheetActivity : BaseDrawerActivity() {
 
     fun component(): TimesheetComponent {
         return component
+    }
+
+    fun createProject() {
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.main_container, TimesheetEditFragment.create())
+                .addToBackStack(null)
+                .commit()
     }
 
     companion object {

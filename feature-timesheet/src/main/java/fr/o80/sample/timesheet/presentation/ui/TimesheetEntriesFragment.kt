@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.View
-import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
@@ -34,9 +33,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         return R.layout.fragment_timesheet_entries
     }
 
-    override fun presenter(): Presenter<TimesheetEntriesView> {
-        return presenter
-    }
+    override fun presenter(): TimesheetEntriesPresenter = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,15 +79,19 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
     }
 
     override fun showError() {
-        // TODO
+        //TODO("not implemented")
+    }
+
+    override fun goToCreateProject() {
+        (activity as TimesheetActivity).createProject()
     }
 
     override fun showLoading() {
-        // TODO
+        //TODO("not implemented")
     }
 
     override fun hideLoading() {
-        // TODO
+        //TODO("not implemented")
     }
 
     companion object {

@@ -9,4 +9,5 @@ import fr.o80.sample.timesheet.data.entity.TimeEntry
 interface TimesheetEntriesView : PresenterView {
     fun showTimeEntries(entries: List<TimeEntry>, showFAB: Boolean)
     fun showError()
+    fun goToCreateProject()
 }
