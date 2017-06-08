@@ -10,4 +10,7 @@ import javax.inject.Inject
 @FeatureScope
 class TimesheetEditPresenter @Inject
 constructor() :  Presenter<TimesheetEditView>() {
+    fun onButtonClicked(name: String, label: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

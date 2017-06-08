@@ -10,7 +10,7 @@ import fr.o80.sample.timesheet.data.TimesheetDatabase
  * @author Olivier Perez
  */
 @Table(name = "TimeEntry", database = TimesheetDatabase::class)
-class TimeEntry(
+data class TimeEntry(
         @PrimaryKey(autoincrement = true) @Column(name = "id") var id: Long = 0,
         @Column(name = "project") var project: String? = null,
         @Column(name = "code") var code: String? = null)
