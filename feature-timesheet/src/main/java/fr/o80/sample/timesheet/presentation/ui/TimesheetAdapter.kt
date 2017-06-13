@@ -66,8 +66,8 @@ class TimesheetAdapter(val listener: (TimeEntry) -> Unit, val addListener: () ->
 
         fun bind(timeEntry: TimeEntry) {
             with(timeEntry) {
-                projectName.text = project
-                projectCode.text = code
+                projectName.text = project?.label
+                projectCode.text = project?.code
             }
             itemView.setOnClickListener { listener(timeEntry) }
         }

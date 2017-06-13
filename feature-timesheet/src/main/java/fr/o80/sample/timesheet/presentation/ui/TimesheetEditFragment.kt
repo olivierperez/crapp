@@ -10,18 +10,20 @@ import android.widget.TextView
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
+import fr.o80.sample.timesheet.data.entity.Project
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditPresenter
+import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditView
 import javax.inject.Inject
 
 /**
  * @author Olivier Perez
  */
-class TimesheetEditFragment : BaseFragment() {
+class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
     @Inject
     lateinit var presenter: TimesheetEditPresenter
 
-    val name: EditText by bindView(R.id.timesheet_edit_name)
+    val code: EditText by bindView(R.id.timesheet_edit_name)
     val label: EditText by bindView(R.id.timesheet_edit_label)
     val button: Button by bindView(R.id.timesheet_edit_validate)
 
@@ -34,12 +36,12 @@ class TimesheetEditFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         button.setOnClickListener {
-            presenter.onButtonClicked(name.text.toString(), label.text.toString())
+            presenter.onButtonClicked(code.text.toString(), label.text.toString())
         }
 
         label.setOnEditorActionListener { _: TextView, idAction: Int, _: KeyEvent? ->
             if (idAction == EditorInfo.IME_ACTION_DONE) {
-                presenter.onButtonClicked(name.text.toString(), label.text.toString())
+                presenter.onButtonClicked(code.text.toString(), label.text.toString())
                 true
             } else {
                 false
@@ -58,6 +60,10 @@ class TimesheetEditFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_timesheet_edit
 
     override fun presenter(): TimesheetEditPresenter = presenter
+
+    override fun finishWithProject(project: Project) {
+        TODO("not implemented")
+    }
 
     companion object {
 

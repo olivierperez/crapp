@@ -68,6 +68,7 @@ dependencies {
 
     // Rx
     compile lib.rxJava
+    compile lib.rxAndroid
 
     provided 'javax.annotation:jsr250-api:1.0'
     provided lib.autovalue

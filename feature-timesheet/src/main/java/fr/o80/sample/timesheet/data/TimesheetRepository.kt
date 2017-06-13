@@ -1,4 +1,4 @@
-package fr.o80.sample.timesheet.presentation.data
+package fr.o80.sample.timesheet.data
 
 import com.raizlabs.android.dbflow.rx2.language.RXSQLite
 import com.raizlabs.android.dbflow.sql.language.SQLite

@@ -1,17 +1,27 @@
 package fr.o80.sample.timesheet.data.entity
 
-import com.raizlabs.android.dbflow.annotation.Column
-import com.raizlabs.android.dbflow.annotation.PrimaryKey
-import com.raizlabs.android.dbflow.annotation.Table
-import com.raizlabs.android.dbflow.structure.BaseModel
+import com.raizlabs.android.dbflow.annotation.*
+import com.raizlabs.android.dbflow.rx2.structure.BaseRXModel
 import fr.o80.sample.timesheet.data.TimesheetDatabase
+import java.util.*
 
 /**
  * @author Olivier Perez
  */
 @Table(name = "TimeEntry", database = TimesheetDatabase::class)
 data class TimeEntry(
-        @PrimaryKey(autoincrement = true) @Column(name = "id") var id: Long = 0,
-        @Column(name = "project") var project: String? = null,
-        @Column(name = "code") var code: String? = null)
-    : BaseModel()
+        @Column(name = "id")
+        @PrimaryKey(autoincrement = true)
+        var id: Long = 0,
+
+        @ForeignKey(
+                saveForeignKeyModel = false,
+                stubbedRelationship = false,
+                references = arrayOf(
+                        ForeignKeyReference(columnName = "project", foreignKeyColumnName = "id")
+                ))
+        var project: Project? = null,
+
+        @Column(name = "date")
+        var date: Date? = null
+) : BaseRXModel()

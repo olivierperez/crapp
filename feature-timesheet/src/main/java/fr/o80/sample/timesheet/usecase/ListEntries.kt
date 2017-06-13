@@ -4,7 +4,7 @@ import javax.inject.Inject
 
 import fr.o80.sample.lib.dagger.FeatureScope
 import fr.o80.sample.timesheet.data.entity.TimeEntry
-import fr.o80.sample.timesheet.presentation.data.TimesheetRepository
+import fr.o80.sample.timesheet.data.TimesheetRepository
 import io.reactivex.Observable
 
 /**

@@ -51,6 +51,7 @@ dependencies {
 
     // Rx
     compile lib.rxJava
+    compile lib.rxAndroid
 
     // Data
     kapt lib.dbflowCompile

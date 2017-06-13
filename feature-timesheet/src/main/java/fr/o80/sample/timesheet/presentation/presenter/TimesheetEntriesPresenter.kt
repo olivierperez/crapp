@@ -44,7 +44,7 @@ constructor(private val listEntries: ListEntries) : Presenter<TimesheetEntriesVi
     }
 
     fun onTimeEntryClicked(timeEntry: TimeEntry) {
-        Timber.d("Time entry clicked: %s", timeEntry.project)
+        Timber.d("Time entry clicked: %s", timeEntry.project?.label)
     }
 
     fun onAddClicked() {
