@@ -3,11 +3,12 @@ package fr.o80.sample.timesheet.presentation.presenter
 import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.dagger.FeatureScope
 import fr.o80.sample.timesheet.data.entity.TimeEntry
-import fr.o80.sample.timesheet.presentation.model.EntryViewModel
-import fr.o80.sample.timesheet.presentation.model.FailedEntryViewModel
-import fr.o80.sample.timesheet.presentation.model.LoadedEntryViewModel
-import fr.o80.sample.timesheet.presentation.model.LoadingEntryViewModel
+import fr.o80.sample.timesheet.presentation.model.EntriesViewModel
+import fr.o80.sample.timesheet.presentation.model.FailedEntriesViewModel
+import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
+import fr.o80.sample.timesheet.presentation.model.LoadingEntriesViewModel
 import fr.o80.sample.timesheet.usecase.ListEntries
+import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,24 +22,12 @@ constructor(private val listEntries: ListEntries) : Presenter<TimesheetEntriesVi
     fun init() {
         Timber.d("init")
         addDisposable(listEntries.all()
-                .map<EntryViewModel> { LoadedEntryViewModel(it) }
-                .startWith(LoadingEntryViewModel)
-                .onErrorReturn { FailedEntryViewModel(it) }
-                .subscribe {
-                    when (it) {
-                        is LoadingEntryViewModel -> view.showLoading()
-                        is LoadedEntryViewModel -> {
-                            Timber.d("Loaded, %s", it.entries)
-                            view.hideLoading()
-                            val showFAB = it.entries.size > 4
-                            view.showTimeEntries(it.entries, showFAB)
-                        }
-                        is FailedEntryViewModel -> {
-                            Timber.e(it.throwable, "Cannot load time entries")
-                            view.hideLoading()
-                            view.showError()
-                        }
-                    }
+                .map<EntriesViewModel> { LoadedEntriesViewModel(it, it.size > 4) }
+                .startWith(LoadingEntriesViewModel)
+                .onErrorReturn { FailedEntriesViewModel(it) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { viewModel ->
+                    view.update(viewModel)
                 }
         )
     }

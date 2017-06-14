@@ -7,12 +7,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.View
+import com.tinsuke.icekick.extension.state
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
 import fr.o80.sample.timesheet.data.entity.TimeEntry
+import fr.o80.sample.timesheet.presentation.model.*
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -22,6 +25,8 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     @Inject
     lateinit var presenter: TimesheetEntriesPresenter
+
+    private var viewModel: EntriesViewModel? by state(EntryViewModelBundler())
 
     val recyclerView: RecyclerView by bindView(R.id.recyclerView)
 
@@ -40,18 +45,6 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         (activity as TimesheetActivity).component().inject(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        if (adapter == null) {
-            adapter = TimesheetAdapter(presenter::onTimeEntryClicked, presenter::onAddClicked)
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(activity)
-
-            presenter.init()
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,17 +58,50 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
+
+        fab.setOnClickListener { presenter.onAddClicked() }
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        // Load or restore state
+        if (viewModel == null) {
+            adapter = TimesheetAdapter(presenter::onTimeEntryClicked, presenter::onAddClicked)
+            recyclerView.adapter = adapter
+
+            presenter.init()
+        } else {
+            update(viewModel)
+        }
     }
 
-    override fun showTimeEntries(entries: List<TimeEntry>, showFAB: Boolean) {
-        if (showFAB) {
-            fab.visibility = View.VISIBLE
-            fab.setOnClickListener {presenter.onAddClicked()}
-            adapter!!.setEntries(entries, showAdd = false)
-        } else {
-            fab.visibility = View.GONE
-            adapter!!.setEntries(entries, showAdd = true)
+    override fun update(viewModel: EntriesViewModel?) {
+        this.viewModel = viewModel
+
+        with(viewModel) {
+            when (viewModel) {
+                is LoadingEntriesViewModel -> showLoading()
+
+                is LoadedEntriesViewModel -> {
+                    Timber.d("Loaded, showFAB=%s, %s", viewModel.showFAB, viewModel.entries)
+                    hideLoading()
+                    showTimeEntries(viewModel.entries, !viewModel.showFAB)
+                    showFAB(viewModel.showFAB)
+                }
+
+                is FailedEntriesViewModel -> {
+                    Timber.e(viewModel.throwable, "Cannot load time entries")
+                    hideLoading()
+                    showError()
+                }
+            }
         }
+    }
+
+    fun showTimeEntries(entries: List<TimeEntry>, showAddEntry: Boolean) {
+        adapter!!.setEntries(entries, showAddEntry)
+    }
+
+    fun showFAB(visible: Boolean) {
+        fab.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     override fun showError() {

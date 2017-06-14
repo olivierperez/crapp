@@ -54,6 +54,7 @@ dependencies {
     // UI
     compile lib.butterknife
     kapt lib.butterknifeCompile
+    implementation 'com.github.tinsukE:icekick:0.2'
 
     // Dependency injection
     compile lib.dagger

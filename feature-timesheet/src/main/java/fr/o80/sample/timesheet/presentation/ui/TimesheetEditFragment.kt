@@ -10,7 +10,6 @@ import android.widget.TextView
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
-import fr.o80.sample.timesheet.data.entity.Project
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditView
 import javax.inject.Inject
