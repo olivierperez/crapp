@@ -20,8 +20,8 @@ constructor() : Presenter<TimesheetEditView>() {
     fun onButtonClicked(code: String, label: String) {
         projectCrud.create(Project(code = code, label = label))
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { p ->
-                    view.finishWithProject(p)
+                ?.subscribe { _ ->
+                    view.finish()
                 }
     }
 }

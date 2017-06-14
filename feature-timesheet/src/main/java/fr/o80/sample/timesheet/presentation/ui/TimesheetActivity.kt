@@ -8,6 +8,7 @@ import fr.o80.sample.lib.core.ui.BaseDrawerActivity
 import fr.o80.sample.timesheet.R
 import fr.o80.sample.timesheet.dagger.DaggerTimesheetComponent
 import fr.o80.sample.timesheet.dagger.TimesheetComponent
+import fr.o80.sample.timesheet.data.entity.Project
 
 /**
  * @author Olivier Perez
@@ -47,5 +48,9 @@ class TimesheetActivity : BaseDrawerActivity() {
         fun newIntent(context: Context): Intent {
             return Intent(context, TimesheetActivity::class.java)
         }
+    }
+
+    fun onNewProject() {
+        fragmentManager.popBackStack()
     }
 }

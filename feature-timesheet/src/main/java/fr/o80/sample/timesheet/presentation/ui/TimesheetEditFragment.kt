@@ -61,8 +61,8 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
     override fun presenter(): TimesheetEditPresenter = presenter
 
-    override fun finishWithProject(project: Project) {
-        TODO("not implemented")
+    override fun finish() {
+        (activity as TimesheetActivity).onNewProject()
     }
 
     companion object {
