@@ -7,10 +7,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.View
+import butterknife.BindView
 import com.tinsuke.icekick.extension.state
 import fr.o80.sample.lib.core.ui.BaseFragment
-import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
+import fr.o80.sample.timesheet.R2
 import fr.o80.sample.timesheet.data.entity.TimeEntry
 import fr.o80.sample.timesheet.presentation.model.*
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
@@ -28,15 +29,15 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     private var viewModel: EntriesViewModel? by state(EntryViewModelBundler())
 
-    val recyclerView: RecyclerView by bindView(R.id.recyclerView)
+    @BindView(R2.id.recyclerView)
+    lateinit var recyclerView: RecyclerView
 
-    val fab: FloatingActionButton by bindView(R.id.fab)
+    @BindView(R2.id.fab)
+    lateinit var fab: FloatingActionButton
 
     private var adapter: TimesheetAdapter? = null
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_timesheet_entries
-    }
+    override fun getLayoutId() = R.layout.fragment_timesheet_entries
 
     override fun presenter(): TimesheetEntriesPresenter = presenter
 

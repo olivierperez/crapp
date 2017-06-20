@@ -7,9 +7,10 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import butterknife.BindView
 import fr.o80.sample.lib.core.ui.BaseFragment
-import fr.o80.sample.lib.core.ui.bindView
 import fr.o80.sample.timesheet.R
+import fr.o80.sample.timesheet.R2
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditView
 import javax.inject.Inject
@@ -22,9 +23,14 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
     @Inject
     lateinit var presenter: TimesheetEditPresenter
 
-    val code: EditText by bindView(R.id.timesheet_edit_name)
-    val label: EditText by bindView(R.id.timesheet_edit_label)
-    val button: Button by bindView(R.id.timesheet_edit_validate)
+    @BindView(R2.id.timesheet_edit_name)
+    lateinit var code: EditText
+
+    @BindView(R2.id.timesheet_edit_label)
+    lateinit var label: EditText
+
+    @BindView(R2.id.timesheet_edit_validate)
+    lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

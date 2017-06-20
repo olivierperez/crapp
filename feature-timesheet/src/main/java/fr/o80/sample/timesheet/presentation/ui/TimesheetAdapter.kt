@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import fr.o80.sample.lib.core.ui.bindView
+import butterknife.ButterKnife
 import fr.o80.sample.timesheet.R
 import fr.o80.sample.timesheet.data.entity.TimeEntry
 
@@ -61,8 +61,12 @@ class TimesheetAdapter(val listener: (TimeEntry) -> Unit, val addListener: () ->
 
     inner class EntryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val projectName: TextView by bindView(R.id.project_name)
-        val projectCode: TextView by bindView(R.id.project_code)
+        lateinit var projectName: TextView
+        lateinit var projectCode: TextView
+
+        init {
+            ButterKnife.bind(this, itemView)
+        }
 
         fun bind(timeEntry: TimeEntry) {
             with(timeEntry) {
