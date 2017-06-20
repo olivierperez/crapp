@@ -64,6 +64,9 @@ dependencies {
     kapt lib.butterknifeCompile
     api lib.circleImageView
 
+    // Utils
+    api lib.timber
+
     // Test
     androidTestImplementation(lib.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
