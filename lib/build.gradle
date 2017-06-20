@@ -50,23 +50,23 @@ dependencies {
     lib.jsr250
 
     // Rx
-    compile lib.rxJava
-    compile lib.rxAndroid
+    api lib.rxJava
+    api lib.rxAndroid
 
     // Data
     kapt lib.dbflowCompile
-    compile lib.dbflowCore
-    compile lib.dbflow
-    compile lib.dbflowRx2
+    api lib.dbflowCore
+    api lib.dbflow
+    api lib.dbflowRx2
 
     // UI
-    compile lib.butterknife
+    api lib.butterknife
     kapt lib.butterknifeCompile
-    compile lib.circleImageView
+    api lib.circleImageView
 
     // Test
-    androidTestCompile(lib.espresso, {
+    androidTestImplementation(lib.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile lib.junit
+    testImplementation lib.junit
 }

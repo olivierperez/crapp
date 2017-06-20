@@ -36,24 +36,24 @@ repositories {
 }
 
 dependencies {
-    compile lib.kotlin
-    compile project(path: ':lib')
+    implementation lib.kotlin
+    implementation project(path: ':lib')
 
     // Support
-    compile lib.appcompat
+    implementation lib.appcompat
 
     // UI
-    compile lib.butterknife
+    implementation lib.butterknife
     kapt lib.butterknifeCompile
 
     // Dependency injection
-    compile lib.dagger
+    implementation lib.dagger
     kapt lib.daggerCompile
     provided lib.jsr250
 
     // Tests
-    androidTestCompile(lib.espresso, {
+    androidTestImplementation(lib.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile lib.junit
+    testImplementation lib.junit
 }
