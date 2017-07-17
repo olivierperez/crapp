@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import fr.o80.sample.lib.R
 import fr.o80.sample.lib.core.Feature
@@ -23,8 +22,6 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
 
-
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
         val fragmentManager = fragmentManager

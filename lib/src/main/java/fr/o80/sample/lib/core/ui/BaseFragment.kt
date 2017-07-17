@@ -19,7 +19,7 @@ import fr.o80.sample.lib.core.presenter.PresenterView
  */
 abstract class BaseFragment : Fragment(), PresenterView {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(layoutId, container, false)
 

@@ -6,14 +6,14 @@ import io.reactivex.disposables.Disposable
 /**
  * @author Olivier Perez
  */
-open class Presenter<T : PresenterView> {
+open class Presenter<out T : PresenterView> {
 
-    var viewUnsafe: T? = null
+    var viewUnsafe: PresenterView? = null
         private set
 
     private val disposables = CompositeDisposable()
 
-    fun attach(view: T) {
+    fun attach(view: PresenterView?) {
         this.viewUnsafe = view
     }
 
@@ -22,12 +22,13 @@ open class Presenter<T : PresenterView> {
         viewUnsafe = null
     }
 
-    fun view(): T {
-        when (viewUnsafe) {
-            null -> throw RuntimeException("Trying to access view after it has been dettached.")
-            else -> return viewUnsafe as T
+    val view: T
+        get() {
+            when (viewUnsafe) {
+                null -> throw RuntimeException("Trying to access view after it has been dettached.")
+                else -> return viewUnsafe as T
+            }
         }
-    }
 
     protected fun addDisposable(disposable: Disposable) {
         disposables.add(disposable)
