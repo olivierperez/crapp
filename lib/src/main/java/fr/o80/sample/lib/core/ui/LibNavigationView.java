@@ -42,7 +42,7 @@ public class LibNavigationView extends NavigationView {
     private void init() {
         ((LibApplication) getContext().getApplicationContext()).component().inject(this);
         int id = 0;
-        for (final Feature feature : configuration.features()) {
+        for (final Feature feature : configuration.getFeatures()) {
             getMenu().add(Menu.NONE, id++, Menu.NONE, feature.getTitle())
                     .setIcon(feature.getIcon())
                     .setEnabled(true)

@@ -19,10 +19,10 @@ class AppApplication : LibApplication() {
     }
 
     override fun buildLibConfiguration(): LibConfiguration {
-        return LibConfiguration.Builder()
-                .homeFeature(Timesheet())
-                .addFeature(Dashboard())
-                .build()
+        return LibConfiguration(
+                home = Timesheet(),
+                features = listOf(Dashboard())
+        )
     }
 
 }

@@ -1,21 +1,18 @@
 package fr.o80.sample.timesheet.presentation.ui
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.View
-import butterknife.BindView
 import com.tinsuke.icekick.extension.state
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
-import fr.o80.sample.timesheet.R2
 import fr.o80.sample.timesheet.data.entity.TimeEntry
 import fr.o80.sample.timesheet.presentation.model.*
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView
+import kotlinx.android.synthetic.main.fragment_timesheet_entries.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,15 +26,10 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     private var viewModel: EntriesViewModel? by state(EntryViewModelBundler())
 
-    @BindView(R2.id.recyclerView)
-    lateinit var recyclerView: RecyclerView
-
-    @BindView(R2.id.fab)
-    lateinit var fab: FloatingActionButton
-
     private var adapter: TimesheetAdapter? = null
 
-    override fun getLayoutId() = R.layout.fragment_timesheet_entries
+    override val layoutId: Int
+        get() = R.layout.fragment_timesheet_entries
 
     override fun presenter(): TimesheetEntriesPresenter = presenter
 

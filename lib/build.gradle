@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion cCompileSdkVersion
@@ -60,8 +60,6 @@ dependencies {
     api lib.dbflowRx2
 
     // UI
-    api lib.butterknife
-    kapt lib.butterknifeCompile
     api lib.circleImageView
 
     // Utils

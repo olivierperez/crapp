@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion cCompileSdkVersion
@@ -52,8 +52,6 @@ dependencies {
     implementation lib.cardView
 
     // UI
-    implementation lib.butterknife
-    kapt lib.butterknifeCompile
     implementation 'com.github.tinsukE:icekick:0.2'
 
     // Dependency injection

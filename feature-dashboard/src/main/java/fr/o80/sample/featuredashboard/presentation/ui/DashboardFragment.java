@@ -7,10 +7,8 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import fr.o80.sample.featuredashboard.DashboardService;
 import fr.o80.sample.featuredashboard.R;
-import fr.o80.sample.featuredashboard.R2;
 import fr.o80.sample.lib.core.presenter.Presenter;
 import fr.o80.sample.lib.core.ui.BaseFragment;
 
@@ -22,9 +20,6 @@ public class DashboardFragment extends BaseFragment {
     @Inject
     protected DashboardService dashboardService;
 
-    @BindView(R2.id.textView)
-    protected TextView textView;
-
     @Override
     public void onResume() {
         super.onResume();
@@ -34,7 +29,7 @@ public class DashboardFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView.setText(R.string.lorem_ipsum);
+        ((TextView) view.findViewById(R.id.textView)).setText(R.string.lorem_ipsum);
     }
 
     @Override

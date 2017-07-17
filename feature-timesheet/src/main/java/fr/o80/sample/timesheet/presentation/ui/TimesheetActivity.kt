@@ -8,7 +8,6 @@ import fr.o80.sample.lib.core.ui.BaseDrawerActivity
 import fr.o80.sample.timesheet.R
 import fr.o80.sample.timesheet.dagger.DaggerTimesheetComponent
 import fr.o80.sample.timesheet.dagger.TimesheetComponent
-import fr.o80.sample.timesheet.data.entity.Project
 
 /**
  * @author Olivier Perez
@@ -17,18 +16,16 @@ class TimesheetActivity : BaseDrawerActivity() {
 
     private lateinit var component: TimesheetComponent
 
+    override val initFragment: Fragment
+        get() = TimesheetEntriesFragment.newInstance()
+
+    override val layoutId: Int
+        get() =  R.layout.activity_drawer_simple
+
     override fun initDagger() {
         component = DaggerTimesheetComponent.builder()
                 .libComponent((application as LibApplication).component())
                 .build()
-    }
-
-    override fun getInitFragment(): Fragment {
-        return TimesheetEntriesFragment.newInstance()
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_drawer_simple
     }
 
     fun component(): TimesheetComponent {
