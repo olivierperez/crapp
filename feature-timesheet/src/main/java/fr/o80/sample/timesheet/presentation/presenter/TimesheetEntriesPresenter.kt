@@ -22,13 +22,11 @@ constructor(private val listEntries: ListEntries) : Presenter<TimesheetEntriesVi
     fun init() {
         Timber.d("init")
         addDisposable(listEntries.all()
-                .map<EntriesViewModel> { LoadedEntriesViewModel(it, it.size > 4) }
+                .map<EntriesViewModel> { LoadedEntriesViewModel(it) }
                 .startWith(LoadingEntriesViewModel)
                 .onErrorReturn { FailedEntriesViewModel(it) }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { viewModel ->
-                    view.update(viewModel)
-                }
+                .subscribe(view::update)
         )
     }
 

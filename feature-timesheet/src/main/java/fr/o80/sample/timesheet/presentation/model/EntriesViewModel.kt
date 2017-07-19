@@ -2,9 +2,8 @@ package fr.o80.sample.timesheet.presentation.model
 
 import android.os.Bundle
 import com.tinsuke.icekick.bundler.Bundler
-import fr.o80.sample.timesheet.data.entity.TimeEntry
 import fr.o80.sample.timesheet.Const.KEY_ENTRIES
-import fr.o80.sample.timesheet.Const.KEY_SHOW_FAB
+import fr.o80.sample.timesheet.data.entity.TimeEntry
 
 /**
  * @author Olivier Perez
@@ -12,7 +11,7 @@ import fr.o80.sample.timesheet.Const.KEY_SHOW_FAB
 sealed class EntriesViewModel
 
 object LoadingEntriesViewModel : EntriesViewModel()
-data class LoadedEntriesViewModel(val entries: List<TimeEntry>, val showFAB : Boolean) : EntriesViewModel()
+data class LoadedEntriesViewModel(val entries: List<TimeEntry>) : EntriesViewModel()
 data class FailedEntriesViewModel(val throwable: Throwable) : EntriesViewModel()
 
 class EntryViewModelBundler : Bundler<EntriesViewModel> {
@@ -20,8 +19,7 @@ class EntryViewModelBundler : Bundler<EntriesViewModel> {
     override fun load(bundle: Bundle, key: String): EntriesViewModel? {
         return if (bundle.containsKey(KEY_ENTRIES)) {
             LoadedEntriesViewModel(
-                    bundle.getParcelableArrayList(KEY_ENTRIES),
-                    bundle.getBoolean(KEY_SHOW_FAB)
+                    bundle.getParcelableArrayList(KEY_ENTRIES)
             )
         } else {
             null
@@ -32,7 +30,6 @@ class EntryViewModelBundler : Bundler<EntriesViewModel> {
         when (value) {
             is LoadedEntriesViewModel -> {
                 bundle.putParcelableArrayList(KEY_ENTRIES, value.entries)
-                bundle.putBoolean(KEY_SHOW_FAB, value.showFAB)
             }
         }
     }
