@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import fr.o80.sample.timesheet.R
-import fr.o80.sample.timesheet.data.entity.TimeEntry
+import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 
 /**
  * @author Olivier Perez
  */
-class TimesheetAdapter(val listener: (TimeEntry) -> Unit) : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
+class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
 
-    private var entries: List<TimeEntry>? = null
+    private var entries: List<EntryViewModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder =
         EntryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_timesheet, parent, false))
@@ -26,7 +26,7 @@ class TimesheetAdapter(val listener: (TimeEntry) -> Unit) : RecyclerView.Adapter
     override fun getItemCount(): Int =
         if (entries != null) entries!!.size else 0
 
-    fun setEntries(entries: List<TimeEntry>) {
+    fun setEntries(entries: List<EntryViewModel>) {
         this.entries = entries
         notifyItemRangeInserted(0, entries.size)
     }
@@ -36,10 +36,10 @@ class TimesheetAdapter(val listener: (TimeEntry) -> Unit) : RecyclerView.Adapter
         val projectName: TextView = itemView.findViewById(R.id.project_name) as TextView
         val projectCode: TextView = itemView.findViewById(R.id.project_code) as TextView
 
-        fun bind(timeEntry: TimeEntry) {
+        fun bind(timeEntry: EntryViewModel) {
             with(timeEntry) {
-                projectName.text = project?.label
-                projectCode.text = project?.code
+                projectName.text = label
+                projectCode.text = code
             }
             itemView.setOnClickListener { listener(timeEntry) }
         }

@@ -3,6 +3,7 @@ package fr.o80.sample.timesheet.presentation.model
 import android.os.Bundle
 import com.tinsuke.icekick.bundler.Bundler
 import fr.o80.sample.timesheet.Const.KEY_ENTRIES
+import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 
 /**
  * @author Olivier Perez

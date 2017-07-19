@@ -8,10 +8,10 @@ import android.view.View
 import com.tinsuke.icekick.extension.state
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
-import fr.o80.sample.timesheet.data.entity.TimeEntry
 import fr.o80.sample.timesheet.presentation.model.*
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView
+import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import kotlinx.android.synthetic.main.fragment_timesheet_entries.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -88,7 +88,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         }
     }
 
-    fun showTimeEntries(entries: List<TimeEntry>) {
+    fun showTimeEntries(entries: List<EntryViewModel>) {
         adapter!!.setEntries(entries)
     }
 
