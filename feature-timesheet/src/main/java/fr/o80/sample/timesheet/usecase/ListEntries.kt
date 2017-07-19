@@ -1,11 +1,10 @@
 package fr.o80.sample.timesheet.usecase
 
-import javax.inject.Inject
-
 import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.timesheet.data.entity.TimeEntry
 import fr.o80.sample.timesheet.data.TimesheetRepository
-import io.reactivex.Observable
+import fr.o80.sample.timesheet.data.entity.TimeEntry
+import io.reactivex.Single
+import javax.inject.Inject
 
 /**
  * @author Olivier Perez
@@ -14,7 +13,7 @@ import io.reactivex.Observable
 class ListEntries @Inject
 constructor(private val timesheetRepository: TimesheetRepository) {
 
-    fun all(): Observable<List<TimeEntry>> {
-        return timesheetRepository.all().toObservable()
+    fun all(): Single<List<TimeEntry>> {
+        return timesheetRepository.all()
     }
 }

@@ -1,6 +1,7 @@
 package fr.o80.sample.timesheet.usecase
 
 import fr.o80.sample.lib.dagger.FeatureScope
+import fr.o80.sample.timesheet.data.ProjectRepository
 import fr.o80.sample.timesheet.data.entity.Project
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -12,14 +13,17 @@ import javax.inject.Inject
  */
 @FeatureScope
 class ProjectCrud @Inject
-constructor() {
+constructor(private val projectRepository: ProjectRepository) {
 
-    fun create(project: Project): Single<Boolean>? {
-        return project.save()
-                .subscribeOn(Schedulers.io())
-                .doOnSuccess {
-                    Timber.d("Project saved %d %s", project.id, project.code)
-                }
-    }
+    fun create(project: Project): Single<Boolean>? =
+            project.save()
+                    .subscribeOn(Schedulers.io())
+                    .doOnSuccess {
+                        Timber.d("Project saved %d %s", project.id, project.code)
+                    }
+
+    fun all(): Single<List<Project>> =
+            projectRepository.all()
+                    .subscribeOn(Schedulers.io())
 
 }
