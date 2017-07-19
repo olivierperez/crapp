@@ -57,7 +57,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
         // Load or restore state
         if (viewModel == null) {
-            adapter = TimesheetAdapter(presenter::onTimeEntryClicked, presenter::onAddClicked)
+            adapter = TimesheetAdapter(presenter::onTimeEntryClicked)
             recyclerView.adapter = adapter
 
             presenter.init()
@@ -74,10 +74,9 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
                 is LoadingEntriesViewModel -> showLoading()
 
                 is LoadedEntriesViewModel -> {
-                    Timber.d("Loaded, showFAB=%s, %s", viewModel.showFAB, viewModel.entries)
+                    Timber.d("Loaded, %s", viewModel.entries)
                     hideLoading()
-                    showTimeEntries(viewModel.entries, !viewModel.showFAB)
-                    showFAB(viewModel.showFAB)
+                    showTimeEntries(viewModel.entries)
                 }
 
                 is FailedEntriesViewModel -> {
@@ -89,12 +88,8 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         }
     }
 
-    fun showTimeEntries(entries: List<TimeEntry>, showAddEntry: Boolean) {
-        adapter!!.setEntries(entries, showAddEntry)
-    }
-
-    fun showFAB(visible: Boolean) {
-        fab.visibility = if (visible) View.VISIBLE else View.GONE
+    fun showTimeEntries(entries: List<TimeEntry>) {
+        adapter!!.setEntries(entries)
     }
 
     override fun showError() {
