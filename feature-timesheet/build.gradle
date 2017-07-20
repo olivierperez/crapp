@@ -14,6 +14,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -50,6 +51,7 @@ dependencies {
     // Support
     implementation lib.appcompat
     implementation lib.cardView
+    implementation lib.constraintLayout
 
     // UI
     implementation 'com.github.tinsukE:icekick:0.2'

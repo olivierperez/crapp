@@ -5,4 +5,7 @@
     <string name="project_code">Project code</string>
     <string name="project_name">Name</string>
     <string name="project_add">Add</string>
+
+    <string name="time_entry_remove_one_hour">Remove one hour</string>
+    <string name="time_entry_add_one_hour">Add one hour</string>
 </resources>
