@@ -16,7 +16,7 @@ class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Ad
     private var entries: List<EntryViewModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder =
-        EntryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_timesheet, parent, false))
+            EntryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_timesheet, parent, false))
 
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
         val timeEntry = entries!![position]
@@ -24,7 +24,7 @@ class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Ad
     }
 
     override fun getItemCount(): Int =
-        if (entries != null) entries!!.size else 0
+            if (entries != null) entries!!.size else 0
 
     fun setEntries(entries: List<EntryViewModel>) {
         this.entries = entries
@@ -35,11 +35,14 @@ class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Ad
 
         val projectName: TextView = itemView.findViewById(R.id.project_name) as TextView
         val projectCode: TextView = itemView.findViewById(R.id.project_code) as TextView
+        val removeTime: TextView = itemView.findViewById(R.id.remove_time) as TextView
+        val addTime: TextView = itemView.findViewById(R.id.add_time) as TextView
 
         fun bind(timeEntry: EntryViewModel) {
             with(timeEntry) {
                 projectName.text = label
                 projectCode.text = code
+                addTime.text = itemView.context.getString(R.string.hours, hours)
             }
             itemView.setOnClickListener { listener(timeEntry) }
         }

@@ -8,4 +8,6 @@
 
     <string name="time_entry_remove_one_hour">Remove one hour</string>
     <string name="time_entry_add_one_hour">Add one hour</string>
+
+    <string name="hours">%dh</string>
 </resources>
