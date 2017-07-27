@@ -28,7 +28,8 @@ class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Ad
 
     fun setEntries(entries: List<EntryViewModel>) {
         this.entries = entries
-        notifyItemRangeInserted(0, entries.size)
+        // TODO Replace this notify by DiffUtil
+        notifyDataSetChanged()
     }
 
     inner class EntryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

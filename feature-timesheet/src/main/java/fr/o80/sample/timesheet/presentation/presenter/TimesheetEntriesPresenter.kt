@@ -27,9 +27,15 @@ constructor(private val listEntries: ListEntries)
                 .map<EntriesViewModel> { LoadedEntriesViewModel(it) }
                 .toObservable()
                 .startWith(LoadingEntriesViewModel)
-                .onErrorReturn { FailedEntriesViewModel(it) }
+                .onErrorReturn {
+                    Timber.e(it, "Cannot load entries")
+                    FailedEntriesViewModel(it)
+                }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(view::update)
+                .subscribe {
+                    Timber.d("On next $it")
+                    view.update(it)
+                }
         )
     }
 

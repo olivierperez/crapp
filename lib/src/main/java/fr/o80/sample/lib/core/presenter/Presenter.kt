@@ -18,7 +18,7 @@ open class Presenter<out T : PresenterView> {
     }
 
     fun dettach() {
-        disposables.dispose()
+        disposables.clear()
         viewUnsafe = null
     }
 

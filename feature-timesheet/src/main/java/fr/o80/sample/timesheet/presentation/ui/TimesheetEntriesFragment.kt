@@ -5,13 +5,14 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
-import com.tinsuke.icekick.extension.state
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
-import fr.o80.sample.timesheet.presentation.model.*
+import fr.o80.sample.timesheet.presentation.model.EntriesViewModel
+import fr.o80.sample.timesheet.presentation.model.FailedEntriesViewModel
+import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
+import fr.o80.sample.timesheet.presentation.model.LoadingEntriesViewModel
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView
-import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import kotlinx.android.synthetic.main.fragment_timesheet_entries.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,9 +25,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
     @Inject
     lateinit var presenter: TimesheetEntriesPresenter
 
-    private var viewModel: EntriesViewModel? by state(EntryViewModelBundler())
-
-    private var adapter: TimesheetAdapter? = null
+    private val adapter: TimesheetAdapter by lazy { TimesheetAdapter(presenter::onTimeEntryClicked) }
 
     override val layoutId: Int
         get() = R.layout.fragment_timesheet_entries
@@ -56,19 +55,12 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         // Load or restore state
-        if (viewModel == null) {
-            adapter = TimesheetAdapter(presenter::onTimeEntryClicked)
-            recyclerView.adapter = adapter
+        recyclerView.adapter = adapter
 
-            presenter.init()
-        } else {
-            update(viewModel)
-        }
+        presenter.init()
     }
 
     override fun update(viewModel: EntriesViewModel?) {
-        this.viewModel = viewModel
-
         with(viewModel) {
             when (viewModel) {
                 is LoadingEntriesViewModel -> showLoading()
@@ -76,7 +68,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
                 is LoadedEntriesViewModel -> {
                     Timber.d("Loaded, %s", viewModel.entries)
                     hideLoading()
-                    showTimeEntries(viewModel.entries)
+                    adapter.setEntries(viewModel.entries)
                 }
 
                 is FailedEntriesViewModel -> {
@@ -86,10 +78,6 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
                 }
             }
         }
-    }
-
-    fun showTimeEntries(entries: List<EntryViewModel>) {
-        adapter!!.setEntries(entries)
     }
 
     override fun showError() {
