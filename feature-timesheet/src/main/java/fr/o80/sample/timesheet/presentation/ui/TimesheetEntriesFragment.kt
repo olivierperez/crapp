@@ -13,6 +13,7 @@ import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadingEntriesViewModel
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_timesheet_entries.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -52,9 +53,8 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         }
 
         fab.setOnClickListener { presenter.onAddClicked() }
+        recyclerView.itemAnimator = SlideInLeftAnimator()
         recyclerView.layoutManager = LinearLayoutManager(activity)
-
-        // Load or restore state
         recyclerView.adapter = adapter
 
         presenter.init()

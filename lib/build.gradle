@@ -61,6 +61,7 @@ dependencies {
 
     // UI
     api lib.circleImageView
+    api lib.recyclerAnimator
 
     // Utils
     api lib.timber
