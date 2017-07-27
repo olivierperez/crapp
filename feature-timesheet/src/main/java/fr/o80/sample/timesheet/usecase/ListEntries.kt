@@ -27,6 +27,7 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                             }
                             .map { EntryViewModel(it.label!!, it.code!!, 0) })
 
+                    vms.sortBy { it.label }
                     vms.toList()
                 })
     }
