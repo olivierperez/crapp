@@ -60,22 +60,20 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         presenter.init()
     }
 
-    override fun update(viewModel: EntriesViewModel?) {
-        with(viewModel) {
-            when (viewModel) {
-                is LoadingEntriesViewModel -> showLoading()
+    override fun update(viewModel: EntriesViewModel) {
+        when (viewModel) {
+            is LoadingEntriesViewModel -> showLoading()
 
-                is LoadedEntriesViewModel -> {
-                    Timber.d("Loaded, %s", viewModel.entries)
-                    hideLoading()
-                    adapter.setEntries(viewModel.entries)
-                }
+            is LoadedEntriesViewModel -> {
+                Timber.d("Loaded, %s", viewModel.entries)
+                hideLoading()
+                adapter.setEntries(viewModel.entries)
+            }
 
-                is FailedEntriesViewModel -> {
-                    Timber.e(viewModel.throwable, "Cannot load time entries")
-                    hideLoading()
-                    showError()
-                }
+            is FailedEntriesViewModel -> {
+                Timber.e(viewModel.throwable, "Cannot load time entries")
+                hideLoading()
+                showError()
             }
         }
     }

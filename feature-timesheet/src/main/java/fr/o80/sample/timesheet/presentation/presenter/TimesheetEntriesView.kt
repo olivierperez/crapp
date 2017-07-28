@@ -8,7 +8,7 @@ import fr.o80.sample.timesheet.presentation.model.EntriesViewModel
  * @author Olivier Perez
  */
 interface TimesheetEntriesView : PresenterView {
-    fun update(viewModel: EntriesViewModel?)
+    fun update(viewModel: EntriesViewModel)
     fun showError()
     fun goToCreateProject()
 }
