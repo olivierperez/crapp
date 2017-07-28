@@ -42,7 +42,7 @@ ext {
     version = [
             dagger     : '2.9',
             support    : '25.3.1',
-            dbflow     : '4.0.2'
+            dbflow     : '4.0.5'
     ]
 
     lib = [

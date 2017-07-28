@@ -18,12 +18,10 @@ object TimesheetDatabase {
 
     @Migration(version = 0, database = TimesheetDatabase::class)
     class Initialization : BaseMigration() {
-        override fun migrate(database: DatabaseWrapper?) {
-            database?.let {
-                Project(label = "FONCTIONNEMENT", code = "ZF.FPLCOS.019").save(database)
-                Project(label = "FPL RUN - Mobile - LBP - Peps", code = "ZF.062275.003").save(database)
-                Project(label = "FPL BUILD -Mobile-LBP portefeuille foist", code = "ZF.062275.004").save(database)
-            }
+        override fun migrate(database: DatabaseWrapper) {
+            Project(label = "FONCTIONNEMENT", code = "ZF.FPLCOS.019").save(database)
+            Project(label = "FPL RUN - Mobile - LBP - Peps", code = "ZF.062275.003").save(database)
+            Project(label = "FPL BUILD -Mobile-LBP portefeuille foist", code = "ZF.062275.004").save(database)
         }
 
     }
