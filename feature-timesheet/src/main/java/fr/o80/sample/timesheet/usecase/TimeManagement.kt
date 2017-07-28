@@ -14,9 +14,10 @@ import javax.inject.Inject
 @FeatureScope
 class TimeManagement @Inject
 constructor(private val timesheetRepository: TimesheetRepository, private val projectRepository: ProjectRepository) {
-    fun addOneHour(code: String): Single<TimeEntry> {
+
+    fun addOneHour(code: String): Single<Boolean> {
         return Single
-                .create<TimeEntry> { emitter ->
+                .create<Boolean> { emitter ->
                     val project = projectRepository.findByCode(code)
 
                     if (project != null) {
@@ -24,15 +25,42 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                         if (timeEntry != null) {
                             // Update the existing time entry
                             timeEntry.hours += 1
-                            timeEntry.save().subscribe(
-                                    { emitter.onSuccess(timeEntry) },
-                                    { emitter.onError(it) })
+                            timeEntry.save()
+                                    .subscribe(
+                                            { emitter.onSuccess(true) },
+                                            { emitter.onError(it) })
                         } else {
                             // Create a new time entry
-                            val newTimeEntry = TimeEntry(project = project, hours = 1)
-                            newTimeEntry.insert().subscribe(
-                                    { emitter.onSuccess(newTimeEntry) },
-                                    { emitter.onError(it) })
+                            TimeEntry(project = project, hours = 1)
+                                    .insert()
+                                    .subscribe(
+                                            { emitter.onSuccess(true) },
+                                            { emitter.onError(it) })
+                        }
+                    } else {
+                        emitter.onError(RuntimeException("Project not found"))
+                    }
+                }
+                .subscribeOn(Schedulers.io())
+    }
+
+    fun removeOneHour(code: String): Single<Boolean> {
+        return Single
+                .create<Boolean> { emitter ->
+                    val project = projectRepository.findByCode(code)
+
+                    if (project != null) {
+                        val timeEntry = timesheetRepository.findByProject(project)
+                        if (timeEntry?.hours ?: 0 >= 1) {
+                            // Update the existing time entry
+                            timeEntry!!.hours -= 1
+                            timeEntry!!.save()
+                                    .subscribe(
+                                            { emitter.onSuccess(true) },
+                                            { emitter.onError(it) })
+                        } else {
+                            // Not yet time entry
+                            emitter.onSuccess(true)
                         }
                     } else {
                         emitter.onError(RuntimeException("Project not found"))

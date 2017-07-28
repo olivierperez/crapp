@@ -57,6 +57,13 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
 
     fun onTimeRemoved(timeEntry: EntryViewModel) {
         Timber.d("Time removed: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
+        timeManagement.removeOneHour(timeEntry.code)
+                .subscribe({
+                    Timber.d("One hour removed")
+                    init()
+                }, {
+                    Timber.e(it, "Failed to remove one hour")
+                })
     }
 
     fun onAddClicked() {
