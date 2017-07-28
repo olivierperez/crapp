@@ -25,7 +25,10 @@ data class TimeEntry(
         var project: Project? = null,
 
         @Column(name = "date")
-        var date: Date? = null
+        var date: Date? = null,
+
+        @Column(name = "hours")
+        var hours: Int = 0
 ) : BaseRXModel(), Parcelable {
 
     companion object {
@@ -39,7 +42,8 @@ data class TimeEntry(
     constructor(source: Parcel) : this(
             source.readLong(),
             source.readParcelable<Project>(Project::class.java.classLoader),
-            source.readSerializable() as Date?
+            source.readSerializable() as Date?,
+            source.readInt()
     )
 
     override fun describeContents() = 0
@@ -48,5 +52,6 @@ data class TimeEntry(
         dest.writeLong(id)
         dest.writeParcelable(project, flags)
         dest.writeSerializable(date)
+        dest.writeInt(hours)
     }
 }

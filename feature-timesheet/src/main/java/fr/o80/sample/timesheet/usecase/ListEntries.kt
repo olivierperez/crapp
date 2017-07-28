@@ -20,7 +20,7 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                 .zip(timesheetRepository.all(), projectRepository.all(), BiFunction {
                     entries, projects ->
                     val vms = mutableListOf<EntryViewModel>()
-                    vms.addAll(entries.map { EntryViewModel(it.project!!.label!!, it.project!!.code!!, 666) })
+                    vms.addAll(entries.map { EntryViewModel(it.project!!.label!!, it.project!!.code!!, it.hours) })
                     vms.addAll(projects
                             .filter { project ->
                                 entries.find { entry -> entry.project?.id == project.id } == null

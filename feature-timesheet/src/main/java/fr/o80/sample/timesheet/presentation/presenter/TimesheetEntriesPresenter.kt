@@ -7,6 +7,7 @@ import fr.o80.sample.timesheet.presentation.model.FailedEntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadingEntriesViewModel
 import fr.o80.sample.timesheet.usecase.ListEntries
+import fr.o80.sample.timesheet.usecase.TimeManagement
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @FeatureScope
 class TimesheetEntriesPresenter
 @Inject
-constructor(private val listEntries: ListEntries)
+constructor(private val listEntries: ListEntries, private val timeManagement: TimeManagement)
     : Presenter<TimesheetEntriesView>() {
 
     fun init() {
@@ -45,6 +46,13 @@ constructor(private val listEntries: ListEntries)
 
     fun onTimeAdded(timeEntry: EntryViewModel) {
         Timber.d("Time added: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
+        timeManagement.addOneHour(timeEntry.code)
+                .subscribe({
+                    Timber.d("One hour added")
+                    init()
+                }, {
+                    Timber.e(it, "Failed to add one hour")
+                })
     }
 
     fun onTimeRemoved(timeEntry: EntryViewModel) {
@@ -55,4 +63,5 @@ constructor(private val listEntries: ListEntries)
         Timber.d("Add time entry")
         view.goToCreateProject()
     }
+
 }
