@@ -13,9 +13,14 @@ import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 /**
  * @author Olivier Perez
  */
-class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
+class TimesheetAdapter(
+        val onClick: (EntryViewModel) -> Unit,
+        val onTimeAdded: (EntryViewModel) -> Unit,
+        val onTimeRemoved: (EntryViewModel) -> Unit
+) : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
 
     private var entries: List<EntryViewModel> = listOf()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder =
             EntryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_timesheet, parent, false))
@@ -38,8 +43,8 @@ class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Ad
 
         val projectName: TextView = itemView.findViewById(R.id.project_name) as TextView
         val projectCode: TextView = itemView.findViewById(R.id.project_code) as TextView
-        val removeTime: TextView = itemView.findViewById(R.id.remove_time) as TextView
         val addTime: TextView = itemView.findViewById(R.id.add_time) as TextView
+        val removeTime: TextView = itemView.findViewById(R.id.remove_time) as TextView
 
         fun bind(timeEntry: EntryViewModel) {
             with(timeEntry) {
@@ -47,7 +52,9 @@ class TimesheetAdapter(val listener: (EntryViewModel) -> Unit) : RecyclerView.Ad
                 projectCode.text = code
                 addTime.text = itemView.context.getString(R.string.hours, hours)
             }
-            itemView.setOnClickListener { listener(timeEntry) }
+            itemView.setOnClickListener { onClick(timeEntry) }
+            addTime.setOnClickListener { onTimeAdded(timeEntry) }
+            removeTime.setOnClickListener { onTimeRemoved(timeEntry) }
         }
     }
 }

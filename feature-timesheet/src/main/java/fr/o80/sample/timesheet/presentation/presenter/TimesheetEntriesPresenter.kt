@@ -43,6 +43,14 @@ constructor(private val listEntries: ListEntries)
         Timber.d("Time entry clicked: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
     }
 
+    fun onTimeAdded(timeEntry: EntryViewModel) {
+        Timber.d("Time added: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
+    }
+
+    fun onTimeRemoved(timeEntry: EntryViewModel) {
+        Timber.d("Time removed: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
+    }
+
     fun onAddClicked() {
         Timber.d("Add time entry")
         view.goToCreateProject()

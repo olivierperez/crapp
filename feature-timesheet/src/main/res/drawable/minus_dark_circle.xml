@@ -32,4 +32,5 @@
             <solid android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
+    <item android:drawable="?selectableItemBackgroundBorderless"/>
 </layer-list>

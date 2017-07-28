@@ -26,7 +26,13 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
     @Inject
     lateinit var presenter: TimesheetEntriesPresenter
 
-    private val adapter: TimesheetAdapter by lazy { TimesheetAdapter(presenter::onTimeEntryClicked) }
+    private val adapter: TimesheetAdapter by lazy {
+        TimesheetAdapter(
+                onClick = presenter::onTimeEntryClicked,
+                onTimeAdded = presenter::onTimeAdded,
+                onTimeRemoved = presenter::onTimeRemoved
+        )
+    }
 
     override val layoutId: Int
         get() = R.layout.fragment_timesheet_entries
