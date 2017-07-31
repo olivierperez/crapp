@@ -33,7 +33,7 @@ ext {
     cCompileSdkVersion = 25
     cBuildToolsVersion = "26.0.0"
     cMinSdkVersion = 16
-    cTargetSdkVersion = 25
+    cTargetSdkVersion = 26
     cVersionCode = 1
     cVersionName = '1.0'
 }

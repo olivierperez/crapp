@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion cMinSdkVersion
         targetSdkVersion cTargetSdkVersion
-        applicationId "fr.o80.sample.sampleapplication"
+        applicationId "fr.o80.crapp"
         versionCode cVersionCode
         versionName cVersionName
         multiDexEnabled true
