@@ -24,7 +24,6 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
 
         setSupportActionBar(toolbar)
 
-        val fragmentManager = fragmentManager
         if (fragmentManager.findFragmentById(R.id.main_container) == null) {
             val initFragment = initFragment
 
@@ -47,10 +46,10 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
         // Set the drawer toggle as the DrawerListener
         drawer_layout.addDrawerListener(drawerToggle)
 
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeButtonEnabled(true)
+        supportActionBar?.let {
+            it.setDisplayShowTitleEnabled(false)
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeButtonEnabled(true)
         }
 
         initDagger()
