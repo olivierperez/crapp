@@ -38,23 +38,29 @@ class LibNavigationView : NavigationView {
 
     private fun init() {
         (context.applicationContext as LibApplication).component().inject(this)
+
+        addFeature(0, configuration.home)
         configuration.features
                 .withIndex()
                 .forEach { (id, feature) ->
-                    menu
-                            .add(Menu.NONE, id, Menu.NONE, feature.title)
-                            .setIcon(feature.icon)
-                            .setEnabled(true)
-                            .setOnMenuItemClickListener {
-                                val l = listener?.get()
-                                if (l != null) {
-                                    l.onFeatureClicked(feature)
-                                    true
-                                } else
-                                    false
-                            }
-                            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+                    addFeature(id + 1, feature)
                 }
+    }
+
+    private fun addFeature(id: Int, feature: Feature) {
+        menu
+                .add(Menu.NONE, id, Menu.NONE, feature.title)
+                .setIcon(feature.icon)
+                .setEnabled(true)
+                .setOnMenuItemClickListener {
+                    val l = listener?.get()
+                    if (l != null) {
+                        l.onFeatureClicked(feature)
+                        true
+                    } else
+                        false
+                }
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
     }
 
     fun setListener(listener: Listener) {

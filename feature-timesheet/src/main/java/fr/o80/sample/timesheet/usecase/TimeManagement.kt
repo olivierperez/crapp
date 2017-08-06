@@ -6,6 +6,7 @@ import fr.o80.sample.timesheet.data.TimesheetRepository
 import fr.o80.sample.timesheet.data.entity.TimeEntry
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -15,13 +16,13 @@ import javax.inject.Inject
 class TimeManagement @Inject
 constructor(private val timesheetRepository: TimesheetRepository, private val projectRepository: ProjectRepository) {
 
-    fun addOneHour(code: String): Single<Boolean> {
+    fun addOneHour(code: String, date: Date): Single<Boolean> {
         return Single
                 .create<Boolean> { emitter ->
                     val project = projectRepository.findByCode(code)
 
                     if (project != null) {
-                        val timeEntry = timesheetRepository.findByProject(project)
+                        val timeEntry = timesheetRepository.findByProjectAndDate(project, date)
                         if (timeEntry != null) {
                             // Update the existing time entry
                             timeEntry.hours += 1
@@ -31,7 +32,7 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                                             { emitter.onError(it) })
                         } else {
                             // Create a new time entry
-                            TimeEntry(project = project, hours = 1)
+                            TimeEntry(project = project, hours = 1, date = date)
                                     .insert()
                                     .subscribe(
                                             { emitter.onSuccess(true) },
@@ -44,13 +45,13 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                 .subscribeOn(Schedulers.io())
     }
 
-    fun removeOneHour(code: String): Single<Boolean> {
+    fun removeOneHour(code: String, date: Date): Single<Boolean> {
         return Single
                 .create<Boolean> { emitter ->
                     val project = projectRepository.findByCode(code)
 
                     if (project != null) {
-                        val timeEntry = timesheetRepository.findByProject(project)
+                        val timeEntry = timesheetRepository.findByProjectAndDate(project, date)
                         if (timeEntry?.hours ?: 0 >= 1) {
                             // Update the existing time entry
                             timeEntry!!.hours -= 1
