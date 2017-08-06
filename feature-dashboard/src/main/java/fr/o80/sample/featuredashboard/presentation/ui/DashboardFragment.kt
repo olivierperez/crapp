@@ -24,8 +24,8 @@ class DashboardFragment : BaseFragment(), DashboardView {
     override val layoutId: Int
         get() = R.layout.fragment_dashboard
 
-    override fun onResume() {
-        super.onResume()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         (activity as DashboardActivity).component().inject(this)
     }
 
