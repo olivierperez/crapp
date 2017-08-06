@@ -11,6 +11,7 @@ import fr.o80.sample.timesheet.usecase.TimeManagement
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
+import java.util.Date
 import javax.inject.Inject
 
 /**
@@ -25,7 +26,13 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
     fun init() {
         Timber.d("init")
         addDisposable(listEntries.all()
-                .map<EntriesViewModel> { LoadedEntriesViewModel(it) }
+                .map<EntriesViewModel> {
+                    LoadedEntriesViewModel(
+                            it,
+                            it.foldRight(0) { elem, acc -> acc + elem.hours },
+                            Date()
+                    )
+                }
                 .toObservable()
                 .startWith(LoadingEntriesViewModel)
                 .onErrorReturn {

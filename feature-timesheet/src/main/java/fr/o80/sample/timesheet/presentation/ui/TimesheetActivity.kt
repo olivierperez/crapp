@@ -3,6 +3,7 @@ package fr.o80.sample.timesheet.presentation.ui
 import android.app.Fragment
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import fr.o80.sample.lib.core.LibApplication
 import fr.o80.sample.lib.core.ui.BaseDrawerActivity
 import fr.o80.sample.timesheet.R

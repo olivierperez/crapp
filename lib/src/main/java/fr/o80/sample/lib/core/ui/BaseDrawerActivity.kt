@@ -65,7 +65,6 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
         drawerToggle.syncState()
     }
 
-
     override fun onResume() {
         super.onResume()
 
