@@ -1,5 +1,6 @@
 package fr.o80.sample.timesheet.presentation.ui
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_timesheet_entries.*
 import timber.log.Timber
 import java.text.DateFormat
+import java.util.Calendar
 import javax.inject.Inject
 
 /**
@@ -31,7 +33,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
                 onClick = presenter::onTimeEntryClicked,
                 onTimeAdded = presenter::onTimeAdded,
                 onTimeRemoved = presenter::onTimeRemoved
-        )
+                        )
     }
 
     override val layoutId: Int
@@ -71,9 +73,13 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
             is LoadedEntriesViewModel -> {
                 Timber.d("Loaded, %s", viewModel.entries)
                 hideLoading()
+
                 adapter.setEntries(viewModel.entries)
+
                 totalHours.text = getString(R.string.hours, viewModel.totalHours)
-                date.text = DateFormat.getDateInstance(DateFormat.MEDIUM).format(viewModel.date)
+                currentDate.text = DateFormat.getDateInstance(DateFormat.MEDIUM).format(viewModel.date)
+
+                currentDate.setOnClickListener { presenter.onCurrentDateClicked() }
             }
 
             is FailedEntriesViewModel -> {
@@ -82,6 +88,12 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
                 showError()
             }
         }
+    }
+
+    override fun showDatePicker(cal: Calendar) {
+        DatePickerDialog(activity, { _, year, month, dayOfMonth ->
+            presenter.onDateSelected(year, month, dayOfMonth)
+        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
     }
 
     override fun showError() {
