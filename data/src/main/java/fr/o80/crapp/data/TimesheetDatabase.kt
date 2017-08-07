@@ -1,11 +1,11 @@
-package fr.o80.sample.timesheet.data
+package fr.o80.crapp.data
 
 import com.raizlabs.android.dbflow.annotation.Database
 import com.raizlabs.android.dbflow.annotation.Migration
 import com.raizlabs.android.dbflow.sql.migration.BaseMigration
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper
+import fr.o80.crapp.data.entity.Project
 import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.timesheet.data.entity.Project
 
 /**
  * @author Olivier Perez

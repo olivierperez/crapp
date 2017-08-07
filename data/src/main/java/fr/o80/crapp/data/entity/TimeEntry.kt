@@ -1,11 +1,15 @@
-package fr.o80.sample.timesheet.data.entity
+package fr.o80.crapp.data.entity
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.raizlabs.android.dbflow.annotation.*
+import com.raizlabs.android.dbflow.annotation.Column
+import com.raizlabs.android.dbflow.annotation.ForeignKey
+import com.raizlabs.android.dbflow.annotation.ForeignKeyReference
+import com.raizlabs.android.dbflow.annotation.PrimaryKey
+import com.raizlabs.android.dbflow.annotation.Table
 import com.raizlabs.android.dbflow.rx2.structure.BaseRXModel
-import fr.o80.sample.timesheet.data.TimesheetDatabase
-import java.util.*
+import fr.o80.crapp.data.TimesheetDatabase
+import java.util.Date
 
 /**
  * @author Olivier Perez

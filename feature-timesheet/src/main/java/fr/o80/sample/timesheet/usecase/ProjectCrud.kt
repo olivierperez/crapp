@@ -1,8 +1,8 @@
 package fr.o80.sample.timesheet.usecase
 
+import fr.o80.crapp.data.ProjectRepository
+import fr.o80.crapp.data.entity.Project
 import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.timesheet.data.ProjectRepository
-import fr.o80.sample.timesheet.data.entity.Project
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
