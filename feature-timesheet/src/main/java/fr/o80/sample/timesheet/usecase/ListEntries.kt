@@ -1,8 +1,8 @@
 package fr.o80.sample.timesheet.usecase
 
+import fr.o80.crapp.data.ProjectRepository
+import fr.o80.crapp.data.TimesheetRepository
 import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.timesheet.data.ProjectRepository
-import fr.o80.sample.timesheet.data.TimesheetRepository
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction

@@ -6,6 +6,7 @@ android {
     compileSdkVersion cCompileSdkVersion
     buildToolsVersion cBuildToolsVersion
 
+
     defaultConfig {
         minSdkVersion cMinSdkVersion
         targetSdkVersion cTargetSdkVersion
@@ -16,6 +17,7 @@ android {
 
         vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,11 +33,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-
 }
-
-// For AutoValue, to stop crying
-android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
 
 kapt {
     generateStubs = true
@@ -43,15 +41,6 @@ kapt {
 
 dependencies {
     implementation lib.kotlin
-    implementation project(path: ':lib')
-
-    // Support
-    implementation lib.appcompat
-    implementation lib.cardView
-    implementation lib.constraintLayout
-
-    // UI
-    implementation 'com.github.tinsukE:icekick:0.2'
 
     // Dependency injection
     implementation lib.dagger
@@ -68,9 +57,6 @@ dependencies {
     implementation lib.rxJava
     implementation lib.rxAndroid
 
-    provided 'javax.annotation:jsr250-api:1.0'
-    provided lib.autovalue
-    kapt lib.autovalue
     implementation lib.timber
 
     // Tests

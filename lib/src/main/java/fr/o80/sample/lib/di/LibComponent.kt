@@ -1,11 +1,12 @@
 package fr.o80.sample.lib.di
 
-import javax.inject.Singleton
-
 import dagger.Component
+import fr.o80.crapp.data.ProjectRepository
+import fr.o80.crapp.data.TimesheetRepository
 import fr.o80.sample.lib.core.LibConfiguration
 import fr.o80.sample.lib.core.ui.LibNavigationView
 import fr.o80.sample.lib.ui.MainActivity
+import javax.inject.Singleton
 
 /**
  * @author Olivier Perez
@@ -18,4 +19,8 @@ interface LibComponent {
     fun inject(view: LibNavigationView)
 
     fun libConfiguration(): LibConfiguration
+
+    fun projectRepository(): ProjectRepository
+
+    fun timesheetRepository(): TimesheetRepository
 }
