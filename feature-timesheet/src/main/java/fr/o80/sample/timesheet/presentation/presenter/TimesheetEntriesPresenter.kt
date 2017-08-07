@@ -2,6 +2,7 @@ package fr.o80.sample.timesheet.presentation.presenter
 
 import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.dagger.FeatureScope
+import fr.o80.sample.timesheet.util.plus
 import fr.o80.sample.timesheet.presentation.model.EntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.FailedEntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
@@ -119,12 +120,5 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
                 set(Calendar.SECOND, 0)
                 set(Calendar.MILLISECOND, 0)
             }.time
-
-    operator fun Date.plus(days: Int): Date =
-            Calendar.getInstance()
-                    .apply {
-                        time = this@plus
-                        add(Calendar.DAY_OF_MONTH, days)
-                    }.time
 
 }

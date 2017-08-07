@@ -47,7 +47,7 @@ dependencies {
     // Dependency injection
     implementation lib.dagger
     kapt lib.daggerCompile
-    lib.jsr250
+    api lib.jsr250
 
     // Rx
     api lib.rxJava
