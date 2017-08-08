@@ -1,9 +1,9 @@
 package fr.o80.sample.timesheet.usecase
 
+import fr.o80.crapp.data.ProjectRepository
+import fr.o80.crapp.data.TimesheetRepository
+import fr.o80.crapp.data.entity.TimeEntry
 import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.timesheet.data.ProjectRepository
-import fr.o80.sample.timesheet.data.TimesheetRepository
-import fr.o80.sample.timesheet.data.entity.TimeEntry
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import java.util.Date

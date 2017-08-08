@@ -1,21 +1,21 @@
-package fr.o80.sample.timesheet.data
+package fr.o80.crapp.data
 
 import com.raizlabs.android.dbflow.rx2.language.RXSQLite
 import com.raizlabs.android.dbflow.sql.language.SQLite
-import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.timesheet.data.entity.Project
-import fr.o80.sample.timesheet.data.entity.TimeEntry
-import fr.o80.sample.timesheet.data.entity.TimeEntry_Table
-import fr.o80.sample.timesheet.util.plus
+import fr.o80.crapp.data.entity.Project
+import fr.o80.crapp.data.entity.TimeEntry
+import fr.o80.crapp.data.entity.TimeEntry_Table
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @author Olivier Perez
  */
-@FeatureScope
+@Singleton
 class TimesheetRepository @Inject constructor() {
 
     fun all(): Single<List<TimeEntry>> {
@@ -40,5 +40,12 @@ class TimesheetRepository @Inject constructor() {
                 .queryList()
                 .subscribeOn(Schedulers.io())
     }
+
+    operator fun Date.plus(days: Int): Date =
+            Calendar.getInstance()
+                    .apply {
+                        this.time = this@plus
+                        add(Calendar.DAY_OF_MONTH, days)
+                    }.time
 
 }

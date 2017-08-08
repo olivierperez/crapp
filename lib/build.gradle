@@ -38,6 +38,7 @@ repositories {
 
 dependencies {
     compile lib.kotlin
+    api project(path: ':data')
 
     // Support
     api lib.appcompat
