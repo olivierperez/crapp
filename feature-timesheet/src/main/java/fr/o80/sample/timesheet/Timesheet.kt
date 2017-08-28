@@ -8,6 +8,7 @@ import fr.o80.sample.timesheet.presentation.ui.TimesheetActivity
  * @author Olivier Perez
  */
 class Timesheet : Feature {
+
     override fun open(context: Context) {
         val intent = TimesheetActivity.newIntent(context)
         context.startActivity(intent)
@@ -18,4 +19,5 @@ class Timesheet : Feature {
 
     override val icon: Int
         get() = R.drawable.ic_timesheet
+
 }

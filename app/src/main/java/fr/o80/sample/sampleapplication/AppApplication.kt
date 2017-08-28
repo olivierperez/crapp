@@ -1,6 +1,6 @@
 package fr.o80.sample.sampleapplication
 
-import fr.o80.sample.featuredashboard.feature.Dashboard
+import fr.o80.featuresummary.Summary
 import fr.o80.sample.lib.core.LibApplication
 import fr.o80.sample.lib.core.LibConfiguration
 import fr.o80.sample.timesheet.Timesheet
@@ -21,7 +21,7 @@ class AppApplication : LibApplication() {
     override fun buildLibConfiguration(): LibConfiguration {
         return LibConfiguration(
                 home = Timesheet(),
-                features = listOf(Dashboard())
+                features = listOf(Summary())
         )
     }
 

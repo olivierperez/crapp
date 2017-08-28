@@ -60,6 +60,7 @@ dependencies {
     // Features
     implementation project(path: ':feature-dashboard')
     implementation project(path: ':feature-timesheet')
+    implementation project(path: ':feature-summary')
 
     // Support
     implementation lib.appcompat

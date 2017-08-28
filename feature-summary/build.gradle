@@ -15,6 +15,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
+
     }
 
     buildTypes {
@@ -32,11 +33,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-
 }
-
-// For AutoValue, to stop crying
-android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
 
 kapt {
     generateStubs = true
@@ -49,28 +46,16 @@ dependencies {
     // Support
     implementation lib.appcompat
     implementation lib.cardView
-    implementation lib.constraintLayout
-
-    // UI
-    implementation 'com.github.tinsukE:icekick:0.2'
 
     // Dependency injection
     implementation lib.dagger
     kapt lib.daggerCompile
     provided lib.jsr250
 
-    // Data
-    kapt lib.dbflowCompile
-    implementation lib.dbflowCore
-    implementation lib.dbflow
-    implementation lib.dbflowRx2
-
     // Rx
     implementation lib.rxJava
     implementation lib.rxAndroid
 
-    provided lib.autovalue
-    kapt lib.autovalue
     implementation lib.timber
 
     // Tests

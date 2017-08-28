@@ -41,14 +41,14 @@ class TimesheetActivity : BaseDrawerActivity() {
                 .commit()
     }
 
+    fun onNewProject() {
+        fragmentManager.popBackStack()
+    }
+
     companion object {
 
         fun newIntent(context: Context): Intent {
             return Intent(context, TimesheetActivity::class.java)
         }
-    }
-
-    fun onNewProject() {
-        fragmentManager.popBackStack()
     }
 }
