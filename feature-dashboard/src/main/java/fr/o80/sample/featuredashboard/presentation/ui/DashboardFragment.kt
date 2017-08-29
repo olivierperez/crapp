@@ -3,15 +3,11 @@ package fr.o80.sample.featuredashboard.presentation.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-
-import javax.inject.Inject
-
-import fr.o80.sample.featuredashboard.DashboardService
 import fr.o80.sample.featuredashboard.R
 import fr.o80.sample.featuredashboard.presentation.presenter.DashboardPresenter
 import fr.o80.sample.featuredashboard.presentation.presenter.DashboardView
-import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.core.ui.BaseFragment
+import javax.inject.Inject
 
 /**
  * @author Olivier Perez
@@ -31,7 +27,7 @@ class DashboardFragment : BaseFragment(), DashboardView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (view.findViewById(R.id.textView) as TextView).setText(R.string.lorem_ipsum)
+        (view.findViewById<TextView>(R.id.textView)).setText(R.string.lorem_ipsum)
     }
 
     override fun presenter(): DashboardPresenter {

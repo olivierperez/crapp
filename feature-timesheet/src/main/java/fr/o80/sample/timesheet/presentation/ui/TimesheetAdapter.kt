@@ -41,10 +41,10 @@ class TimesheetAdapter(
 
     inner class EntryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val projectName: TextView = itemView.findViewById(R.id.project_name) as TextView
-        val projectCode: TextView = itemView.findViewById(R.id.project_code) as TextView
-        val addTime: TextView = itemView.findViewById(R.id.add_time) as TextView
-        val removeTime: TextView = itemView.findViewById(R.id.remove_time) as TextView
+        val projectName: TextView = itemView.findViewById(R.id.project_name)
+        val projectCode: TextView = itemView.findViewById(R.id.project_code)
+        val addTime: TextView = itemView.findViewById(R.id.add_time)
+        val removeTime: TextView = itemView.findViewById(R.id.remove_time)
 
         fun bind(timeEntry: EntryViewModel) {
             with(timeEntry) {

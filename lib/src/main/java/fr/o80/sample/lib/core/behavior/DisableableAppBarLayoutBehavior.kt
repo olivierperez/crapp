@@ -20,7 +20,6 @@ class DisableableAppBarLayoutBehavior : AppBarLayout.Behavior {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    override fun onStartNestedScroll(parent: CoordinatorLayout?, child: AppBarLayout?, directTargetChild: View?, target: View?, nestedScrollAxes: Int): Boolean {
-        return isEnabled && super.onStartNestedScroll(parent, child, directTargetChild, target, nestedScrollAxes)
-    }
+    override fun onStartNestedScroll(parent: CoordinatorLayout, child: AppBarLayout, directTargetChild: View, target: View, nestedScrollAxes: Int, type: Int): Boolean =
+            isEnabled && super.onStartNestedScroll(parent, child, directTargetChild, target, nestedScrollAxes, type)
 }
