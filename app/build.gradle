@@ -28,11 +28,14 @@ android {
 
     buildTypes {
         release {
+            resValue "string", "app_name", "CRApp"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
         debug {
+            resValue "string", "app_name", "DevCRApp"
+            applicationIdSuffix ".debug"
             debuggable true
             minifyEnabled false
             signingConfig signingConfigs.debug
