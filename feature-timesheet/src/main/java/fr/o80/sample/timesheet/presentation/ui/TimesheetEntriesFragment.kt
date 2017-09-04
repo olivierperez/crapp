@@ -113,9 +113,6 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
     }
 
     companion object {
-
-        fun newInstance(): TimesheetEntriesFragment {
-            return TimesheetEntriesFragment()
-        }
+        fun newInstance() = TimesheetEntriesFragment()
     }
 }

@@ -29,9 +29,7 @@ class TimesheetActivity : BaseDrawerActivity() {
                 .build()
     }
 
-    fun component(): TimesheetComponent {
-        return component
-    }
+    fun component(): TimesheetComponent = component
 
     fun createProject() {
         fragmentManager

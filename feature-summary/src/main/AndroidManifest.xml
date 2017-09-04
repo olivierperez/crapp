@@ -2,6 +2,6 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <activity android:name=".presentation.SummaryActivity"/>
+        <activity android:name=".presentation.ui.SummaryActivity"/>
     </application>
 </manifest>

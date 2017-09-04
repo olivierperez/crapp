@@ -1,7 +1,7 @@
 package fr.o80.featuresummary
 
 import android.content.Context
-import fr.o80.featuresummary.presentation.SummaryActivity
+import fr.o80.featuresummary.presentation.ui.SummaryActivity
 import fr.o80.sample.lib.core.Feature
 
 /**
