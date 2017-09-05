@@ -1,8 +1,8 @@
 package fr.o80.featuresummary.presentation.ui
 
-import android.app.Fragment
 import android.content.Context
 import android.content.Intent
+import android.support.v4.app.Fragment
 import fr.o80.featuresummary.dagger.DaggerSummaryComponent
 import fr.o80.featuresummary.dagger.SummaryComponent
 import fr.o80.sample.lib.core.LibApplication

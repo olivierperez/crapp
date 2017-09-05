@@ -1,9 +1,9 @@
 package fr.o80.sample.lib.core.ui
 
-import android.app.Fragment
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -24,11 +24,9 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
 
         setSupportActionBar(toolbar)
 
-        if (fragmentManager.findFragmentById(R.id.main_container) == null) {
-            val initFragment = initFragment
-
-            if (initFragment != null) {
-                fragmentManager
+        supportFragmentManager.findFragmentById(R.id.main_container).let {
+            initFragment.let {
+                supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.main_container, initFragment)
                         .commit()

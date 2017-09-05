@@ -1,9 +1,8 @@
 package fr.o80.sample.timesheet.presentation.ui
 
-import android.app.Fragment
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
+import android.support.v4.app.Fragment
 import fr.o80.sample.lib.core.LibApplication
 import fr.o80.sample.lib.core.ui.BaseDrawerActivity
 import fr.o80.sample.timesheet.R
@@ -32,7 +31,7 @@ class TimesheetActivity : BaseDrawerActivity() {
     fun component(): TimesheetComponent = component
 
     fun createProject() {
-        fragmentManager
+        supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, TimesheetEditFragment.create())
                 .addToBackStack(null)
