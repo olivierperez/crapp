@@ -1,6 +1,7 @@
 package fr.o80.crapp.data
 
 import com.raizlabs.android.dbflow.rx2.language.RXSQLite
+import com.raizlabs.android.dbflow.sql.language.OrderBy
 import com.raizlabs.android.dbflow.sql.language.SQLite
 import fr.o80.crapp.data.entity.Project
 import fr.o80.crapp.data.entity.TimeEntry
@@ -36,7 +37,8 @@ class TimesheetRepository @Inject constructor() {
     fun findByDateRange(after: Date, strictlyBefore: Date): Single<List<TimeEntry>> {
         return RXSQLite.rx(SQLite.select().from(TimeEntry::class.java)
                                    .where(TimeEntry_Table.date.greaterThanOrEq(after))
-                                   .and(TimeEntry_Table.date.lessThan(strictlyBefore)))
+                                   .and(TimeEntry_Table.date.lessThan(strictlyBefore))
+                                   .orderBy(OrderBy.fromProperty(TimeEntry_Table.project)))
                 .queryList()
                 .subscribeOn(Schedulers.io())
     }

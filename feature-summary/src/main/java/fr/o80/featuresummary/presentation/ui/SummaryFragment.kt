@@ -42,7 +42,9 @@ class SummaryFragment : BaseFragment(), SummaryView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewPager.adapter = pageAdapter
+        viewPager.adapter = pageAdapter
+
+        presenter.init()
     }
 
     companion object {
