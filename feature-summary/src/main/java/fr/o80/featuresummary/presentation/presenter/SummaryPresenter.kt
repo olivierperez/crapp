@@ -3,6 +3,7 @@ package fr.o80.featuresummary.presentation.presenter
 import fr.o80.featuresummary.usecase.MonthSummary
 import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.dagger.FeatureScope
+import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
@@ -16,9 +17,14 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
     fun init() {
         addDisposable(monthSummary
                               .getMonth(Date())
-                              .subscribe { m ->
-                                  Timber.d("m: %s", m)
-                              })
+
+                              .toObservable()
+                              .map<SummaryUiModel> { LoadedSummaryUiModel(it) }
+                              .onErrorReturn { FailedSummaryUiModel(it) }
+                              .startWith(LoadingSummaryUiModel)
+
+                              .observeOn(AndroidSchedulers.mainThread())
+                              .subscribe(view::update))
     }
 
 }

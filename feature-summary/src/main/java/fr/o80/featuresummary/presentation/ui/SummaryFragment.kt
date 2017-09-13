@@ -5,11 +5,13 @@ import android.support.v4.view.PagerAdapter
 import android.view.View
 import fr.o80.featuresummary.R
 import fr.o80.featuresummary.presentation.presenter.SummaryPresenter
+import fr.o80.featuresummary.presentation.presenter.SummaryUiModel
 import fr.o80.featuresummary.presentation.presenter.SummaryView
 import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.core.presenter.PresenterView
 import fr.o80.sample.lib.core.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_summary.*
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -45,6 +47,10 @@ class SummaryFragment : BaseFragment(), SummaryView {
         viewPager.adapter = pageAdapter
 
         presenter.init()
+    }
+
+    override fun update(uiModel: SummaryUiModel) {
+        Timber.d("UiModel: %s", uiModel)
     }
 
     companion object {

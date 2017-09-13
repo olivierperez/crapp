@@ -2,6 +2,8 @@ package fr.o80.featuresummary.usecase
 
 import fr.o80.crapp.data.ProjectRepository
 import fr.o80.crapp.data.TimesheetRepository
+import fr.o80.crapp.data.entity.Project
+import fr.o80.crapp.data.entity.TimeEntry
 import fr.o80.featuresummary.usecase.model.ProjectSummary
 import fr.o80.featuresummary.usecase.model.SummaryTimeEntry
 import fr.o80.sample.lib.dagger.FeatureScope
@@ -9,6 +11,7 @@ import fr.o80.sample.lib.utils.CalendarUtils
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 import java.util.Date
 import javax.inject.Inject
 
@@ -29,7 +32,7 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                 .flatMapObservable { Observable.fromIterable(it) }
                 .toMultimap { it.project!!.id }
 
-        return Single.zip(
+        return Single.zip<List<Project>, MutableMap<Long, MutableCollection<TimeEntry>>, List<ProjectSummary>>(
                 projectsSingle,
                 entriesSingle,
                 BiFunction { projects, entries ->
@@ -45,5 +48,6 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                                               )
                             }
                 })
+                .subscribeOn(Schedulers.io())
     }
 }
