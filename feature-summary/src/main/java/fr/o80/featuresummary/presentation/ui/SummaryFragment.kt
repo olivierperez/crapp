@@ -1,9 +1,9 @@
 package fr.o80.featuresummary.presentation.ui
 
 import android.os.Bundle
-import android.support.v4.view.PagerAdapter
 import android.view.View
 import fr.o80.featuresummary.R
+import fr.o80.featuresummary.presentation.presenter.LoadedSummaryUiModel
 import fr.o80.featuresummary.presentation.presenter.SummaryPresenter
 import fr.o80.featuresummary.presentation.presenter.SummaryUiModel
 import fr.o80.featuresummary.presentation.presenter.SummaryView
@@ -21,8 +21,6 @@ class SummaryFragment : BaseFragment(), SummaryView {
 
     @Inject
     lateinit var presenter: SummaryPresenter
-
-    private val pageAdapter by lazy { SummaryPagerAdapter(childFragmentManager) }
 
     override fun showLoading() {
         TODO("not implemented")
@@ -44,13 +42,16 @@ class SummaryFragment : BaseFragment(), SummaryView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewPager.adapter = pageAdapter
 
         presenter.init()
     }
 
     override fun update(uiModel: SummaryUiModel) {
         Timber.d("UiModel: %s", uiModel)
+        when(uiModel) {
+            is LoadedSummaryUiModel ->
+                viewPager.adapter = SummaryPagerAdapter(childFragmentManager, uiModel.projectIds)
+        }
     }
 
     companion object {

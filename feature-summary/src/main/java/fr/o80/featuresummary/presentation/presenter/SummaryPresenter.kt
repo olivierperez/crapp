@@ -16,7 +16,7 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
 
     fun init() {
         addDisposable(monthSummary
-                              .getMonth(Date())
+                              .getProjectsOnMonth(Date())
 
                               .toObservable()
                               .map<SummaryUiModel> { LoadedSummaryUiModel(it) }
