@@ -41,7 +41,7 @@ ext {
 ext {
     version = [
             dagger     : '2.11',
-            support    : '26.0.1',
+            support    : '26.1.0',
             dbflow     : '4.0.5'
     ]
 
