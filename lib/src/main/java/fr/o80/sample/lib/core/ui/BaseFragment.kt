@@ -23,10 +23,7 @@ abstract class BaseFragment : Fragment(), PresenterView {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(layoutId, container, false)
 
-        val p = presenter()
-        if (p is Presenter && this is PresenterView) {
-            p.attach(this)
-        }
+        presenter().attach(this)
 
         return view
     }
@@ -47,6 +44,6 @@ abstract class BaseFragment : Fragment(), PresenterView {
     @get:LayoutRes
     protected abstract val layoutId: Int
 
-    protected abstract fun presenter(): Presenter<out PresenterView>
+    protected abstract fun presenter(): Presenter<PresenterView>
 
 }
