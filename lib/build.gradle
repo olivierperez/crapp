@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
 
 android {
     compileSdkVersion cCompileSdkVersion
@@ -38,6 +39,8 @@ repositories {
 
 dependencies {
     compile lib.kotlin
+    implementation lib.kotlinReflect
+    implementation lib.kotlinSerial
     api project(path: ':data')
 
     // Support

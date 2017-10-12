@@ -15,6 +15,8 @@ import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesPresenter
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEntriesView
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import kotlinx.android.synthetic.main.fragment_timesheet_entries.*
+import kotlinx.serialization.json.JSON.Companion.parse
+import kotlinx.serialization.json.JSON.Companion.stringify
 import timber.log.Timber
 import java.text.DateFormat
 import java.util.Calendar
@@ -27,6 +29,8 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     @Inject
     lateinit var presenter: TimesheetEntriesPresenter
+
+    private var vm: LoadedEntriesViewModel? = null
 
     private val adapter: TimesheetAdapter by lazy {
         TimesheetAdapter(
@@ -63,7 +67,18 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
 
-        presenter.init()
+        if (savedInstanceState != null) {
+            update(parse(savedInstanceState.getString("aze")))
+        } else {
+            presenter.init()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        vm?.let {
+            outState.putString("aze", stringify(it))
+        }
     }
 
     override fun update(viewModel: EntriesViewModel) {
@@ -74,6 +89,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
                 Timber.d("Loaded, %s", viewModel.entries)
                 hideLoading()
 
+                vm = viewModel
                 adapter.setEntries(viewModel.entries)
 
                 totalHours.text = getString(R.string.hours, viewModel.totalHours)

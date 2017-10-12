@@ -10,6 +10,8 @@ import com.raizlabs.android.dbflow.config.FlowManager
 import fr.o80.sample.lib.di.DaggerLibComponent
 import fr.o80.sample.lib.di.LibComponent
 import fr.o80.sample.lib.di.LibModule
+import fr.o80.sample.lib.ui.DateSerializer
+import kotlinx.serialization.registerSerializer
 
 /**
  * @author Olivier Perez
@@ -31,9 +33,12 @@ abstract class LibApplication : Application() {
         component = DaggerLibComponent.builder()
                 .libModule(LibModule(buildLibConfiguration()))
                 .build()
+
         FlowManager.init(FlowConfig.Builder(this)
                 .openDatabasesOnInit(true)
                 .build())
+
+        registerSerializer("java.util.Date", DateSerializer())
     }
 
     override fun onTerminate() {
