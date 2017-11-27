@@ -1,0 +1,130 @@
+def dependencyGroup(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+ext.butterknife = dependencyGroup {
+    implementation lib.butterKnife
+    annotationProcessor lib.butterKnifeApt
+}
+
+ext.dagger = dependencyGroup {
+    implementation lib.dagger
+    annotationProcessor lib.daggerApt
+}
+
+ext.data = dependencyGroup {
+    kapt lib.dbflowCompile
+    implementation lib.dbflowCore
+    implementation lib.dbflow
+    implementation lib.dbflowRx2
+}
+
+ext.kotlin = dependencyGroup {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+
+ext.ormlite = dependencyGroup {
+    api lib.ormLite
+    api lib.ormLiteAndroid
+}
+
+ext.parceler = dependencyGroup {
+    implementation lib.parceler
+    annotationProcessor lib.parcelerApt
+}
+
+ext.support = dependencyGroup {
+    implementation lib.supportV4
+    implementation lib.supportAnnotations
+    implementation lib.supportAppCompat
+    implementation lib.supportDesign
+    implementation lib.supportCardView
+}
+
+ext.rx = dependencyGroup {
+    api lib.rxandroid
+    api lib.rxjava
+}
+
+ext.timber = dependencyGroup {
+    api lib.timber
+}
+
+ext.tests = dependencyGroup {
+    testApi lib.junit
+    testApi lib.mockitoCore
+    testApi lib.daggerMock
+    androidTestApi lib.junit
+    androidTestApi lib.mockitoCore
+    androidTestApi lib.daggerMock
+}
+
+ext {
+    version = [
+            dagger : '2.13',
+            daggerMock : '0.8.2',
+            support: '27.0.1',
+            parceler: '1.0.3',
+            dbflow : '4.0.5'
+    ]
+    lib = [
+
+            // Tests
+            junit             : 'junit:junit:4.12',
+            mockitoCore       : 'org.mockito:mockito-core:2.12.0',
+            daggerMock        : "com.github.fabioCollini:DaggerMock:$version.daggerMock",
+
+            // Unit Tests
+            robolectric       : 'org.robolectric:robolectric:3.0',
+            assertJ           : 'org.assertj:assertj-core:1.7.1',
+
+            // Support
+            supportV4         : "com.android.support:support-v4:$version.support",
+            supportAnnotations: "com.android.support:support-annotations:$version.support",
+            supportAppCompat  : "com.android.support:appcompat-v7:$version.support",
+            supportDesign     : "com.android.support:design:$version.support",
+            supportCardView   : "com.android.support:cardview-v7:$version.support",
+
+            // ORMLite
+            dbflowCompile   : "com.github.Raizlabs.DBFlow:dbflow-processor:${version.dbflow}",
+            dbflowCore      : "com.github.Raizlabs.DBFlow:dbflow-core:${version.dbflow}",
+            dbflow          : "com.github.Raizlabs.DBFlow:dbflow:${version.dbflow}",
+            dbflowRx2       : "com.github.Raizlabs.DBFlow:dbflow-rx2:${version.dbflow}",
+
+            // Rx
+            rxjava            : 'io.reactivex.rxjava2:rxjava:2.1.6',
+            rxandroid         : 'io.reactivex.rxjava2:rxandroid:2.0.1',
+
+            // Parceler
+            parceler          : "org.parceler:parceler-api:$version.parceler",
+            parcelerApt       : "org.parceler:parceler:$version.parceler",
+
+            // UI
+            betterSpinner     : 'com.weiwangcn.betterspinner:library-material:1.1.0',
+            recyclerviewAnim  : 'jp.wasabeef:recyclerview-animators:2.2.5',
+            simpleRating      : 'com.iarcuschin:simpleratingbar:0.1.5',
+
+            // Others
+            autoValue         : 'com.google.auto.value:auto-value:1.2-rc1',
+
+            dagger            : "com.google.dagger:dagger:$version.dagger",
+            daggerApt         : "com.google.dagger:dagger-compiler:$version.dagger",
+
+            butterKnife       : 'com.jakewharton:butterknife:8.0.1',
+            butterKnifeApt    : 'com.jakewharton:butterknife-compiler:8.0.1',
+
+            timber            : 'com.jakewharton.timber:timber:4.6.0',
+
+            timeAgo           : 'com.github.marlonlom:timeago:3.0.1',
+
+            about             : 'com.github.daniel-stoneuk:material-about-library:1.8.2',
+            communityTypeFace : 'com.mikepenz:community-material-typeface:1.7.22.1@aar',
+            iconicsCore       : 'com.mikepenz:iconics-core:2.8.2@aar',
+            materialTypeFace  : 'com.mikepenz:google-material-typeface:2.2.0.3.original@aar',
+
+            sublimePicker     : 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.1',
+            swipeLayout       : 'com.daimajia.swipelayout:library:1.2.0@aar'
+
+    ]
+}
