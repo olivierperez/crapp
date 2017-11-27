@@ -1,75 +1,16 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-
-android {
-    compileSdkVersion cCompileSdkVersion
-    buildToolsVersion cBuildToolsVersion
-
-    defaultConfig {
-        minSdkVersion cMinSdkVersion
-        targetSdkVersion cTargetSdkVersion
-        versionCode cVersionCode
-        versionName cVersionName
-        multiDexEnabled true
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            debuggable true
-            minifyEnabled false
-        }
-    }
-}
-
-kapt {
-    generateStubs = true
-}
-
-repositories {
-    mavenCentral()
-}
+apply from: '../config/module.gradle'
 
 dependencies {
-    compile lib.kotlin
     api project(path: ':data')
 
-    // Support
-    api lib.appcompat
-    api lib.supportDesign
-    api lib.multidex
+    kotlin()
+    dagger()
+    data()
+    rx()
+    support()
+    ui()
 
-    // Dependency injection
-    implementation lib.dagger
-    kapt lib.daggerCompile
-    api lib.jsr250
+    timber()
 
-    // Rx
-    api lib.rxJava
-    api lib.rxAndroid
-
-    // Data
-    kapt lib.dbflowCompile
-    api lib.dbflowCore
-    api lib.dbflow
-    api lib.dbflowRx2
-
-    // UI
-    api lib.circleImageView
-    api lib.recyclerAnimator
-
-    // Utils
-    api lib.timber
-
-    // Test
-    androidTestImplementation(lib.espresso, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation lib.junit
+    tests()
 }

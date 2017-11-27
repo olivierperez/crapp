@@ -22,6 +22,7 @@ open class Presenter<out T : PresenterView> {
         viewUnsafe = null
     }
 
+    @Suppress("UNCHECKED_CAST")
     val view: T
         get() {
             when (viewUnsafe) {

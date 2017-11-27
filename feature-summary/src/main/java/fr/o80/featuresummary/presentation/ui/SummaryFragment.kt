@@ -40,7 +40,7 @@ class SummaryFragment : BaseFragment(), SummaryView {
         (activity as SummaryActivity).component().inject(this)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         presenter.init()

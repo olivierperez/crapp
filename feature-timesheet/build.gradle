@@ -1,81 +1,16 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-
-android {
-    compileSdkVersion cCompileSdkVersion
-    buildToolsVersion cBuildToolsVersion
-
-    defaultConfig {
-        minSdkVersion cMinSdkVersion
-        targetSdkVersion cTargetSdkVersion
-        versionCode cVersionCode
-        versionName cVersionName
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        vectorDrawables.useSupportLibrary = true
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            debuggable true
-            minifyEnabled false
-        }
-    }
-
-    compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
-    }
-
-}
-
-// For AutoValue, to stop crying
-android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
-
-kapt {
-    generateStubs = true
-}
+apply from: '../config/module.gradle'
 
 dependencies {
-    implementation lib.kotlin
     implementation project(path: ':lib')
 
-    // Support
-    implementation lib.appcompat
-    implementation lib.cardView
-    implementation lib.constraintLayout
+    kotlin()
+    dagger()
+    support()
+    rx()
+    // data()
 
-    // UI
-    implementation 'com.github.tinsukE:icekick:0.2'
+    ui()
+    timber()
 
-    // Dependency injection
-    implementation lib.dagger
-    kapt lib.daggerCompile
-    provided lib.jsr250
-
-    // Data
-    kapt lib.dbflowCompile
-    implementation lib.dbflowCore
-    implementation lib.dbflow
-    implementation lib.dbflowRx2
-
-    // Rx
-    implementation lib.rxJava
-    implementation lib.rxAndroid
-
-    provided lib.autovalue
-    kapt lib.autovalue
-    implementation lib.timber
-
-    // Tests
-    androidTestImplementation(lib.espresso, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation lib.junit
+    tests()
 }

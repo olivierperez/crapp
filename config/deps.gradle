@@ -1,3 +1,5 @@
+apply plugin: 'kotlin-kapt'
+
 def dependencyGroup(Closure closure) {
     closure.delegate = dependencies
     return closure
@@ -5,19 +7,19 @@ def dependencyGroup(Closure closure) {
 
 ext.butterknife = dependencyGroup {
     implementation lib.butterKnife
-    annotationProcessor lib.butterKnifeApt
+    kapt lib.butterKnifeApt
 }
 
 ext.dagger = dependencyGroup {
     implementation lib.dagger
-    annotationProcessor lib.daggerApt
+    kapt lib.daggerApt
 }
 
 ext.data = dependencyGroup {
     kapt lib.dbflowCompile
-    implementation lib.dbflowCore
-    implementation lib.dbflow
-    implementation lib.dbflowRx2
+    api lib.dbflowCore
+    api lib.dbflow
+    api lib.dbflowRx2
 }
 
 ext.kotlin = dependencyGroup {
@@ -31,7 +33,7 @@ ext.ormlite = dependencyGroup {
 
 ext.parceler = dependencyGroup {
     implementation lib.parceler
-    annotationProcessor lib.parcelerApt
+    kapt lib.parcelerApt
 }
 
 ext.support = dependencyGroup {
@@ -40,15 +42,24 @@ ext.support = dependencyGroup {
     implementation lib.supportAppCompat
     implementation lib.supportDesign
     implementation lib.supportCardView
+    implementation lib.constraintLayout
+    implementation lib.multidex
 }
 
 ext.rx = dependencyGroup {
     api lib.rxandroid
     api lib.rxjava
+    api lib.rxPermissions
 }
 
 ext.timber = dependencyGroup {
     api lib.timber
+}
+
+ext.ui = dependencyGroup {
+    implementation lib.icekick
+    api lib.circleImageView
+    api lib.recyclerAnimator
 }
 
 ext.tests = dependencyGroup {
@@ -62,12 +73,13 @@ ext.tests = dependencyGroup {
 
 ext {
     version = [
-            dagger : '2.13',
-            daggerMock : '0.8.2',
-            support: '27.0.1',
-            parceler: '1.0.3',
-            dbflow : '4.0.5'
+            dagger    : '2.13',
+            daggerMock: '0.8.2',
+            support   : '27.0.1',
+            parceler  : '1.0.3',
+            dbflow    : '4.0.5'
     ]
+
     lib = [
 
             // Tests
@@ -85,16 +97,19 @@ ext {
             supportAppCompat  : "com.android.support:appcompat-v7:$version.support",
             supportDesign     : "com.android.support:design:$version.support",
             supportCardView   : "com.android.support:cardview-v7:$version.support",
+            constraintLayout  : 'com.android.support.constraint:constraint-layout:1.0.2',
+            multidex          : 'com.android.support:multidex:1.0.1',
 
             // ORMLite
-            dbflowCompile   : "com.github.Raizlabs.DBFlow:dbflow-processor:${version.dbflow}",
-            dbflowCore      : "com.github.Raizlabs.DBFlow:dbflow-core:${version.dbflow}",
-            dbflow          : "com.github.Raizlabs.DBFlow:dbflow:${version.dbflow}",
-            dbflowRx2       : "com.github.Raizlabs.DBFlow:dbflow-rx2:${version.dbflow}",
+            dbflowCompile     : "com.github.Raizlabs.DBFlow:dbflow-processor:${version.dbflow}",
+            dbflowCore        : "com.github.Raizlabs.DBFlow:dbflow-core:${version.dbflow}",
+            dbflow            : "com.github.Raizlabs.DBFlow:dbflow:${version.dbflow}",
+            dbflowRx2         : "com.github.Raizlabs.DBFlow:dbflow-rx2:${version.dbflow}",
 
             // Rx
             rxjava            : 'io.reactivex.rxjava2:rxjava:2.1.6',
             rxandroid         : 'io.reactivex.rxjava2:rxandroid:2.0.1',
+            rxPermissions     : 'com.github.VictorAlbertos.RxPermissionsResult:rx2:0.0.4',
 
             // Parceler
             parceler          : "org.parceler:parceler-api:$version.parceler",
@@ -102,18 +117,16 @@ ext {
 
             // UI
             betterSpinner     : 'com.weiwangcn.betterspinner:library-material:1.1.0',
-            recyclerviewAnim  : 'jp.wasabeef:recyclerview-animators:2.2.5',
+            recyclerAnimator  : 'jp.wasabeef:recyclerview-animators:2.2.7',
             simpleRating      : 'com.iarcuschin:simpleratingbar:0.1.5',
+            circleImageView   : 'de.hdodenhof:circleimageview:1.3.0',
+            icekick           : 'com.github.tinsukE:icekick:0.2',
 
-            // Others
-            autoValue         : 'com.google.auto.value:auto-value:1.2-rc1',
-
+            // Dagger
             dagger            : "com.google.dagger:dagger:$version.dagger",
             daggerApt         : "com.google.dagger:dagger-compiler:$version.dagger",
 
-            butterKnife       : 'com.jakewharton:butterknife:8.0.1',
-            butterKnifeApt    : 'com.jakewharton:butterknife-compiler:8.0.1',
-
+            // Others
             timber            : 'com.jakewharton.timber:timber:4.6.0',
 
             timeAgo           : 'com.github.marlonlom:timeago:3.0.1',

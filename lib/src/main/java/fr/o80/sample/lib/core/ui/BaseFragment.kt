@@ -34,10 +34,9 @@ abstract class BaseFragment : Fragment(), PresenterView {
         super.onDestroyView()
 
         // Hide keyboard
-        val view = view
-        if (view != null) {
-            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        view?.let { v ->
+            (activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                    .hideSoftInputFromWindow(v.windowToken, 0)
         }
     }
 

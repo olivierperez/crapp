@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: '../config/deps.gradle'
 
 android {
     compileSdkVersion cCompileSdkVersion
@@ -52,29 +53,16 @@ kapt {
     generateStubs = true
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation lib.kotlin
     implementation project(path: ':lib')
 
-    // Features
     implementation project(path: ':feature-dashboard')
     implementation project(path: ':feature-timesheet')
     implementation project(path: ':feature-summary')
 
-    // Support
-    implementation lib.appcompat
+    kotlin()
+    support()
+    rx()
 
-    // Rx
-    implementation lib.rxPermissions
-    implementation lib.rxJava
-
-    // Tests
-    androidTestImplementation(lib.espresso, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation lib.junit
+    tests()
 }

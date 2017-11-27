@@ -27,7 +27,7 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
         (activity as TimesheetActivity).component().inject(this)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         timesheet_edit_validate.setOnClickListener {
