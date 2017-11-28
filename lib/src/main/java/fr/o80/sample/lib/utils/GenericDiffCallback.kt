@@ -5,7 +5,7 @@ package fr.o80.sample.lib.utils
  */
 import android.support.v7.util.DiffUtil
 
-abstract class GenericDiffCallback<T>(protected val oldList: List<T>, protected val newList: List<T>) : DiffUtil.Callback() {
+abstract class GenericDiffCallback<in T>(private val oldList: List<T>, private val newList: List<T>) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
 
