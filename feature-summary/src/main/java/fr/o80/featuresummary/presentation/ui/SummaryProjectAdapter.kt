@@ -41,7 +41,18 @@ class SummaryProjectAdapter : RecyclerView.Adapter<SummaryProjectAdapter.Summary
         fun bind(projectSummary: ProjectSummary) {
             projectName.text = projectSummary.label
             projectCode.text = projectSummary.label
-            time.text = "${projectSummary.time}h"
+
+            when {
+                projectSummary.time < 8 -> {
+                    time.text = "${projectSummary.time}h"
+                }
+                projectSummary.time % 8 == 0 -> {
+                    time.text = "${projectSummary.time/8}d"
+                }
+                else -> {
+                    time.text = "${projectSummary.time/8}d ${projectSummary.time - (projectSummary.time/8) * 8}h"
+                }
+            }
         }
 
     }

@@ -44,9 +44,10 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                                         label!!,
                                         code!!,
                                         entries[id]
-                                                ?.map { (_, _, date, hours) -> SummaryTimeEntry(date!!, hours) }
-                                                ?: listOf()
-                                              )
+                                                ?.map(TimeEntry::hours)
+                                                ?.fold(0) { acc, item -> acc + item }
+                                                ?: 0
+                                )
                             }
                 })
                 .subscribeOn(Schedulers.io())
