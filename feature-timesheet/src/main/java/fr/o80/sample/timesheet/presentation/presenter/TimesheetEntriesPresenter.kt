@@ -9,8 +9,11 @@ import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadingEntriesViewModel
 import fr.o80.sample.timesheet.usecase.ListEntries
 import fr.o80.sample.timesheet.usecase.TimeManagement
+import fr.o80.sample.timesheet.usecase.mkdate
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
+import fr.o80.sample.timesheet.usecase.today
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import java.util.Calendar
 import java.util.Date
@@ -48,7 +51,7 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
                               .toObservable()
                               .startWith(LoadingEntriesViewModel)
                               .onErrorReturn {
-                                  Timber.e(it, "Cannot load entries")
+                                  Timber.e(it, "Failed to load time entries for date %s", date)
                                   FailedEntriesViewModel(it)
                               }
                               .observeOn(AndroidSchedulers.mainThread())
@@ -66,23 +69,27 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
     fun onTimeAdded(timeEntry: EntryViewModel) {
         Timber.d("Time added: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
         timeManagement.addOneHour(timeEntry.code, cache!!.date)
-                .subscribe({
-                               Timber.d("One hour added")
-                               init()
-                           }, {
-                               Timber.e(it, "Failed to add one hour")
-                           })
+                .subscribeBy(
+                        onSuccess = {
+                            Timber.d("One hour added")
+                            init()
+                        },
+                        onError = {
+                            Timber.e(it, "Failed to add one hour")
+                        })
     }
 
     fun onTimeRemoved(timeEntry: EntryViewModel) {
         Timber.d("Time removed: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
         timeManagement.removeOneHour(timeEntry.code, cache!!.date)
-                .subscribe({
-                               Timber.d("One hour removed")
-                               init()
-                           }, {
-                               Timber.e(it, "Failed to remove one hour")
-                           })
+                .subscribeBy(
+                        onSuccess = {
+                            Timber.d("One hour removed")
+                            init()
+                        },
+                        onError = {
+                            Timber.e(it, "Failed to remove one hour")
+                        })
     }
 
     fun onAddClicked() {
@@ -99,26 +106,8 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
 
     fun onDateSelected(year: Int, month: Int, dayOfMonth: Int) {
         cache?.let {
-            val newDate = Calendar.getInstance().apply {
-                set(Calendar.YEAR, year)
-                set(Calendar.MONTH, month)
-                set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                set(Calendar.HOUR_OF_DAY, 0)
-                set(Calendar.MINUTE, 0)
-                set(Calendar.SECOND, 0)
-                set(Calendar.MILLISECOND, 0)
-            }.time
-
-            load(newDate)
+            load(mkdate(year, month, dayOfMonth))
         }
     }
-
-    private fun today(): Date =
-            Calendar.getInstance().apply {
-                set(Calendar.HOUR_OF_DAY, 0)
-                set(Calendar.MINUTE, 0)
-                set(Calendar.SECOND, 0)
-                set(Calendar.MILLISECOND, 0)
-            }.time
 
 }

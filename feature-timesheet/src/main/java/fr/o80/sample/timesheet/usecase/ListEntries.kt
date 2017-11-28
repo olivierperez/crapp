@@ -26,7 +26,7 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                                        .filter { project ->
                                            entries.find { entry -> entry.project?.id == project.id } == null
                                        }
-                                       .map { EntryViewModel(it.label!!, it.code!!, 0, Date()) })
+                                       .map { EntryViewModel(it.label!!, it.code!!, 0, today()) })
 
                     vms.sortBy { it.label }
                     vms.toList()

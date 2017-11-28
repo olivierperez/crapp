@@ -11,15 +11,11 @@ abstract class GenericDiffCallback<T>(protected val oldList: List<T>, protected 
 
     override fun getNewListSize(): Int = newList.size
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldItem = oldList[oldItemPosition]
-        val newItem = newList[newItemPosition]
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            isSameItem(oldList[oldItemPosition], newList[newItemPosition])
 
-        return isSameItem(oldItem, newItem)
-    }
-
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean
-            = oldList[oldItemPosition] == newList[newItemPosition]
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition] == newList[newItemPosition]
 
     protected abstract fun isSameItem(oldItem: T, newItem: T): Boolean
 
