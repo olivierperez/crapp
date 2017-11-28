@@ -1,10 +1,9 @@
 package fr.o80.sample.timesheet.presentation.ui
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
+import android.widget.Toast
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditPresenter
@@ -31,15 +30,16 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
         super.onViewCreated(view, savedInstanceState)
 
         timesheet_edit_validate.setOnClickListener {
-            presenter.onButtonClicked(timesheet_edit_name.text.toString(), timesheet_edit_label.text.toString())
+            presenter.onButtonClicked(timesheet_edit_label.text.toString(), timesheet_edit_code.text.toString())
         }
 
-        timesheet_edit_label.setOnEditorActionListener { _: TextView, idAction: Int, _: KeyEvent? ->
-            if (idAction == EditorInfo.IME_ACTION_DONE) {
-                presenter.onButtonClicked(timesheet_edit_name.text.toString(), timesheet_edit_label.text.toString())
-                true
-            } else {
-                false
+        timesheet_edit_label.setOnEditorActionListener { _, idAction, _ ->
+            when (idAction) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    presenter.onButtonClicked(timesheet_edit_label.text.toString(), timesheet_edit_code.text.toString())
+                    true
+                }
+                else -> false
             }
         }
     }
@@ -56,6 +56,10 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
     override fun finish() {
         (activity as TimesheetActivity).onNewProject()
+    }
+
+    override fun showError(errorStr: Int, simpleName: String) {
+        Toast.makeText(context, getString(errorStr, simpleName), Toast.LENGTH_SHORT).show()
     }
 
     companion object {

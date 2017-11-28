@@ -39,7 +39,7 @@ class TimesheetActivity : BaseDrawerActivity() {
     }
 
     fun onNewProject() {
-        fragmentManager.popBackStack()
+        supportFragmentManager.popBackStack()
     }
 
     companion object {
