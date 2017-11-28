@@ -1,6 +1,7 @@
 package fr.o80.sample.timesheet.presentation.ui
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -28,6 +29,8 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        timesheet_edit_code.filters = timesheet_edit_code.filters + InputFilter.AllCaps()
 
         timesheet_edit_validate.setOnClickListener {
             presenter.onButtonClicked(timesheet_edit_label.text.toString(), timesheet_edit_code.text.toString())

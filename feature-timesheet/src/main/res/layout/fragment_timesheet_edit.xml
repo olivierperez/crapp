@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/project_name"
-            android:inputType="text|textVisiblePassword" />
+            android:inputType="textCapWords" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/project_code"
-            android:inputType="text|textVisiblePassword" />
+            android:inputType="textVisiblePassword" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
