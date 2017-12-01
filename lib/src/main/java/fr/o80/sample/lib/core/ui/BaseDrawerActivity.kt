@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import fr.o80.sample.lib.R
 import fr.o80.sample.lib.core.Feature
+import fr.o80.sample.lib.core.LibConfiguration
 import kotlinx.android.synthetic.main.activity_drawer_w_appbar.*
+import javax.inject.Inject
 
 /**
  * @author Olivier Perez
@@ -17,6 +19,9 @@ import kotlinx.android.synthetic.main.activity_drawer_w_appbar.*
 abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Listener {
 
     lateinit private var drawerToggle: ActionBarDrawerToggle
+
+    @Inject
+    lateinit var libConfiguration: LibConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +71,7 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
     override fun onResume() {
         super.onResume()
 
-        navigation_view.setListener(this)
+        navigationView.setListener(this)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -86,10 +91,16 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
         return super.onOptionsItemSelected(item)
     }
 
-
     override fun onFeatureClicked(feature: Feature) {
         drawer_layout.closeDrawers()
-        feature.open(this)
+        when {
+            feature.notYetOpened(this) -> {
+                feature.open(this)
+            }
+            else -> {
+
+            }
+        }
     }
 
     protected abstract val initFragment: Fragment?

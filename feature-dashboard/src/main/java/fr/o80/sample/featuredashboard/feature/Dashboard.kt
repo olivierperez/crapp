@@ -1,5 +1,6 @@
 package fr.o80.sample.featuredashboard.feature
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 
@@ -22,5 +23,7 @@ class Dashboard : Feature {
         val intent = Intent(context, DashboardActivity::class.java)
         context.startActivity(intent)
     }
+
+    override fun notYetOpened(activity: Activity): Boolean = activity !is DashboardActivity
 
 }

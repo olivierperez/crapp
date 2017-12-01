@@ -42,7 +42,7 @@
     </android.support.design.widget.CoordinatorLayout>
 
     <fr.o80.sample.lib.core.ui.LibNavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

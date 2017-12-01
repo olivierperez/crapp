@@ -17,26 +17,17 @@ import fr.o80.sample.lib.core.LibConfiguration
 /**
  * @author Olivier Perez
  */
-class LibNavigationView : NavigationView {
+class LibNavigationView
+@JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : NavigationView(context, attrs, defStyleAttr) {
 
     @Inject
     lateinit var configuration: LibConfiguration
 
     private var listener: WeakReference<Listener>? = null
 
-    constructor(context: Context) : super(context) {
-        init()
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init()
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init()
-    }
-
-    private fun init() {
+    init {
         (context.applicationContext as LibApplication).component().inject(this)
 
         addFeature(0, configuration.home)
