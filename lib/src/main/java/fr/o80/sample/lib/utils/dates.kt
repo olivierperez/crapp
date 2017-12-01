@@ -45,3 +45,10 @@ fun lastDayOfMonth(date: Date): Date =
             set(Calendar.SECOND, 59)
             set(Calendar.MILLISECOND, 999)
         }.time
+
+operator fun Date.plus(days: Int): Date =
+        Calendar.getInstance()
+                .apply {
+                    this.time = this@plus
+                    add(Calendar.DAY_OF_MONTH, days)
+                }.time

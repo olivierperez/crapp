@@ -2,7 +2,6 @@ package fr.o80.sample.timesheet.presentation.presenter
 
 import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.timesheet.util.plus
 import fr.o80.sample.timesheet.presentation.model.EntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.FailedEntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
@@ -10,6 +9,7 @@ import fr.o80.sample.timesheet.presentation.model.LoadingEntriesViewModel
 import fr.o80.sample.timesheet.usecase.ListEntries
 import fr.o80.sample.timesheet.usecase.TimeManagement
 import fr.o80.sample.lib.utils.mkdate
+import fr.o80.sample.lib.utils.plus
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import fr.o80.sample.lib.utils.today
 import io.reactivex.android.schedulers.AndroidSchedulers
