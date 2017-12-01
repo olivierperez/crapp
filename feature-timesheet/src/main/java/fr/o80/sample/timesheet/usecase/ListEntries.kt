@@ -4,6 +4,7 @@ import fr.o80.crapp.data.ProjectRepository
 import fr.o80.crapp.data.TimesheetRepository
 import fr.o80.sample.lib.dagger.FeatureScope
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
+import fr.o80.sample.lib.utils.today
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import java.util.Date

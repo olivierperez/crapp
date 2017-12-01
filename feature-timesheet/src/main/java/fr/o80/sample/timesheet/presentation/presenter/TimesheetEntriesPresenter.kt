@@ -9,9 +9,9 @@ import fr.o80.sample.timesheet.presentation.model.LoadedEntriesViewModel
 import fr.o80.sample.timesheet.presentation.model.LoadingEntriesViewModel
 import fr.o80.sample.timesheet.usecase.ListEntries
 import fr.o80.sample.timesheet.usecase.TimeManagement
-import fr.o80.sample.timesheet.usecase.mkdate
+import fr.o80.sample.lib.utils.mkdate
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
-import fr.o80.sample.timesheet.usecase.today
+import fr.o80.sample.lib.utils.today
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber

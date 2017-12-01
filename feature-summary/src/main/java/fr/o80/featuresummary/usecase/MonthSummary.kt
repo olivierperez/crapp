@@ -5,15 +5,14 @@ import fr.o80.crapp.data.TimesheetRepository
 import fr.o80.crapp.data.entity.Project
 import fr.o80.crapp.data.entity.TimeEntry
 import fr.o80.featuresummary.usecase.model.ProjectSummary
-import fr.o80.featuresummary.usecase.model.SummaryTimeEntry
 import fr.o80.sample.lib.dagger.FeatureScope
-import fr.o80.sample.lib.utils.CalendarUtils
+import fr.o80.sample.lib.utils.firstDayOfMonth
+import fr.o80.sample.lib.utils.lastDayOfMonth
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import java.util.Date
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -24,8 +23,8 @@ class MonthSummary @Inject
 constructor(private val timesheetRepository: TimesheetRepository, private val projectRepository: ProjectRepository) {
 
     fun getMonth(startDate: Date): Single<List<ProjectSummary>> {
-        val start = CalendarUtils.firstDayOfMonth(startDate)
-        val end = CalendarUtils.lastDayOfMonth(startDate)
+        val start = firstDayOfMonth(startDate)
+        val end = lastDayOfMonth(startDate)
 
         val projectsSingle = projectRepository.all()
         val entriesSingle = timesheetRepository
