@@ -5,6 +5,7 @@ import fr.o80.crapp.data.TimesheetRepository
 import fr.o80.crapp.data.entity.TimeEntry
 import fr.o80.sample.lib.dagger.FeatureScope
 import io.reactivex.Single
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.util.Date
 import javax.inject.Inject
@@ -52,16 +53,22 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
 
                     if (project != null) {
                         val timeEntry = timesheetRepository.findByProjectAndDate(project, date)
-                        if (timeEntry?.hours ?: 0 >= 1) {
-                            // Update the existing time entry
-                            timeEntry!!.hours -= 1
-                            timeEntry!!.save()
-                                    .subscribe(
-                                            { emitter.onSuccess(true) },
-                                            { emitter.onError(it) })
-                        } else {
-                            // Not yet time entry
-                            emitter.onSuccess(true)
+                        when (timeEntry?.hours ?: -1) {
+                            -1 -> {
+                                emitter.onSuccess(true)
+                            }
+                            1 -> {
+                                timeEntry!!.delete().subscribeBy(
+                                        onSuccess = { emitter.onSuccess(true) },
+                                        onError = { emitter.onError(it) })
+                            }
+                            else -> {
+                                // Update the existing time entry
+                                timeEntry!!.hours--
+                                timeEntry.save().subscribeBy(
+                                        onSuccess = { emitter.onSuccess(true) },
+                                        onError = { emitter.onError(it) })
+                            }
                         }
                     } else {
                         emitter.onError(RuntimeException("Project not found"))
