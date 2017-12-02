@@ -93,13 +93,9 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
 
     override fun onFeatureClicked(feature: Feature) {
         drawer_layout.closeDrawers()
-        when {
-            feature.notYetOpened(this) -> {
-                feature.open(this)
-            }
-            else -> {
-
-            }
+        if (feature.notYetOpened(this)) {
+            feature.open(this)
+            finish()
         }
     }
 
