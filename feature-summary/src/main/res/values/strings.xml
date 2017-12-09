@@ -1,4 +1,7 @@
 <resources>
     <string name="summary_title">Summary</string>
     <string name="summary_failed_to_load">Failed to load summary</string>
+    <string name="summary_time_hours">%dh</string>
+    <string name="summary_time_days">%dd</string>
+    <string name="summary_time_days_hours">%1$dd %2$dh</string>
 </resources>

@@ -43,15 +43,9 @@ class SummaryProjectAdapter : RecyclerView.Adapter<SummaryProjectAdapter.Summary
             projectCode.text = projectSummary.code
 
             when {
-                projectSummary.time < 8 -> {
-                    time.text = "${projectSummary.time}h"
-                }
-                projectSummary.time % 8 == 0 -> {
-                    time.text = "${projectSummary.time/8}d"
-                }
-                else -> {
-                    time.text = "${projectSummary.time/8}d ${projectSummary.time - (projectSummary.time/8) * 8}h"
-                }
+                projectSummary.time < 8 -> time.text = itemView.context.getString(R.string.summary_time_hours, projectSummary.time)
+                projectSummary.time % 8 == 0 -> time.text = itemView.context.getString(R.string.summary_time_days, projectSummary.time/8)
+                else -> time.text = itemView.context.getString(R.string.summary_time_days_hours, projectSummary.time/8, projectSummary.time - (projectSummary.time/8) * 8)
             }
         }
 
