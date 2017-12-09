@@ -40,7 +40,7 @@ class SummaryProjectAdapter : RecyclerView.Adapter<SummaryProjectAdapter.Summary
 
         fun bind(projectSummary: ProjectSummary) {
             projectName.text = projectSummary.label
-            projectCode.text = projectSummary.label
+            projectCode.text = projectSummary.code
 
             when {
                 projectSummary.time < 8 -> {
