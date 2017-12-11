@@ -29,8 +29,8 @@ abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Liste
 
         setSupportActionBar(toolbar)
 
-        supportFragmentManager.findFragmentById(R.id.main_container).let {
-            initFragment.let {
+        if(supportFragmentManager.findFragmentById(R.id.main_container) == null) {
+            initFragment?.let {
                 supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.main_container, initFragment)
