@@ -2,7 +2,6 @@ package fr.o80.sample.timesheet.presentation.ui
 
 import android.os.Bundle
 import android.text.InputFilter
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import fr.o80.sample.lib.core.ui.BaseFragment
@@ -22,13 +21,12 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
     override val layoutId: Int = R.layout.fragment_timesheet_edit
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun inject() {
         (activity as TimesheetActivity).component().inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         timesheet_edit_code.filters = timesheet_edit_code.filters + InputFilter.AllCaps()
 
@@ -45,14 +43,6 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
                 else -> false
             }
         }
-    }
-
-    override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun presenter(): TimesheetEditPresenter = presenter

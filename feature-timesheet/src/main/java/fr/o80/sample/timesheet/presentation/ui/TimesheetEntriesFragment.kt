@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
 import fr.o80.sample.timesheet.presentation.model.EntriesViewModel
@@ -41,13 +40,12 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     override fun presenter(): TimesheetEntriesPresenter = presenter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun inject() {
         (activity as TimesheetActivity).component().inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         val activity = activity as AppCompatActivity
         activity.setSupportActionBar(toolbar)

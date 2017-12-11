@@ -7,6 +7,8 @@ import fr.o80.sample.lib.core.presenter.PresenterView
  * @author Olivier Perez
  */
 interface SummaryView : PresenterView {
+    fun showLoading()
+    fun hideLoading()
     fun update(uiModel: LoadedSummaryUiModel)
     fun showError(@StringRes stringRes: Int)
 }

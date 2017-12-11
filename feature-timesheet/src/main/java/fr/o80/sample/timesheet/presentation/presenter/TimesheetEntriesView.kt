@@ -8,6 +8,8 @@ import java.util.Calendar
  * @author Olivier Perez
  */
 interface TimesheetEntriesView : PresenterView {
+    fun showLoading()
+    fun hideLoading()
     fun update(viewModel: EntriesViewModel)
     fun showError()
     fun goToCreateProject()
