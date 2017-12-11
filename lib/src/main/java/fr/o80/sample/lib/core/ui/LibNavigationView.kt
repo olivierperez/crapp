@@ -51,7 +51,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                     } else
                         false
                 }
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
     }
 
     fun setListener(listener: Listener) {
