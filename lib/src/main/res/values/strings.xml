@@ -3,4 +3,7 @@
 
     <string name="drawer_open">Menu ouvert</string>
     <string name="drawer_close">Menu fermé</string>
+
+    <string name="crapp">CRApp</string>
+    <string name="crapp_by_olivier">By Olivier Perez</string>
 </resources>

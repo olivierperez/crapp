@@ -24,9 +24,9 @@
         android:layout_above="@+id/email"
         android:layout_alignLeft="@+id/profile_image"
         android:layout_alignStart="@+id/profile_image"
-        android:gravity="left"
+        android:gravity="start"
         android:paddingBottom="4dp"
-        android:text="Akash Bangad"
+        android:text="@string/crapp"
         android:textColor="#FFF"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -39,8 +39,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/username"
         android:layout_marginBottom="8dp"
-        android:gravity="left"
-        android:text="Akash.bangad93@gmail.com"
+        android:gravity="start"
+        android:text="@string/crapp_by_olivier"
         android:textColor="#fff"
         android:textSize="14sp" />
 
