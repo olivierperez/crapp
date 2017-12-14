@@ -1,5 +1,6 @@
 package fr.o80.sample.timesheet.presentation.presenter
 
+import fr.o80.crapp.data.entity.Project
 import fr.o80.sample.lib.core.presenter.PresenterView
 import fr.o80.sample.timesheet.presentation.model.EntriesViewModel
 import java.util.Calendar
@@ -12,6 +13,8 @@ interface TimesheetEntriesView : PresenterView {
     fun hideLoading()
     fun update(viewModel: EntriesViewModel)
     fun showError()
-    fun goToCreateProject()
     fun showDatePicker(cal: Calendar)
+
+    fun goToCreateProject()
+    fun goToEditProject(project: Project)
 }

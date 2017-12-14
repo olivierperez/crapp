@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import fr.o80.crapp.data.entity.Project
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
 import fr.o80.sample.timesheet.presentation.presenter.TimesheetEditPresenter
@@ -58,6 +59,10 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
     companion object {
 
         fun create(): TimesheetEditFragment {
+            return TimesheetEditFragment()
+        }
+
+        fun edit(project: Project): TimesheetEditFragment {
             return TimesheetEditFragment()
         }
     }

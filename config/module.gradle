@@ -35,3 +35,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
     }
 }
+
+androidExtensions {
+    defaultCacheImplementation = "SPARSE_ARRAY"
+    experimental = true
+}

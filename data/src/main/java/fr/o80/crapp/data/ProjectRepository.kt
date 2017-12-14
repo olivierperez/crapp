@@ -1,15 +1,12 @@
 package fr.o80.crapp.data
 
 import com.raizlabs.android.dbflow.rx2.language.RXSQLite
-import com.raizlabs.android.dbflow.sql.language.Join
 import com.raizlabs.android.dbflow.sql.language.SQLite
 import fr.o80.crapp.data.entity.Project
 import fr.o80.crapp.data.entity.Project_Table
-import fr.o80.crapp.data.entity.TimeEntry
-import fr.o80.crapp.data.entity.TimeEntry_Table
+import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,10 +22,10 @@ class ProjectRepository @Inject constructor() {
                 .subscribeOn(Schedulers.io())
     }
 
-    fun findByCode(code: String): Project? {
-        return SQLite.select()
+    fun findByCode(code: String): Maybe<Project> {
+        return RXSQLite.rx(SQLite.select()
                 .from(Project::class.java)
-                .where(Project_Table.code.eq(code))
+                .where(Project_Table.code.eq(code)))
                 .querySingle()
     }
 
