@@ -67,13 +67,17 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
         Timber.d("Time entry clicked: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
         addDisposable(projectCrud.findByCode(timeEntry.code)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onSuccess = view::goToEditProject))
+                .subscribeBy(
+                        onSuccess = { view.goToEditProject(it) },
+                        onError = {throwable ->
+                            Timber.e(throwable, "Failed to open project edition")
+                        }))
 
     }
 
     fun onTimeAdded(timeEntry: EntryViewModel) {
         Timber.d("Time added: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
-        timeManagement.addOneHour(timeEntry.code, cache!!.date)
+        addDisposable(timeManagement.addOneHour(timeEntry.code, cache!!.date)
                 .subscribeBy(
                         onSuccess = {
                             Timber.d("One hour added")
@@ -81,12 +85,12 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
                         },
                         onError = {
                             Timber.e(it, "Failed to add one hour")
-                        })
+                        }))
     }
 
     fun onTimeRemoved(timeEntry: EntryViewModel) {
         Timber.d("Time removed: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
-        timeManagement.removeOneHour(timeEntry.code, cache!!.date)
+        addDisposable(timeManagement.removeOneHour(timeEntry.code, cache!!.date)
                 .subscribeBy(
                         onSuccess = {
                             Timber.d("One hour removed")
@@ -94,7 +98,7 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
                         },
                         onError = {
                             Timber.e(it, "Failed to remove one hour")
-                        })
+                        }))
     }
 
     fun onAddClicked() {
