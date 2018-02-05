@@ -1,5 +1,8 @@
 <resources>
     <string name="timesheet_title">Timesheet</string>
+
+    <string name="common_ok">OK</string>
+
     <string name="desc_add_project">Add a project</string>
 
     <string name="project_code">Project code</string>

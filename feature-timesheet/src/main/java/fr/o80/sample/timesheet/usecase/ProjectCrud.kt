@@ -30,4 +30,9 @@ constructor(private val projectRepository: ProjectRepository) {
                     .findByCode(code)
                     .subscribeOn(Schedulers.io())
 
+    fun update(id: Long, label: String, code: String): Single<Boolean> =
+            Project(id = id, code = code, label = label)
+                    .update()
+                    .subscribeOn(Schedulers.io())
+
 }

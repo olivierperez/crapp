@@ -9,4 +9,6 @@ import fr.o80.sample.lib.core.presenter.PresenterView
 interface TimesheetEditView : PresenterView {
     fun finish()
     fun showError(@StringRes errorStr: Int, simpleName: String)
+    fun initFields(label: String, code: String)
+    fun setValidateButton(@StringRes validateText: Int)
 }

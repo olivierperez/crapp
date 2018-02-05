@@ -31,6 +31,10 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
         timesheet_edit_code.filters = timesheet_edit_code.filters + InputFilter.AllCaps()
 
+        arguments?.let {
+            presenter.init(it.getParcelable(EXTRA_PROJECT))
+        } ?: presenter.init()
+
         timesheet_edit_validate.setOnClickListener {
             presenter.onButtonClicked(timesheet_edit_label.text.toString(), timesheet_edit_code.text.toString())
         }
@@ -46,6 +50,15 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
         }
     }
 
+    override fun initFields(label: String, code: String) {
+        timesheet_edit_label.setText(label)
+        timesheet_edit_code.setText(code)
+    }
+
+    override fun setValidateButton(validateText: Int) {
+        timesheet_edit_validate.setText(validateText)
+    }
+
     override fun presenter(): TimesheetEditPresenter = presenter
 
     override fun finish() {
@@ -58,12 +71,18 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
     companion object {
 
+        val EXTRA_PROJECT = "project"
+
         fun create(): TimesheetEditFragment {
             return TimesheetEditFragment()
         }
 
         fun edit(project: Project): TimesheetEditFragment {
-            return TimesheetEditFragment()
+            return TimesheetEditFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(EXTRA_PROJECT, project)
+                }
+            }
         }
     }
 }
