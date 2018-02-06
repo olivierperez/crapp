@@ -29,20 +29,20 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        timesheet_edit_code.filters = timesheet_edit_code.filters + InputFilter.AllCaps()
+        codeField.filters = codeField.filters + InputFilter.AllCaps()
 
         arguments?.let {
             presenter.init(it.getParcelable(EXTRA_PROJECT))
         } ?: presenter.init()
 
-        timesheet_edit_validate.setOnClickListener {
-            presenter.onButtonClicked(timesheet_edit_label.text.toString(), timesheet_edit_code.text.toString())
+        validateBtn.setOnClickListener {
+            presenter.onButtonClicked(labelField.text.toString(), codeField.text.toString())
         }
 
-        timesheet_edit_label.setOnEditorActionListener { _, idAction, _ ->
+        labelField.setOnEditorActionListener { _, idAction, _ ->
             when (idAction) {
                 EditorInfo.IME_ACTION_DONE -> {
-                    presenter.onButtonClicked(timesheet_edit_label.text.toString(), timesheet_edit_code.text.toString())
+                    presenter.onButtonClicked(labelField.text.toString(), codeField.text.toString())
                     true
                 }
                 else -> false
@@ -51,8 +51,8 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
     }
 
     override fun initFields(label: String, code: String) {
-        timesheet_edit_label.setText(label)
-        timesheet_edit_code.setText(code)
+        labelField.setText(label)
+        codeField.setText(code)
     }
 
     override fun presenter(): TimesheetEditPresenter = presenter

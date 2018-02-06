@@ -17,7 +17,7 @@
         app:layout_constraintVertical_chainStyle="packed">
 
         <EditText
-            android:id="@+id/timesheet_edit_label"
+            android:id="@+id/labelField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/project_name"
@@ -29,13 +29,13 @@
         android:layout_width="240dp"
         android:layout_marginBottom="8dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/timesheet_edit_validate"
+        app:layout_constraintBottom_toTopOf="@+id/validateBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelLayout">
 
         <EditText
-            android:id="@+id/timesheet_edit_code"
+            android:id="@+id/codeField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/project_code"
@@ -43,7 +43,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/timesheet_edit_validate"
+        android:id="@+id/validateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -57,16 +57,16 @@
         app:srcCompat="@drawable/ic_check" />
 
     <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/timesheet_edit_delete"
+        android:id="@+id/deleteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="?attr/selectableItemBackground"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/timesheet_edit_validate"
-        app:layout_constraintEnd_toStartOf="@+id/timesheet_edit_validate"
-        app:layout_constraintTop_toTopOf="@+id/timesheet_edit_validate"
+        app:layout_constraintBottom_toBottomOf="@+id/validateBtn"
+        app:layout_constraintEnd_toStartOf="@+id/validateBtn"
+        app:layout_constraintTop_toTopOf="@+id/validateBtn"
         app:srcCompat="@drawable/ic_delete"/>
 
 </android.support.constraint.ConstraintLayout>
