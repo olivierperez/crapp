@@ -55,10 +55,6 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
         timesheet_edit_code.setText(code)
     }
 
-    override fun setValidateButton(validateText: Int) {
-        timesheet_edit_validate.setText(validateText)
-    }
-
     override fun presenter(): TimesheetEditPresenter = presenter
 
     override fun finish() {
@@ -71,7 +67,7 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
 
     companion object {
 
-        val EXTRA_PROJECT = "project"
+        const val EXTRA_PROJECT = "project"
 
         fun create(): TimesheetEditFragment {
             return TimesheetEditFragment()

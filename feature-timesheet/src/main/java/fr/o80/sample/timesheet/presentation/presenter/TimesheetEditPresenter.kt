@@ -57,13 +57,11 @@ constructor() : Presenter<TimesheetEditView>() {
     fun init(project: Project) {
         editingProject = project.id
         view.initFields(project.label!!, project.code!!)
-        view.setValidateButton(R.string.common_ok)
     }
 
     fun init() {
         editingProject = 0
         view.initFields("", "")
-        view.setValidateButton(R.string.project_add)
     }
 
 }

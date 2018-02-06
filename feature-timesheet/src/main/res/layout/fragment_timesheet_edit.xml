@@ -42,15 +42,31 @@
             android:inputType="textVisiblePassword" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
+    <android.support.v7.widget.AppCompatImageButton
         android:id="@+id/timesheet_edit_validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/project_add"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/codeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/codeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/codeLayout"
+        app:srcCompat="@drawable/ic_check" />
+
+    <android.support.v7.widget.AppCompatImageButton
+        android:id="@+id/timesheet_edit_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/timesheet_edit_validate"
+        app:layout_constraintEnd_toStartOf="@+id/timesheet_edit_validate"
+        app:layout_constraintTop_toTopOf="@+id/timesheet_edit_validate"
+        app:srcCompat="@drawable/ic_delete"/>
 
 </android.support.constraint.ConstraintLayout>
