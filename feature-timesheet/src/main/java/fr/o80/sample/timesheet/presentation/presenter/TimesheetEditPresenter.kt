@@ -22,7 +22,17 @@ constructor() : Presenter<TimesheetEditView>() {
 
     private var editingProject: Long = 0
 
-    fun onButtonClicked(label: String, code: String) {
+    fun init(project: Project? = null) {
+        if (project == null) {
+            editingProject = 0
+            view.initFields("", "")
+        } else {
+            editingProject = project.id
+            view.initFields(project.label!!, project.code!!)
+        }
+    }
+
+    fun onValidateClicked(label: String, code: String) {
         if (editingProject == 0L) {
             addDisposable(projectCrud
                     .create(label, code)
@@ -54,14 +64,17 @@ constructor() : Presenter<TimesheetEditView>() {
         }
     }
 
-    fun init(project: Project) {
-        editingProject = project.id
-        view.initFields(project.label!!, project.code!!)
-    }
-
-    fun init() {
-        editingProject = 0
-        view.initFields("", "")
+    fun onDeleteClicked() {
+        addDisposable(projectCrud
+                .archive(editingProject)
+                .subscribeBy(onSuccess = {
+                    Timber.d("Project deleted %sd", editingProject)
+                    view.finish()
+                }, onError = {
+                    Timber.e(it, "Failed to delete %d", editingProject)
+                    view.showError(R.string.error_failed_to_save_project, it.javaClass.simpleName)
+                })
+        )
     }
 
 }

@@ -36,18 +36,20 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
         } ?: presenter.init()
 
         validateBtn.setOnClickListener {
-            presenter.onButtonClicked(labelField.text.toString(), codeField.text.toString())
+            presenter.onValidateClicked(labelField.text.toString(), codeField.text.toString())
         }
 
         labelField.setOnEditorActionListener { _, idAction, _ ->
             when (idAction) {
                 EditorInfo.IME_ACTION_DONE -> {
-                    presenter.onButtonClicked(labelField.text.toString(), codeField.text.toString())
+                    presenter.onValidateClicked(labelField.text.toString(), codeField.text.toString())
                     true
                 }
                 else -> false
             }
         }
+
+        deleteBtn.setOnClickListener { presenter.onDeleteClicked() }
     }
 
     override fun initFields(label: String, code: String) {

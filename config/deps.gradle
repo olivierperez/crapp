@@ -19,7 +19,9 @@ ext.data = dependencyGroup {
     kapt lib.dbflowCompile
     api lib.dbflowCore
     api lib.dbflow
+    api lib.dbflowXt
     api lib.dbflowRx2
+    api lib.dbflowRx2Xt
 }
 
 ext.kotlin = dependencyGroup {

@@ -19,7 +19,7 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
 
     fun findByDate(after: Date, strictlyBefore: Date): Single<List<EntryViewModel>> {
         return Single
-                .zip(timesheetRepository.findByDateRange(after, strictlyBefore), projectRepository.all(), BiFunction {
+                .zip(timesheetRepository.findByDateRange(after, strictlyBefore), projectRepository.allActive(), BiFunction {
                     entries, projects ->
                     val vms = mutableListOf<EntryViewModel>()
                     vms.addAll(entries.map { EntryViewModel(it.project!!.label!!, it.project!!.code!!, it.hours, it.date!!) })

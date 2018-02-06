@@ -22,6 +22,21 @@ class ProjectRepository @Inject constructor() {
                 .subscribeOn(Schedulers.io())
     }
 
+    fun allActive(): Single<List<Project>> {
+        return RXSQLite.rx(SQLite.select()
+                .from(Project::class.java)
+                .where(Project_Table.archived.eq(0)))
+                .queryList()
+                .subscribeOn(Schedulers.io())
+    }
+
+    fun findById(id: Long): Maybe<Project> {
+        return RXSQLite.rx(SQLite.select()
+                .from(Project::class.java)
+                .where(Project_Table.id.eq(id)))
+                .querySingle()
+    }
+
     fun findByCode(code: String): Maybe<Project> {
         return RXSQLite.rx(SQLite.select()
                 .from(Project::class.java)

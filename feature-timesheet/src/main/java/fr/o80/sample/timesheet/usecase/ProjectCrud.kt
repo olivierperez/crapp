@@ -25,6 +25,11 @@ constructor(private val projectRepository: ProjectRepository) {
                     .all()
                     .subscribeOn(Schedulers.io())
 
+    fun allActive(): Single<List<Project>> =
+            projectRepository
+                    .allActive()
+                    .subscribeOn(Schedulers.io())
+
     fun findByCode(code: String): Maybe<Project> =
             projectRepository
                     .findByCode(code)
@@ -34,5 +39,10 @@ constructor(private val projectRepository: ProjectRepository) {
             Project(id = id, code = code, label = label)
                     .update()
                     .subscribeOn(Schedulers.io())
+
+    fun archive(id: Long): Single<Boolean> =
+            projectRepository.findById(id)
+                    .map { it.copy(archived = 1) }
+                    .flatMapSingle { it.update() }
 
 }
