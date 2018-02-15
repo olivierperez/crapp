@@ -64,12 +64,12 @@ ext.ui = dependencyGroup {
 }
 
 ext.tests = dependencyGroup {
-    testApi lib.junit
-    testApi lib.mockitoCore
-    testApi lib.daggerMock
-    androidTestApi lib.junit
-    androidTestApi lib.mockitoCore
-    androidTestApi lib.daggerMock
+    testImplementation lib.junit
+    testImplementation lib.mockitoCore
+    testImplementation lib.daggerMock
+    androidTestImplementation lib.junit
+    androidTestImplementation lib.mockitoCore
+    androidTestImplementation lib.daggerMock
 }
 
 ext {
@@ -103,7 +103,9 @@ ext {
             dbflowCompile     : "com.github.Raizlabs.DBFlow:dbflow-processor:${version.dbflow}",
             dbflowCore        : "com.github.Raizlabs.DBFlow:dbflow-core:${version.dbflow}",
             dbflow            : "com.github.Raizlabs.DBFlow:dbflow:${version.dbflow}",
+            dbflowXt          : "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${version.dbflow}",
             dbflowRx2         : "com.github.Raizlabs.DBFlow:dbflow-rx2:${version.dbflow}",
+            dbflowRx2Xt       : "com.github.Raizlabs.DBFlow:dbflow-rx2-kotlinextensions:${version.dbflow}",
 
             // Parceler
             parceler          : "org.parceler:parceler-api:$version.parceler",

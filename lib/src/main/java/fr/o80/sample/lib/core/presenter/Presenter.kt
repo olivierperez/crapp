@@ -8,8 +8,7 @@ import io.reactivex.disposables.Disposable
  */
 open class Presenter<out T : PresenterView> {
 
-    var viewUnsafe: PresenterView? = null
-        private set
+    private var viewUnsafe: PresenterView? = null
 
     private val disposables = CompositeDisposable()
 
