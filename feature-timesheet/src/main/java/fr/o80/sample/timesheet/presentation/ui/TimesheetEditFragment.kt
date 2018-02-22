@@ -2,6 +2,7 @@ package fr.o80.sample.timesheet.presentation.ui
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import fr.o80.crapp.data.entity.Project
@@ -50,6 +51,10 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
         }
 
         deleteBtn.setOnClickListener { presenter.onDeleteClicked() }
+    }
+
+    override fun showArchive() {
+        deleteBtn.visibility = View.VISIBLE
     }
 
     override fun initFields(label: String, code: String) {

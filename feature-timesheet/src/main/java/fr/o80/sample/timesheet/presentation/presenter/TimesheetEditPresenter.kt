@@ -29,6 +29,7 @@ constructor() : Presenter<TimesheetEditView>() {
         } else {
             editingProject = project.id
             view.initFields(project.label!!, project.code!!)
+            view.showArchive()
         }
     }
 
