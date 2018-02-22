@@ -16,9 +16,12 @@ class ProjectCrud @Inject
 constructor(private val projectRepository: ProjectRepository) {
 
     fun create(label: String, code: String): Single<Boolean> =
-            Project(code = code, label = label)
-                    .save()
+            projectRepository
+                    .findByCode(code)
                     .subscribeOn(Schedulers.io())
+                    .map { it.copy(archived = 0) }
+                    .toSingle(Project(code = code, label = label))
+                    .flatMap { it.save() }
 
     fun all(): Single<List<Project>> =
             projectRepository

@@ -67,7 +67,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     override fun update(viewModel: EntriesViewModel) {
         when (viewModel) {
-            is LoadingEntriesViewModel -> showLoading()
+            LoadingEntriesViewModel -> showLoading()
 
             is LoadedEntriesViewModel -> {
                 Timber.d("Loaded, %s", viewModel.entries)
