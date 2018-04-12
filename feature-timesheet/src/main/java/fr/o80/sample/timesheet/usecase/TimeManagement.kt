@@ -16,18 +16,18 @@ import javax.inject.Inject
 class TimeManagement @Inject
 constructor(private val timesheetRepository: TimesheetRepository, private val projectRepository: ProjectRepository) {
 
-    fun addOneHour(code: String, date: Date): Single<Boolean> {
+    fun addHours(code: String, date: Date, hoursToAdd: Int): Single<Boolean> {
         return projectRepository.findByCode(code)
                 .flatMapSingle { project ->
 
                     val timeEntry = timesheetRepository.findByProjectAndDate(project, date)
                     if (timeEntry != null) {
                         // Update the existing time entry
-                        timeEntry.hours += 1
+                        timeEntry.hours += hoursToAdd
                         timeEntry.save().map { true }
                     } else {
                         // Create a new time entry
-                        TimeEntry(project = project, hours = 1, date = date)
+                        TimeEntry(project = project, hours = hoursToAdd, date = date)
                                 .insert()
                                 .map { true }
                     }
@@ -36,22 +36,22 @@ constructor(private val timesheetRepository: TimesheetRepository, private val pr
                 .subscribeOn(Schedulers.io())
     }
 
-    fun removeOneHour(code: String, date: Date): Single<Boolean> {
+    fun removeHours(code: String, date: Date, hoursToRemove: Int): Single<Boolean> {
         return projectRepository.findByCode(code)
                 .flatMapSingle { project ->
                     val timeEntry = timesheetRepository.findByProjectAndDate(project, date)
                     val hours = timeEntry?.hours ?: -1
-                    when (hours) {
-                        -1 -> {
+                    when {
+                        hours == -1 -> {
                             Single.just(true)
                         }
-                        1 -> {
+                        hours - hoursToRemove <= 0 -> {
                             timeEntry!!.delete().map { true }
                         }
                         else -> {
                             // Update the existing time entry
-                            timeEntry!!.hours--
-                            timeEntry.save().map { true }
+                            timeEntry!!.hours -= hoursToRemove
+                            timeEntry!!.save().map { true }
                         }
                     }
                 }

@@ -32,7 +32,9 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         TimesheetAdapter(
                 onClick = presenter::onTimeEntryClicked,
                 onTimeAdded = presenter::onTimeAdded,
-                onTimeRemoved = presenter::onTimeRemoved
+                onLongTimeAdded = presenter::onLongTimeAdded,
+                onTimeRemoved = presenter::onTimeRemoved,
+                onLongTimeRemoved = presenter::onLongTimeRemoved
                         )
     }
 

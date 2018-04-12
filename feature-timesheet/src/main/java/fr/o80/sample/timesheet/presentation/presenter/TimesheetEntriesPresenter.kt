@@ -12,6 +12,7 @@ import fr.o80.sample.lib.utils.mkdate
 import fr.o80.sample.lib.utils.plus
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import fr.o80.sample.lib.utils.today
+import fr.o80.sample.timesheet.Const.HOURS_PER_DAY
 import fr.o80.sample.timesheet.usecase.ProjectCrud
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -77,7 +78,7 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
 
     fun onTimeAdded(timeEntry: EntryViewModel) {
         Timber.d("Time added: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
-        addDisposable(timeManagement.addOneHour(timeEntry.code, cache!!.date)
+        addDisposable(timeManagement.addHours(timeEntry.code, cache!!.date, 1)
                 .subscribeBy(
                         onSuccess = {
                             Timber.d("One hour added")
@@ -88,9 +89,23 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
                         }))
     }
 
+    fun onLongTimeAdded(timeEntry: EntryViewModel) : Boolean {
+        val missingHoursToFillDay = HOURS_PER_DAY - cache!!.totalHours
+        addDisposable(timeManagement.addHours(timeEntry.code, cache!!.date, missingHoursToFillDay)
+                              .subscribeBy(
+                                      onSuccess = {
+                                          Timber.d("$missingHoursToFillDay hour(s) added")
+                                          init()
+                                      },
+                                      onError = {
+                                          Timber.e(it, "Failed to add $missingHoursToFillDay hour(s)")
+                                      }))
+        return true
+    }
+
     fun onTimeRemoved(timeEntry: EntryViewModel) {
         Timber.d("Time removed: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
-        addDisposable(timeManagement.removeOneHour(timeEntry.code, cache!!.date)
+        addDisposable(timeManagement.removeHours(timeEntry.code, cache!!.date, 1)
                 .subscribeBy(
                         onSuccess = {
                             Timber.d("One hour removed")
@@ -99,6 +114,20 @@ constructor(private val listEntries: ListEntries, private val timeManagement: Ti
                         onError = {
                             Timber.e(it, "Failed to remove one hour")
                         }))
+    }
+
+    fun onLongTimeRemoved(timeEntry: EntryViewModel) : Boolean {
+        Timber.d("Time removed: %s, %s, %d", timeEntry.label, timeEntry.code, timeEntry.hours)
+        addDisposable(timeManagement.removeHours(timeEntry.code, cache!!.date, timeEntry.hours)
+                              .subscribeBy(
+                                      onSuccess = {
+                                          Timber.d("${timeEntry.hours} hour(s) removed")
+                                          init()
+                                      },
+                                      onError = {
+                                          Timber.e(it, "Failed to remove ${timeEntry.hours} hour(s)")
+                                      }))
+        return true
     }
 
     fun onAddClicked() {

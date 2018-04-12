@@ -16,7 +16,9 @@ import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 class TimesheetAdapter(
         val onClick: (EntryViewModel) -> Unit,
         val onTimeAdded: (EntryViewModel) -> Unit,
-        val onTimeRemoved: (EntryViewModel) -> Unit
+        val onLongTimeAdded: (EntryViewModel) -> Boolean,
+        val onTimeRemoved: (EntryViewModel) -> Unit,
+        val onLongTimeRemoved: (EntryViewModel) -> Boolean
 ) : RecyclerView.Adapter<TimesheetAdapter.EntryViewHolder>() {
 
     private var entries: List<EntryViewModel> = listOf()
@@ -54,7 +56,9 @@ class TimesheetAdapter(
             }
             itemView.setOnClickListener { onClick(timeEntry) }
             addTime.setOnClickListener { onTimeAdded(timeEntry) }
+            addTime.setOnLongClickListener { onLongTimeAdded(timeEntry) }
             removeTime.setOnClickListener { onTimeRemoved(timeEntry) }
+            removeTime.setOnLongClickListener { onLongTimeRemoved(timeEntry) }
         }
     }
 }
