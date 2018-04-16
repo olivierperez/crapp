@@ -1,0 +1,14 @@
+apply from: '../config/module.gradle'
+
+dependencies {
+    implementation project(path: ':lib')
+
+    kotlin()
+    support()
+    dagger()
+    rx()
+
+    timber()
+
+    tests()
+}

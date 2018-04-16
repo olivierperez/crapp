@@ -1,5 +1,6 @@
 package fr.o80.sample.sampleapplication
 
+import fr.o80.featurereminder.ScheduleRemind
 import fr.o80.featuresummary.Summary
 import fr.o80.sample.lib.core.LibApplication
 import fr.o80.sample.lib.core.LibConfiguration
@@ -16,6 +17,8 @@ class AppApplication : LibApplication() {
         super.onCreate()
         RxPermissionsResult.register(this)
         Timber.plant(Timber.DebugTree())
+
+        ScheduleRemind.scheduleReminder(applicationContext)
     }
 
     override fun buildLibConfiguration(): LibConfiguration {

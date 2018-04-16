@@ -58,8 +58,9 @@ dependencies {
     implementation project(path: ':lib')
 
     implementation project(path: ':feature-dashboard')
-    implementation project(path: ':feature-timesheet')
+    implementation project(path: ':feature-reminder')
     implementation project(path: ':feature-summary')
+    implementation project(path: ':feature-timesheet')
 
     kotlin()
     support()
