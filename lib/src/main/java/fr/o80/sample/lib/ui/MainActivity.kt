@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (application as LibApplication).component().inject(this)
+        (application as LibApplication).component.inject(this)
 
         with(libConfiguration) {
             home.open(this@MainActivity)

@@ -14,7 +14,8 @@ import fr.o80.sample.lib.core.ui.BaseDrawerActivity
  */
 class SummaryActivity : BaseDrawerActivity() {
 
-    private lateinit var component: SummaryComponent
+    lateinit var component: SummaryComponent
+        private set
 
     override val layoutId: Int
         get() = R.layout.activity_drawer_w_toolbar
@@ -24,11 +25,9 @@ class SummaryActivity : BaseDrawerActivity() {
 
     override fun initDagger() {
         component = DaggerSummaryComponent.builder()
-                .libComponent((application as LibApplication).component())
+                .libComponent((application as LibApplication).component)
                 .build()
     }
-
-    fun component(): SummaryComponent = component
 
     companion object {
 
