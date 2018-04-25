@@ -1,5 +1,17 @@
 apply from: '../config/module.gradle'
 
+android.testOptions {
+    // Configuration closure added by the plugin;
+    // all configurable parameters related to JUnit 5 can be found here
+    junitPlatform {
+        // The JUnit Jupiter dependency version to use
+        jupiterVersion "5.1.1"
+
+        // The JUnit Vintage Engine dependency version to use
+        vintageVersion "4.12.2"
+    }
+}
+
 dependencies {
     implementation project(path: ':lib')
 
@@ -9,6 +21,4 @@ dependencies {
     rx()
 
     timber()
-
-    tests()
 }

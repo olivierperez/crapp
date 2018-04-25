@@ -66,19 +66,10 @@ ext.ui = dependencyGroup {
     api lib.recyclerAnimator
 }
 
-ext.tests = dependencyGroup {
-    testImplementation lib.junit
-    testImplementation lib.mockitoCore
-    testImplementation lib.daggerMock
-    androidTestImplementation lib.junit
-    androidTestImplementation lib.mockitoCore
-    androidTestImplementation lib.daggerMock
-}
-
 ext {
     version = [
             dagger    : '2.13',
-            daggerMock: '0.8.2',
+            daggerMock: '0.8.4',
             support   : '27.0.1',
             parceler  : '1.0.3',
             dbflow    : '4.0.5'
@@ -87,7 +78,6 @@ ext {
     lib = [
 
             // Tests
-            junit             : 'junit:junit:4.12',
             mockitoCore       : 'org.mockito:mockito-core:2.12.0',
             daggerMock        : "com.github.fabioCollini:DaggerMock:$version.daggerMock",
 
