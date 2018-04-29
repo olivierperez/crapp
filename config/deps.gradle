@@ -78,8 +78,10 @@ ext {
     lib = [
 
             // Tests
-            mockitoCore       : 'org.mockito:mockito-core:2.12.0',
+            mockitoCore       : 'org.mockito:mockito-core:2.18.3',
+            mockitoKt         : 'com.nhaarman:mockito-kotlin:1.5.0',
             daggerMock        : "com.github.fabioCollini:DaggerMock:$version.daggerMock",
+            daggerMockKt      : "com.github.fabioCollini.daggermock:daggermock-kotlin:$version.daggerMock",
 
             // Unit Tests
             robolectric       : 'org.robolectric:robolectric:3.0',

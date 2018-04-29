@@ -1,29 +1,38 @@
 package fr.o80.featurereminder.usecase
 
+import com.nhaarman.mockito_kotlin.any
 import fr.o80.crapp.data.TimesheetRepository
+import fr.o80.crapp.data.entity.TimeEntry
+import io.reactivex.Single
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
 
 /**
  * @author Olivier Perez
  */
-@ExtendWith(value = [DaggerMockExtension::class])
+@ExtendWith(value = [MockitoExtension::class])
 internal class TotalPerDayTest {
 
     @Mock
-    lateinit var timesheetRepository: TimesheetRepository
+    private lateinit var timesheetRepository: TimesheetRepository
 
     @InjectMocks
-    lateinit var totalPerDay: TotalPerDay
+    private lateinit var totalPerDay: TotalPerDay
 
     @Test
-    @DisplayName("Super test JUnit5")
+    @DisplayName("Sum the hours of the day")
     fun test() {
-        totalPerDay.today().subscribe()
-        assertEquals(1, 1)
+        given(timesheetRepository.findByDateRange(any(), any()))
+                .willReturn(Single.just(listOf(TimeEntry(hours = 5), TimeEntry(hours = 1))))
+
+        val hours = totalPerDay.getTodayHours().blockingGet()
+
+        assertEquals(6, hours)
     }
+
 }

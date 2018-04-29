@@ -11,7 +11,7 @@ import javax.inject.Singleton
 /**
  * @author Olivier Perez
  */
-@Component(modules = arrayOf(LibModule::class))
+@Component(modules = [LibModule::class])
 @Singleton
 interface LibComponent {
     fun inject(activity: MainActivity)

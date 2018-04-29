@@ -53,9 +53,11 @@ dependencies {
 
     testImplementation lib.mockitoCore
     testImplementation lib.daggerMock
-    testImplementation 'com.github.fabioCollini.daggermock:daggermock-kotlin:0.8.4'
+    testImplementation lib.daggerMockKt
+    testImplementation lib.mockitoKt
 
     androidTestImplementation lib.mockitoCore
     androidTestImplementation lib.daggerMock
-    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock-kotlin:0.8.4'
+    androidTestImplementation lib.daggerMockKt
+    androidTestImplementation lib.mockitoKt
 }

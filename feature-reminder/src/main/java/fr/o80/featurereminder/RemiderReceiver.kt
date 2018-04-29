@@ -30,7 +30,7 @@ class RemiderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         inject(context)
         Timber.d("Reminder triggered")
-        totalPerDay.today()
+        totalPerDay.getTodayHours()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onSuccess = { totalHoursForToday ->
