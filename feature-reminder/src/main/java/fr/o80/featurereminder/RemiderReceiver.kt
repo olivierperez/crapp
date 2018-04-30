@@ -15,6 +15,8 @@ import timber.log.Timber
 import javax.inject.Inject
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import fr.o80.featurereminder.usecase.DayChecker
+import fr.o80.sample.lib.utils.todayCalendar
 
 /**
  * @author Olivier Perez
@@ -23,6 +25,9 @@ class RemiderReceiver : BroadcastReceiver() {
 
     @Inject
     lateinit var totalPerDay: TotalPerDay
+
+    @Inject
+    lateinit var dayChecker: DayChecker
 
     private fun inject(context: Context) {
         DaggerReminderComponent.builder()
@@ -34,18 +39,21 @@ class RemiderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         inject(context)
         Timber.d("Reminder triggered")
-        totalPerDay.getTodayHours()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onSuccess = { totalHoursForToday ->
-                            Timber.d("Hours logged today: $totalHoursForToday / $HOURS_PER_DAY")
-                            if (totalHoursForToday < HOURS_PER_DAY) {
-                                displayNotification(context, HOURS_PER_DAY, totalHoursForToday)
-                            }
-                        },
-                        onError = {
-                            Timber.e(it, "Failed to get the logged hours of today")
-                        })
+
+        if (dayChecker shouldNotifyFor todayCalendar()) {
+            totalPerDay.getTodayHours()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(
+                            onSuccess = { totalHoursForToday ->
+                                Timber.d("Hours logged today: $totalHoursForToday / $HOURS_PER_DAY")
+                                if (totalHoursForToday < HOURS_PER_DAY) {
+                                    displayNotification(context, HOURS_PER_DAY, totalHoursForToday)
+                                }
+                            },
+                            onError = {
+                                Timber.e(it, "Failed to get the logged hours of today")
+                            })
+        }
     }
 
     private fun displayNotification(context: Context, hoursRequiredPerDay: Int, totalHoursForToday: Int) {
@@ -72,7 +80,9 @@ class RemiderReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID).apply {
             setSmallIcon(R.drawable.ic_notif_reminder)
             setContentTitle(mainMessage)
-            if (totalHoursForToday > 0) {setContentText(context.resources.getQuantityString(R.plurals.reminder_x_hours_on_x_required, totalHoursForToday, totalHoursForToday, hoursRequiredPerDay))}
+            if (totalHoursForToday > 0) {
+                setContentText(context.resources.getQuantityString(R.plurals.reminder_x_hours_on_x_required, totalHoursForToday, totalHoursForToday, hoursRequiredPerDay))
+            }
             setAutoCancel(true)
             priority = NotificationCompat.PRIORITY_DEFAULT
         }

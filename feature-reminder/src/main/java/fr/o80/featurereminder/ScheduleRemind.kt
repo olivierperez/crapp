@@ -30,7 +30,7 @@ object ScheduleRemind {
         val alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
 
         context.systemService<AlarmManager>()
-                .setRepeating(AlarmManager.RTC_WAKEUP, nextTrigger.timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent)
+                .setRepeating(AlarmManager.RTC, nextTrigger.timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent)
 
         Timber.i("Reminder scheduled")
     }

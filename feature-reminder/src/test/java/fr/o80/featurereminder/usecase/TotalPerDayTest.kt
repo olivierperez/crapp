@@ -7,7 +7,6 @@ import io.reactivex.Single
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -15,8 +14,7 @@ import org.mockito.Mock
 /**
  * @author Olivier Perez
  */
-@ExtendWith(value = [MockitoExtension::class])
-internal class TotalPerDayTest {
+internal class TotalPerDayTest : BaseUnitTest() {
 
     @Mock
     private lateinit var timesheetRepository: TimesheetRepository
