@@ -15,7 +15,9 @@ import timber.log.Timber
 import javax.inject.Inject
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import fr.o80.featurereminder.usecase.DayChecker
+import fr.o80.sample.lib.ui.MainActivity
 import fr.o80.sample.lib.utils.todayCalendar
 
 /**
@@ -85,6 +87,10 @@ class RemiderReceiver : BroadcastReceiver() {
             }
             setAutoCancel(true)
             priority = NotificationCompat.PRIORITY_DEFAULT
+
+            Intent(context, MainActivity::class.java).run {
+                setContentIntent(PendingIntent.getActivity(context, 0, this, 0))
+            }
         }
 
         notificationManager.notify(5, builder.build())
