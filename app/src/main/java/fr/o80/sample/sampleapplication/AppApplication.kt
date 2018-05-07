@@ -18,6 +18,7 @@ class AppApplication : LibApplication() {
         RxPermissionsResult.register(this)
         Timber.plant(Timber.DebugTree())
 
+        Timber.i("Schedule the reminder at application startup")
         ScheduleRemind.scheduleReminder(applicationContext)
     }
 

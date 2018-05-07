@@ -6,6 +6,7 @@ import android.content.Context
 import androidx.core.content.systemService
 import java.util.Calendar
 import android.content.Intent
+import fr.o80.sample.lib.core.Const
 import timber.log.Timber
 import java.util.Date
 
@@ -27,7 +28,7 @@ object ScheduleRemind {
         }
 
         val intent = Intent(context, RemiderReceiver::class.java)
-        val alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        val alarmIntent = PendingIntent.getBroadcast(context, Const.REQUEST_CODE_REMINDER_ALARM, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         context.systemService<AlarmManager>()
                 .setRepeating(AlarmManager.RTC, nextTrigger.timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent)
