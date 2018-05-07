@@ -71,14 +71,16 @@ class RemiderReceiver : BroadcastReceiver() {
 
             intent(context, MainActivity::class.java)
 
+            id = 0
             smallIcon = R.drawable.ic_notif_reminder
-            title = context.getString(if (totalHoursForToday == 0) R.string.reminder_you_have_logged_anything
-                                      else R.string.reminder_complete_your_logged_time)
             autoCancel = true
             priority = NotificationCompat.PRIORITY_DEFAULT
 
             if (totalHoursForToday > 0) {
+                title = context.getString(R.string.reminder_complete_your_logged_time)
                 text = context.resources.getQuantityString(R.plurals.reminder_x_hours_on_x_required, totalHoursForToday, totalHoursForToday, hoursRequiredPerDay)
+            } else {
+                title = context.getString(R.string.reminder_you_have_logged_anything)
             }
         }
 

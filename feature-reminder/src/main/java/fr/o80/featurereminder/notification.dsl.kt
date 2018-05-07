@@ -22,7 +22,8 @@ fun notification(context: Context, notificationManager: NotificationManager, blo
 
 @NotificationDsl
 class NotificationBuilder(private val context: Context, private val notificationManager: NotificationManager) {
-    var channelBuilder: ChannelBuilder? = null
+    private var channelBuilder: ChannelBuilder? = null
+    var id: Int? = null
     var smallIcon: Int? = null
     var title: String? = null
     var text: String? = null
@@ -31,18 +32,20 @@ class NotificationBuilder(private val context: Context, private val notification
     var intent: Intent? = null
 
     fun show() {
+        val valId = id ?: throw IllegalStateException("Id of notification must be defined")
+
         channelBuilder?.createChannel(notificationManager)
 
         val builder = NotificationCompat.Builder(context, RemiderReceiver.CHANNEL_ID).also { builder ->
-            smallIcon?.let { builder.setSmallIcon(it) }
             builder.setContentTitle(title)
             builder.setContentText(text)
+            smallIcon?.let { builder.setSmallIcon(it) }
             autoCancel?.let { builder.setAutoCancel(it) }
-            builder.priority = NotificationCompat.PRIORITY_DEFAULT
-            builder.setContentIntent(PendingIntent.getActivity(context, 0, intent, 0))
+            priority?.let { builder.priority = it }
+            intent?.let { builder.setContentIntent(PendingIntent.getActivity(context, 0, it, 0)) }
         }
 
-        notificationManager.notify(5, builder.build())
+        notificationManager.notify(valId, builder.build())
     }
 
     fun channel(id: String, block: ChannelBuilder.() -> Unit) {
@@ -71,15 +74,11 @@ class ChannelBuilder(private val id: String) {
     var bypassDnd: Boolean? = null
 
     fun createChannel(notificationManager: NotificationManager) {
-        if (importance == null) {
-            throw IllegalStateException("Importance of channel must be defined")
-        }
-        if (name == null) {
-            throw IllegalStateException("Name of channel must be defined")
-        }
+        val valImportance = importance ?: throw IllegalStateException("Importance of channel must be defined")
+        val valName = name ?: throw IllegalStateException("Name of channel must be defined")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(id, name, importance!!).also { builder ->
+            val channel = NotificationChannel(id, valName, valImportance).also { builder ->
                 builder.description = description
                 builder.lockscreenVisibility = lockscreenVisibility ?: Notification.VISIBILITY_PRIVATE
                 builder.enableLights(false)
