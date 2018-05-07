@@ -9,6 +9,4 @@ dependencies {
     rx()
 
     timber()
-
-    tests()
 }

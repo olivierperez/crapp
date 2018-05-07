@@ -24,7 +24,7 @@ class TimesheetEditFragment : BaseFragment(), TimesheetEditView {
     override val layoutId: Int = R.layout.fragment_timesheet_edit
 
     override fun inject() {
-        (activity as TimesheetActivity).component().inject(this)
+        (activity as TimesheetActivity).component.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

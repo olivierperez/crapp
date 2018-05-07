@@ -11,6 +11,4 @@ dependencies {
 
     ui()
     timber()
-
-    tests()
 }

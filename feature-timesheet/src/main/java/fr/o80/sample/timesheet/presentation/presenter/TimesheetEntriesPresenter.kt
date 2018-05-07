@@ -12,7 +12,7 @@ import fr.o80.sample.lib.utils.mkdate
 import fr.o80.sample.lib.utils.plus
 import fr.o80.sample.timesheet.usecase.model.EntryViewModel
 import fr.o80.sample.lib.utils.today
-import fr.o80.sample.timesheet.Const.HOURS_PER_DAY
+import fr.o80.sample.lib.core.Const.HOURS_PER_DAY
 import fr.o80.sample.timesheet.usecase.ProjectCrud
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy

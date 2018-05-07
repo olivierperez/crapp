@@ -19,7 +19,8 @@ abstract class LibApplication : Application() {
 
     protected abstract fun buildLibConfiguration(): LibConfiguration
 
-    private lateinit var component: LibComponent
+    lateinit var component: LibComponent
+        private set
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -41,7 +42,4 @@ abstract class LibApplication : Application() {
         FlowManager.destroy()
     }
 
-    fun component(): LibComponent {
-        return component
-    }
 }

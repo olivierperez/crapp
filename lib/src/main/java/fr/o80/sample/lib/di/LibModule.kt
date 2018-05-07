@@ -1,10 +1,9 @@
 package fr.o80.sample.lib.di
 
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
 import fr.o80.sample.lib.core.LibConfiguration
+import javax.inject.Singleton
 
 /**
  * @author Olivier Perez
@@ -17,4 +16,5 @@ class LibModule(private val configuration: LibConfiguration) {
     fun provideLibConfiguration(): LibConfiguration {
         return configuration
     }
+
 }

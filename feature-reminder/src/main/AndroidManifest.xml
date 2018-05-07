@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fr.o80.featurereminder">
+
+    <application>
+        <receiver android:name=".RemiderReceiver" />
+    </application>
+
+</manifest>

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'de.mannodermaus.android-junit5'
 apply from: '../config/deps.gradle'
 
 android {
@@ -39,4 +40,24 @@ android {
 androidExtensions {
     defaultCacheImplementation = "SPARSE_ARRAY"
     experimental = true
+}
+
+configurations.all {
+    resolutionStrategy.force "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+dependencies {
+    testImplementation junit5.unitTests()
+    testImplementation junit5.parameterized()
+    testCompileOnly junit5.unitTestsRuntime()
+
+    testImplementation lib.mockitoCore
+    testImplementation lib.daggerMock
+    testImplementation lib.daggerMockKt
+    testImplementation lib.mockitoKt
+
+    androidTestImplementation lib.mockitoCore
+    androidTestImplementation lib.daggerMock
+    androidTestImplementation lib.daggerMockKt
+    androidTestImplementation lib.mockitoKt
 }

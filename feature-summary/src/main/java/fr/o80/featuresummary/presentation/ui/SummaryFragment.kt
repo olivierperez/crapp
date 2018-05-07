@@ -32,7 +32,7 @@ class SummaryFragment : BaseFragment(), SummaryView {
     override fun presenter(): Presenter<PresenterView> = presenter
 
     override fun inject() {
-        (activity as SummaryActivity).component().inject(this)
+        (activity as SummaryActivity).component.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

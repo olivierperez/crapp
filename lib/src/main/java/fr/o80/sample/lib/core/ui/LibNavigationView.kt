@@ -28,7 +28,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private var listener: WeakReference<Listener>? = null
 
     init {
-        (context.applicationContext as LibApplication).component().inject(this)
+        (context.applicationContext as LibApplication).component.inject(this)
 
         addFeature(0, configuration.home)
         configuration.features

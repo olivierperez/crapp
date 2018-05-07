@@ -11,18 +11,16 @@ import fr.o80.sample.lib.core.ui.BaseDrawerActivity
  */
 class DashboardActivity : BaseDrawerActivity() {
 
-    lateinit private var component: DashboardComponent
+    lateinit var component: DashboardComponent
+        private set
 
     override fun initDagger() {
         component = DaggerDashboardComponent.builder()
-                .libComponent((application as LibApplication).component())
+                .libComponent((application as LibApplication).component)
                 .build()
     }
 
     override val initFragment: Fragment
         get() = DashboardFragment()
 
-    fun component(): DashboardComponent {
-        return component
-    }
 }

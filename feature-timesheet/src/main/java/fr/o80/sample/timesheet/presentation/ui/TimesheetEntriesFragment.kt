@@ -44,7 +44,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
     override fun presenter(): TimesheetEntriesPresenter = presenter
 
     override fun inject() {
-        (activity as TimesheetActivity).component().inject(this)
+        (activity as TimesheetActivity).component.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

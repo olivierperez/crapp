@@ -24,7 +24,7 @@ class DashboardFragment : BaseFragment(), DashboardView {
     }
 
     override fun inject() {
-        (activity as DashboardActivity).component().inject(this)
+        (activity as DashboardActivity).component.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

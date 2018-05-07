@@ -1,1 +1,1 @@
-include ':app', ':lib', ':data', ':feature-dashboard', ':feature-timesheet', ':feature-summary'
+include ':app', ':lib', ':data', ':feature-dashboard', ':feature-timesheet', ':feature-summary', ':feature-reminder'

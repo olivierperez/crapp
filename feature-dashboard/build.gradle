@@ -6,6 +6,4 @@ dependencies {
     kotlin()
     dagger()
     support()
-
-    tests()
 }

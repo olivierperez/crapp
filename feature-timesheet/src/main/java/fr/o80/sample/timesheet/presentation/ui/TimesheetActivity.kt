@@ -15,7 +15,8 @@ import fr.o80.sample.timesheet.dagger.TimesheetComponent
  */
 class TimesheetActivity : BaseDrawerActivity() {
 
-    private lateinit var component: TimesheetComponent
+    lateinit var component: TimesheetComponent
+        private set
 
     override val initFragment: Fragment
         get() = TimesheetEntriesFragment.newInstance()
@@ -25,11 +26,9 @@ class TimesheetActivity : BaseDrawerActivity() {
 
     override fun initDagger() {
         component = DaggerTimesheetComponent.builder()
-                .libComponent((application as LibApplication).component())
+                .libComponent((application as LibApplication).component)
                 .build()
     }
-
-    fun component(): TimesheetComponent = component
 
     fun createProject() {
         supportFragmentManager
