@@ -54,8 +54,9 @@ class NotificationBuilder(private val context: Context, private val notification
     }
 
     fun intent(context: Context, javaClass: Class<out Activity>) {
-        // TODO Créer l'intent
+        intent = Intent(context, javaClass)
     }
+
 }
 
 @NotificationDsl
