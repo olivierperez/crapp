@@ -29,7 +29,7 @@ class NotificationBuilder(private val context: Context, private val notification
     var text: String? = null
     var autoCancel: Boolean? = null
     var priority: Int? = null
-    var intent: Intent? = null
+    var intent: PendingIntent? = null
 
     fun show() {
         val valId = id ?: throw IllegalStateException("Id of notification must be defined")
@@ -42,7 +42,7 @@ class NotificationBuilder(private val context: Context, private val notification
             smallIcon?.let { builder.setSmallIcon(it) }
             autoCancel?.let { builder.setAutoCancel(it) }
             priority?.let { builder.priority = it }
-            intent?.let { builder.setContentIntent(PendingIntent.getActivity(context, 0, it, 0)) }
+            intent?.let { builder.setContentIntent(it) }
         }
 
         notificationManager.notify(valId, builder.build())
@@ -56,8 +56,8 @@ class NotificationBuilder(private val context: Context, private val notification
         }
     }
 
-    fun intent(context: Context, javaClass: Class<out Activity>) {
-        intent = Intent(context, javaClass)
+    fun intent(context: Context, javaClass: Class<out Activity>, requestCode: Int = 0, flags: Int = 0) {
+        intent = PendingIntent.getActivity(context, requestCode, Intent(context, javaClass), flags)
     }
 
 }

@@ -1,6 +1,7 @@
 package fr.o80.featurereminder
 
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -8,9 +9,11 @@ import android.support.v4.app.NotificationCompat
 import fr.o80.featurereminder.dagger.DaggerReminderComponent
 import fr.o80.featurereminder.usecase.DayChecker
 import fr.o80.featurereminder.usecase.TotalPerDay
+import fr.o80.sample.lib.core.Const
 import fr.o80.sample.lib.core.Const.HOURS_PER_DAY
 import fr.o80.sample.lib.core.LibApplication
 import fr.o80.sample.lib.ui.MainActivity
+import fr.o80.sample.lib.utils.today
 import fr.o80.sample.lib.utils.todayCalendar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -69,9 +72,9 @@ class RemiderReceiver : BroadcastReceiver() {
                 bypassDnd = false
             }
 
-            intent(context, MainActivity::class.java)
+            intent(context, MainActivity::class.java, Const.REQUEST_CODE_REMINDER_NOTIFICATION, PendingIntent.FLAG_UPDATE_CURRENT)
 
-            id = 0
+            id = today().time.toInt()
             smallIcon = R.drawable.ic_notif_reminder
             autoCancel = true
             priority = NotificationCompat.PRIORITY_DEFAULT
