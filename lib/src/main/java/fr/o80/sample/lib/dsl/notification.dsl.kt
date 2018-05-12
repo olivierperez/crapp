@@ -7,7 +7,10 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
+import android.net.Uri
 import android.os.Build
+import android.support.annotation.ColorInt
 import android.support.v4.app.NotificationCompat
 
 @DslMarker
@@ -71,8 +74,13 @@ class ChannelBuilder(internal val id: String) {
     var lockscreenVisibility: Int? = null
     var importance: Int? = null
     var lights: Boolean? = null
+    @ColorInt
+    var lightColor: Int? = null
     var vibration: Boolean? = null
+    var vibrationPattern: LongArray? = null
     var bypassDnd: Boolean? = null
+    var sound: Uri? = null
+    var audioAttributes: AudioAttributes? = null
 
     fun createChannel(notificationManager: NotificationManager) {
         val valImportance = importance
@@ -83,9 +91,12 @@ class ChannelBuilder(internal val id: String) {
             val channel = NotificationChannel(id, valName, valImportance).also { builder ->
                 builder.description = description
                 builder.lockscreenVisibility = lockscreenVisibility ?: Notification.VISIBILITY_PRIVATE
-                builder.enableLights(false)
-                builder.enableVibration(false)
-                builder.setBypassDnd(false)
+                lights?.let { builder.enableLights(it) }
+                vibration?.let { builder.enableVibration(it) }
+                bypassDnd?.let { builder.setBypassDnd(it) }
+                lightColor?.let { builder.lightColor = it }
+                vibrationPattern?.let { builder.vibrationPattern = it }
+                sound?.let { builder.setSound(it, audioAttributes) }
             }
             // Register the channel with the system
             notificationManager.createNotificationChannel(channel)
