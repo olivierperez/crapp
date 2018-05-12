@@ -12,6 +12,7 @@ import fr.o80.featurereminder.usecase.TotalPerDay
 import fr.o80.sample.lib.core.Const
 import fr.o80.sample.lib.core.Const.HOURS_PER_DAY
 import fr.o80.sample.lib.core.LibApplication
+import fr.o80.sample.lib.dsl.notification
 import fr.o80.sample.lib.ui.MainActivity
 import fr.o80.sample.lib.utils.today
 import fr.o80.sample.lib.utils.todayCalendar

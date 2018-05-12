@@ -1,4 +1,4 @@
-package fr.o80.featurereminder
+package fr.o80.sample.lib.dsl
 
 import android.app.Activity
 import android.app.Notification
@@ -33,10 +33,11 @@ class NotificationBuilder(private val context: Context, private val notification
 
     fun show() {
         val valId = id ?: throw IllegalStateException("Id of notification must be defined")
+        val valChannel = channelBuilder ?: throw IllegalStateException("Channel must be defined")
 
         channelBuilder?.createChannel(notificationManager)
 
-        val builder = NotificationCompat.Builder(context, RemiderReceiver.CHANNEL_ID).also { builder ->
+        val builder = NotificationCompat.Builder(context, valChannel.id).also { builder ->
             builder.setContentTitle(title)
             builder.setContentText(text)
             smallIcon?.let { builder.setSmallIcon(it) }
@@ -63,7 +64,7 @@ class NotificationBuilder(private val context: Context, private val notification
 }
 
 @NotificationDsl
-class ChannelBuilder(private val id: String) {
+class ChannelBuilder(internal val id: String) {
 
     var name: String? = null
     var description: String? = null
@@ -74,7 +75,8 @@ class ChannelBuilder(private val id: String) {
     var bypassDnd: Boolean? = null
 
     fun createChannel(notificationManager: NotificationManager) {
-        val valImportance = importance ?: throw IllegalStateException("Importance of channel must be defined")
+        val valImportance = importance
+                ?: throw IllegalStateException("Importance of channel must be defined")
         val valName = name ?: throw IllegalStateException("Name of channel must be defined")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
