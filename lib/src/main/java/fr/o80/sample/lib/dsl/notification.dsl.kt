@@ -3,6 +3,7 @@ package fr.o80.sample.lib.dsl
 import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
+import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -69,6 +70,8 @@ class NotificationBuilder(private val context: Context, private val notification
 @NotificationDsl
 class ChannelBuilder(internal val id: String) {
 
+    private var group: GroupBuilder? = null
+
     var name: String? = null
     var description: String? = null
     var lockscreenVisibility: Int? = null
@@ -82,24 +85,37 @@ class ChannelBuilder(internal val id: String) {
     var sound: Uri? = null
     var audioAttributes: AudioAttributes? = null
 
+    fun group(id: String, label: CharSequence) {
+        group = GroupBuilder(id, label)
+    }
+
     fun createChannel(notificationManager: NotificationManager) {
-        val valImportance = importance
-                ?: throw IllegalStateException("Importance of channel must be defined")
+        val valImportance = importance ?: throw IllegalStateException("Importance of channel must be defined")
         val valName = name ?: throw IllegalStateException("Name of channel must be defined")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(id, valName, valImportance).also { builder ->
                 builder.description = description
                 builder.lockscreenVisibility = lockscreenVisibility ?: Notification.VISIBILITY_PRIVATE
+
                 lights?.let { builder.enableLights(it) }
                 vibration?.let { builder.enableVibration(it) }
                 bypassDnd?.let { builder.setBypassDnd(it) }
                 lightColor?.let { builder.lightColor = it }
                 vibrationPattern?.let { builder.vibrationPattern = it }
                 sound?.let { builder.setSound(it, audioAttributes) }
+
+                // Create the group
+                group?.let {
+                    notificationManager.createNotificationChannelGroup(NotificationChannelGroup(it.id, it.label))
+                    builder.group = it.id
+                }
             }
+
             // Register the channel with the system
             notificationManager.createNotificationChannel(channel)
         }
     }
 }
+
+data class GroupBuilder(val id: String, val label: CharSequence)

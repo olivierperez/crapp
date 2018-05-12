@@ -64,6 +64,8 @@ class RemiderReceiver : BroadcastReceiver() {
 
         notification(context, notificationManager) {
             channel(CHANNEL_ID) {
+                group(GROUP_ID, context.getString(R.string.notification_channel_group))
+
                 name = context.getString(R.string.notification_channel_title)
                 description = context.getString(R.string.notification_channel_description)
                 lockscreenVisibility = NotificationCompat.VISIBILITY_PUBLIC
@@ -92,6 +94,7 @@ class RemiderReceiver : BroadcastReceiver() {
     }
 
     companion object {
+        const val GROUP_ID = "REMINDERS"
         const val CHANNEL_ID = "REMINDER"
     }
 
