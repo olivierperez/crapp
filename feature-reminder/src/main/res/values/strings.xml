@@ -1,4 +1,5 @@
 <resources>
+    <string name="notification_channel_group">Rappels</string>
     <string name="notification_channel_title">Rappel</string>
     <string name="notification_channel_description">Rappel régulier pour contre l\'oubli d'une journée.</string>
     <string name="reminder_you_have_logged_anything">Vous n\'avez pas saisi vos CRA d\'aujourd\'hui</string>
