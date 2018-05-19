@@ -17,13 +17,13 @@ object ScheduleRemind {
 
     fun scheduleReminder(context: Context) {
         val nextTrigger = Calendar.getInstance().apply {
-            set(Calendar.HOUR, 18)
+            set(Calendar.HOUR_OF_DAY, 18)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
         }
 
-        if (nextTrigger.before(Date())) {
+        if (nextTrigger.before(Calendar.getInstance())) {
             nextTrigger.add(Calendar.DAY_OF_MONTH, 1)
         }
 
@@ -33,7 +33,7 @@ object ScheduleRemind {
         context.systemService<AlarmManager>()
                 .setRepeating(AlarmManager.RTC, nextTrigger.timeInMillis, AlarmManager.INTERVAL_DAY, alarmIntent)
 
-        Timber.i("Reminder scheduled")
+        Timber.i("Reminder scheduled, next execution is %s", nextTrigger)
     }
 
 }
