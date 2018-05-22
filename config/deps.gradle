@@ -72,15 +72,17 @@ ext {
             daggerMock: '0.8.4',
             support   : '27.1.0',
             parceler  : '1.0.3',
-            dbflow    : '4.0.5'
+            dbflow    : '4.0.5',
+            mockito   : '2.18.3'
     ]
 
     lib = [
 
             // Tests
-            mockitoCore       : 'org.mockito:mockito-core:2.18.3',
+            mockitoCore       : "org.mockito:mockito-core:$version.mockito",
+            mockitoJupiter    : "org.mockito:mockito-junit-jupiter:$version.mockito",
             mockitoKt         : 'com.nhaarman:mockito-kotlin:1.5.0',
-            daggerMock        : "com.github.fabioCollini:DaggerMock:$version.daggerMock",
+            daggerMock        : "com.github.fabioCollini:daggermock:$version.daggerMock",
             daggerMockKt      : "com.github.fabioCollini.daggermock:daggermock-kotlin:$version.daggerMock",
 
             // Unit Tests

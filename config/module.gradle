@@ -52,12 +52,14 @@ dependencies {
     testCompileOnly junit5.unitTestsRuntime()
 
     testImplementation lib.mockitoCore
+    testImplementation lib.mockitoKt
+    testImplementation lib.mockitoJupiter
     testImplementation lib.daggerMock
     testImplementation lib.daggerMockKt
-    testImplementation lib.mockitoKt
 
     androidTestImplementation lib.mockitoCore
+    androidTestImplementation lib.mockitoKt
+    androidTestImplementation lib.mockitoJupiter
     androidTestImplementation lib.daggerMock
     androidTestImplementation lib.daggerMockKt
-    androidTestImplementation lib.mockitoKt
 }
