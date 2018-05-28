@@ -60,9 +60,7 @@ class RemiderReceiver : BroadcastReceiver() {
     }
 
     private fun displayNotification(context: Context, hoursRequiredPerDay: Int, totalHoursForToday: Int) {
-        val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        notification(context, notificationManager) {
+        notification(context) {
             channel(CHANNEL_ID) {
                 group(GROUP_ID, context.getString(R.string.notification_channel_group))
 
@@ -89,8 +87,6 @@ class RemiderReceiver : BroadcastReceiver() {
                 title = context.getString(R.string.reminder_you_have_logged_anything)
             }
         }
-
-
     }
 
     companion object {
