@@ -16,6 +16,8 @@ import javax.inject.Inject
 @FeatureScope
 class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummary) : Presenter<SummaryView>() {
 
+    private var data: LoadedSummaryUiModel? = null
+
     fun init() {
         addDisposable(monthSummary
                               .getMonth(Date())
@@ -25,17 +27,25 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
                               .onErrorReturn { FailedSummaryUiModel(it) }
                               .startWith(LoadingSummaryUiModel)
 
+                              .doOnNext {
+                                  if (it is LoadedSummaryUiModel)
+                                      data = it
+                              }
+
                               .observeOn(AndroidSchedulers.mainThread())
                               .subscribeBy(
-                                      onNext = {
-                                          when (it) {
+                                      onNext = { uiModel ->
+                                          when (uiModel) {
                                               is LoadingSummaryUiModel -> {
                                                   view.showLoading()
                                               }
                                               is LoadedSummaryUiModel -> {
                                                   Timber.i("Summary loaded")
                                                   view.hideLoading()
-                                                  view.update(it)
+                                                  view.update(uiModel)
+                                                  if (uiModel.summary.isNotEmpty()) {
+                                                      view.showSendOption()
+                                                  }
                                               }
                                               is FailedSummaryUiModel -> {
                                                   view.showError(R.string.summary_failed_to_load)
@@ -43,6 +53,10 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
                                           }
                                       })
                      )
+    }
+
+    fun onSendClicked() {
+        Timber.i("Send option clicked")
     }
 
 }
