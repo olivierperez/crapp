@@ -12,4 +12,5 @@ interface SummaryView : PresenterView {
     fun update(uiModel: LoadedSummaryUiModel)
     fun showError(@StringRes stringRes: Int)
     fun showSendOption()
+    fun send(title: String, body: String)
 }

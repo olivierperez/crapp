@@ -1,15 +1,14 @@
 package fr.o80.featuresummary.presentation.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ShareCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import fr.o80.featuresummary.R
 import fr.o80.featuresummary.presentation.presenter.LoadedSummaryUiModel
@@ -64,13 +63,23 @@ class SummaryFragment : BaseFragment(), SummaryView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.menu_send -> {
                 presenter.onSendClicked()
                 true
             }
             else -> false
         }
+    }
+
+    override fun send(title: String, body: String) {
+        val intent = ShareCompat.IntentBuilder.from(activity)
+                .setType("text/html")
+                .setSubject(title)
+                .setHtmlText(body)
+                .addEmailTo("todo@example.org")
+                .intent
+        startActivity(Intent.createChooser(intent, "Share with:"))
     }
 
     override fun showSendOption() {

@@ -6,6 +6,11 @@ import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.dagger.FeatureScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.html.body
+import kotlinx.html.html
+import kotlinx.html.li
+import kotlinx.html.stream.appendHTML
+import kotlinx.html.ul
 import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
@@ -57,6 +62,19 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
 
     fun onSendClicked() {
         Timber.i("Send option clicked")
+        data?.let {
+            val body = StringBuilder().appendHTML().html {
+                body {
+                    ul {
+                        it.summary.forEach { project ->
+                            li { +"${project.code} - ${project.label} - ${project.time}h" }
+                        }
+                    }
+                }
+            }.toString()
+
+            view.send("CRApp summary", body)
+        }
     }
 
 }
