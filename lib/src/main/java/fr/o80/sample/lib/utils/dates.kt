@@ -21,7 +21,7 @@ fun today(): Date =
 fun mkcalendar(year: Int, month: Int, dayOfMonth: Int): Calendar =
         Calendar.getInstance().apply {
             set(Calendar.YEAR, year)
-            set(Calendar.MONTH, month - 1)
+            set(Calendar.MONTH, month)
             set(Calendar.DAY_OF_MONTH, dayOfMonth)
             set(Calendar.HOUR_OF_DAY, 0)
             set(Calendar.MINUTE, 0)
