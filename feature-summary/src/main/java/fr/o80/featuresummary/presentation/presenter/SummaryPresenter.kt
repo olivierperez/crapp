@@ -67,7 +67,7 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
                 body {
                     ul {
                         it.summary.forEach { project ->
-                            li { +"${project.code} - ${project.label} - ${project.time}h" }
+                            li { +"${project.label} | ${project.code} | ${project.time}h" }
                         }
                     }
                 }

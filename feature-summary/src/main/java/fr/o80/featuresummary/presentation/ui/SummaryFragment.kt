@@ -1,6 +1,5 @@
 package fr.o80.featuresummary.presentation.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ShareCompat
 import android.support.v7.widget.DividerItemDecoration
@@ -74,12 +73,12 @@ class SummaryFragment : BaseFragment(), SummaryView {
 
     override fun send(title: String, body: String) {
         val intent = ShareCompat.IntentBuilder.from(activity)
-                .setType("text/html")
+                .setType("message/rfc822")
                 .setSubject(title)
                 .setHtmlText(body)
                 .addEmailTo("todo@example.org")
                 .intent
-        startActivity(Intent.createChooser(intent, "Share with:"))
+        startActivity(intent)
     }
 
     override fun showSendOption() {
