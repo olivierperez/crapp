@@ -62,18 +62,25 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
 
     fun onSendClicked() {
         Timber.i("Send option clicked")
-        data?.let {
+        if (data != null) {
+            view.showEmailPopup()
+        }
+    }
+
+    fun onEmailChoosen(email: String?) {
+        Timber.i("Email choosen")
+        data?.let { uiModel ->
             val body = StringBuilder().appendHTML().html {
                 body {
                     ul {
-                        it.summary.forEach { project ->
+                        uiModel.summary.forEach { project ->
                             li { +"${project.label} | ${project.code} | ${project.time}h" }
                         }
                     }
                 }
             }.toString()
 
-            view.send("CRApp summary", body)
+            view.send(email.orEmpty(), "CRApp summary", body)
         }
     }
 

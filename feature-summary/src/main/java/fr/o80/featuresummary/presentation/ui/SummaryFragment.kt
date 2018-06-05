@@ -2,12 +2,14 @@ package fr.o80.featuresummary.presentation.ui
 
 import android.os.Bundle
 import android.support.v4.app.ShareCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.Toast
 import fr.o80.featuresummary.R
 import fr.o80.featuresummary.presentation.presenter.LoadedSummaryUiModel
@@ -71,12 +73,23 @@ class SummaryFragment : BaseFragment(), SummaryView {
         }
     }
 
-    override fun send(title: String, body: String) {
+    override fun showEmailPopup() {
+        AlertDialog.Builder(context!!)
+                .setTitle(R.string.summary_email)
+                .setView(R.layout.popup_email)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    val email = (dialog as AlertDialog).findViewById<EditText>(R.id.email)?.text?.toString()
+                    presenter.onEmailChoosen(email)
+                }
+                .show()
+    }
+
+    override fun send(email: String, title: String, body: String) {
         val intent = ShareCompat.IntentBuilder.from(activity)
                 .setType("message/rfc822")
                 .setSubject(title)
                 .setHtmlText(body)
-                .addEmailTo("todo@example.org")
+                .addEmailTo(email)
                 .intent
         startActivity(intent)
     }
