@@ -1,4 +1,4 @@
-package fr.o80.featurereminder
+package fr.o80.featurereminder.receiver
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.NotificationCompat
+import fr.o80.featurereminder.R
 import fr.o80.featurereminder.dagger.DaggerReminderComponent
 import fr.o80.featurereminder.usecase.DayChecker
 import fr.o80.featurereminder.usecase.TotalPerDay

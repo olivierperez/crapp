@@ -6,25 +6,28 @@ import android.content.Context
 import androidx.core.content.systemService
 import java.util.Calendar
 import android.content.Intent
+import fr.o80.featurereminder.receiver.RemiderReceiver
 import fr.o80.sample.lib.core.Const
+import fr.o80.sample.lib.prefs.User
 import timber.log.Timber
-import java.util.Date
+import javax.inject.Inject
 
 /**
  * @author Olivier Perez
  */
-object ScheduleRemind {
+class ScheduleRemind
+@Inject constructor(private val context: Context, private val user: User){
 
-    fun scheduleReminder(context: Context) {
+    fun scheduleReminder() {
         val nextTrigger = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 18)
-            set(Calendar.MINUTE, 0)
+            set(Calendar.HOUR_OF_DAY, user.reminderHour)
+            set(Calendar.MINUTE, user.reminderMinute)
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
-        }
 
-        if (nextTrigger.before(Calendar.getInstance())) {
-            nextTrigger.add(Calendar.DAY_OF_MONTH, 1)
+            if (before(Calendar.getInstance())) {
+                add(Calendar.DAY_OF_MONTH, 1)
+            }
         }
 
         val intent = Intent(context, RemiderReceiver::class.java)

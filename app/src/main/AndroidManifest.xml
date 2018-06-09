@@ -22,7 +22,7 @@
 
         <!-- Startup receiver -->
         <receiver
-            android:name=".OnStartupReceiver"
+            android:name="fr.o80.featurereminder.receiver.OnStartupReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

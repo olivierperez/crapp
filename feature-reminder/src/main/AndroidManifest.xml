@@ -2,7 +2,7 @@
     package="fr.o80.featurereminder">
 
     <application>
-        <receiver android:name=".RemiderReceiver" />
+        <receiver android:name=".receiver.RemiderReceiver" />
     </application>
 
 </manifest>
