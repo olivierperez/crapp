@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="summary_title">Summary</string>
     <string name="summary_failed_to_load">Failed to load summary</string>

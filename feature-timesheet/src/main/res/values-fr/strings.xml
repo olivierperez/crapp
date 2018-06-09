@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="timesheet_title">Timesheet</string>
+
+    <string name="desc_add_project">Ajouter un projet</string>
+
+    <string name="project_code">Code project</string>
+    <string name="project_name">Nom</string>
+
+    <string name="time_entry_remove_one_hour">Enlever une heure</string>
+    <string name="time_entry_add_one_hour">Ajouter une heure</string>
+
+    <string name="error_failed_to_save_project">L\'enregistrement a échoué [%s]</string>
+
+    <string name="hours">%dh</string>
+</resources>
