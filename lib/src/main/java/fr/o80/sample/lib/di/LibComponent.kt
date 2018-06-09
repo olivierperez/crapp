@@ -1,5 +1,6 @@
 package fr.o80.sample.lib.di
 
+import android.content.Context
 import dagger.Component
 import fr.o80.crapp.data.ProjectRepository
 import fr.o80.crapp.data.TimesheetRepository
@@ -19,6 +20,8 @@ interface LibComponent {
     fun inject(view: LibNavigationView)
 
     fun libConfiguration(): LibConfiguration
+
+    fun libContext(): Context
 
     fun projectRepository(): ProjectRepository
 

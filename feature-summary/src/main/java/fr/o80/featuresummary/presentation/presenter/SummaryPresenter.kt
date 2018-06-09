@@ -2,6 +2,7 @@ package fr.o80.featuresummary.presentation.presenter
 
 import fr.o80.featuresummary.R
 import fr.o80.featuresummary.usecase.MonthSummary
+import fr.o80.sample.lib.prefs.User
 import fr.o80.sample.lib.core.presenter.Presenter
 import fr.o80.sample.lib.dagger.FeatureScope
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +20,7 @@ import javax.inject.Inject
  * @author Olivier Perez
  */
 @FeatureScope
-class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummary) : Presenter<SummaryView>() {
+class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummary, private val user: User) : Presenter<SummaryView>() {
 
     private var data: LoadedSummaryUiModel? = null
 
@@ -63,12 +64,30 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
     fun onSendClicked() {
         Timber.i("Send option clicked")
         if (data != null) {
-            view.showEmailPopup()
+            if (user.rememberEmail) {
+                sendSummaryMail(user.email)
+            } else {
+                view.showEmailPopup()
+            }
         }
     }
 
-    fun onEmailChoosen(email: String?) {
+    fun onEmailChoosen(email: String, rememberEmail: Boolean) {
         Timber.i("Email choosen")
+
+        // Remember email if user
+        if (rememberEmail) {
+            user.rememberEmail = true
+            user.email = email
+        } else {
+            user.rememberEmail = false
+            user.email = ""
+        }
+
+        sendSummaryMail(email)
+    }
+
+    private fun sendSummaryMail(email: String) {
         data?.let { uiModel ->
             val body = StringBuilder().appendHTML().html {
                 body {
@@ -80,7 +99,7 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
                 }
             }.toString()
 
-            view.send(email.orEmpty(), "CRApp summary", body)
+            view.send(email, "CRApp summary", body)
         }
     }
 

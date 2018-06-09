@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import fr.o80.featuresummary.R
@@ -78,8 +79,11 @@ class SummaryFragment : BaseFragment(), SummaryView {
                 .setTitle(R.string.summary_email)
                 .setView(R.layout.popup_email)
                 .setPositiveButton("Ok") { dialog, _ ->
-                    val email = (dialog as AlertDialog).findViewById<EditText>(R.id.email)?.text?.toString()
-                    presenter.onEmailChoosen(email)
+                    (dialog as AlertDialog).let {
+                        val email = dialog.findViewById<EditText>(R.id.email)?.text?.toString().orEmpty()
+                        val rememberEmail = dialog.findViewById<CheckBox>(R.id.rememberEmail)?.isChecked ?: false
+                        presenter.onEmailChoosen(email, rememberEmail)
+                    }
                 }
                 .show()
     }
