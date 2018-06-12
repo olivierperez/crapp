@@ -1,7 +1,5 @@
 package fr.o80.sample.lib.core
 
-import java.util.Calendar
-
 /**
  * @author Olivier Perez
  */
@@ -13,6 +11,4 @@ object Const {
 
     const val REQUEST_CODE_REMINDER_ALARM = 1
     const val REQUEST_CODE_REMINDER_NOTIFICATION = 2
-
-    val NOTIFIABLE_DAYS: IntArray = intArrayOf(Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY)
 }

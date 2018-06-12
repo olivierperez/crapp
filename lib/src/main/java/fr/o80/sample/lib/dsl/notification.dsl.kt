@@ -17,16 +17,18 @@ import android.support.v4.app.NotificationCompat
 @DslMarker
 annotation class NotificationDsl
 
-fun notification(context: Context, notificationManager: NotificationManager, block: NotificationBuilder.() -> Unit) {
-    NotificationBuilder(context, notificationManager).run {
+fun notification(context: Context, block: NotificationBuilder.() -> Unit) {
+    NotificationBuilder(context).run {
         block()
         show()
     }
 }
 
 @NotificationDsl
-class NotificationBuilder(private val context: Context, private val notificationManager: NotificationManager) {
+class NotificationBuilder(private val context: Context) {
+    private val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     private var channelBuilder: ChannelBuilder? = null
+
     var id: Int? = null
     var smallIcon: Int? = null
     var title: String? = null

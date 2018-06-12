@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="notification_channel_group">Rappels</string>
-    <string name="notification_channel_title">Rappel</string>
-    <string name="notification_channel_description">Rappel régulier pour contre l\'oubli d'une journée.</string>
-    <string name="reminder_you_have_logged_anything">Vous n\'avez pas saisi vos CRA d\'aujourd\'hui</string>
-    <string name="reminder_complete_your_logged_time">Complétez vos CRA d\'aujourd\'hui</string>
+    <string name="notification_channel_group">Reminders</string>
+    <string name="notification_channel_title">Reminder</string>
+    <string name="notification_channel_description">Recurrent reminder to prevent to forget a day.</string>
+    <string name="reminder_you_have_logged_anything">You haven\'t entered time today</string>
+    <string name="reminder_complete_your_logged_time">Fill your time of today</string>
     <plurals name="reminder_x_hours_on_x_required">
-        <item quantity="one">%1$d heure / %2$d attendues</item>
-        <item quantity="other">%d heures / %d attendues</item>
+        <item quantity="one">%1$d hours / %2$d expected</item>
+        <item quantity="other">%1$d hours / %2$d expected</item>
     </plurals>
 </resources>

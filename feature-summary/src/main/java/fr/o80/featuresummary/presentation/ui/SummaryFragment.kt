@@ -1,9 +1,16 @@
 package fr.o80.featuresummary.presentation.ui
 
 import android.os.Bundle
+import android.support.v4.app.ShareCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.Toast
 import fr.o80.featuresummary.R
 import fr.o80.featuresummary.presentation.presenter.LoadedSummaryUiModel
@@ -24,6 +31,8 @@ class SummaryFragment : BaseFragment(), SummaryView {
     @Inject
     lateinit var presenter: SummaryPresenter
 
+    private var showSendOption = false
+
     private val adapter = SummaryProjectAdapter()
 
     override val layoutId: Int
@@ -35,6 +44,11 @@ class SummaryFragment : BaseFragment(), SummaryView {
         (activity as SummaryActivity).component.inject(this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recyclerView.adapter = adapter
@@ -43,6 +57,50 @@ class SummaryFragment : BaseFragment(), SummaryView {
         recyclerView.addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
 
         presenter.init()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.summary_menu, menu)
+        menu.findItem(R.id.menu_send).isVisible = showSendOption
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_send -> {
+                presenter.onSendClicked()
+                true
+            }
+            else -> false
+        }
+    }
+
+    override fun showEmailPopup() {
+        AlertDialog.Builder(context!!)
+                .setTitle(R.string.summary_email)
+                .setView(R.layout.popup_email)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    (dialog as AlertDialog).let {
+                        val email = dialog.findViewById<EditText>(R.id.email)?.text?.toString().orEmpty()
+                        val rememberEmail = dialog.findViewById<CheckBox>(R.id.rememberEmail)?.isChecked ?: false
+                        presenter.onEmailChoosen(email, rememberEmail)
+                    }
+                }
+                .show()
+    }
+
+    override fun send(email: String, title: String, body: String) {
+        val intent = ShareCompat.IntentBuilder.from(activity)
+                .setType("message/rfc822")
+                .setSubject(title)
+                .setHtmlText(body)
+                .addEmailTo(email)
+                .intent
+        startActivity(intent)
+    }
+
+    override fun showSendOption() {
+        showSendOption = true
+        activity?.invalidateOptionsMenu()
     }
 
     override fun showLoading() {

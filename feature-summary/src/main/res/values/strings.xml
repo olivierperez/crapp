@@ -1,7 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="summary_title">Summary</string>
     <string name="summary_failed_to_load">Failed to load summary</string>
     <string name="summary_time_hours">%dh</string>
     <string name="summary_time_days">%dd</string>
     <string name="summary_time_days_hours">%1$dd %2$dh</string>
+    <string name="summary_send">Send</string>
+    <string name="summary_email">Email</string>
+    <string name="summary_remember_email">Remember</string>
 </resources>

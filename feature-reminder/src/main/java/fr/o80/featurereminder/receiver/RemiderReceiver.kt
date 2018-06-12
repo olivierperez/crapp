@@ -1,4 +1,4 @@
-package fr.o80.featurereminder
+package fr.o80.featurereminder.receiver
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.NotificationCompat
+import fr.o80.featurereminder.R
 import fr.o80.featurereminder.dagger.DaggerReminderComponent
 import fr.o80.featurereminder.usecase.DayChecker
 import fr.o80.featurereminder.usecase.TotalPerDay
@@ -60,9 +61,7 @@ class RemiderReceiver : BroadcastReceiver() {
     }
 
     private fun displayNotification(context: Context, hoursRequiredPerDay: Int, totalHoursForToday: Int) {
-        val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        notification(context, notificationManager) {
+        notification(context) {
             channel(CHANNEL_ID) {
                 group(GROUP_ID, context.getString(R.string.notification_channel_group))
 
@@ -89,8 +88,6 @@ class RemiderReceiver : BroadcastReceiver() {
                 title = context.getString(R.string.reminder_you_have_logged_anything)
             }
         }
-
-
     }
 
     companion object {

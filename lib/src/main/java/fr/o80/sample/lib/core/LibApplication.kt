@@ -30,7 +30,7 @@ abstract class LibApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         component = DaggerLibComponent.builder()
-                .libModule(LibModule(buildLibConfiguration()))
+                .libModule(LibModule(buildLibConfiguration(), this))
                 .build()
         FlowManager.init(FlowConfig.Builder(this)
                 .openDatabasesOnInit(true)

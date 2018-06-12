@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">lib</string>
-
-    <string name="drawer_open">Menu open</string>
-    <string name="drawer_close">Menu closed</string>
+    <string name="drawer_open">Menu ouvert</string>
+    <string name="drawer_close">Menu fermé</string>
 
     <string name="crapp">CRApp</string>
     <string name="crapp_by_olivier">By Olivier Perez</string>
