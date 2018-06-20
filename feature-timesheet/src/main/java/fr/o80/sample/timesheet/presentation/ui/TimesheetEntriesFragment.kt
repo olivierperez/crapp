@@ -3,6 +3,7 @@ package fr.o80.sample.timesheet.presentation.ui
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import fr.o80.crapp.data.entity.Project
 import fr.o80.sample.lib.core.ui.BaseFragment
@@ -61,7 +62,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
         fab.setOnClickListener { presenter.onAddClicked() }
         recyclerView.itemAnimator = SlideInLeftAnimator()
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = adapter
 
         presenter.init()
