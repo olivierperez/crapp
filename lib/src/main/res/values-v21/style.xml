@@ -3,6 +3,7 @@
     <!-- Base theme -->
     <style name="BaseLibTheme_21" parent="BaseLibTheme_19">
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:navigationBarColor">@color/primaryDark</item>
     </style>
 
     <style name="WindowAnimationTransition">
