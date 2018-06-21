@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:theme="@style/LibTheme.AppBarOverlay"
         app:layout_behavior="fr.o80.sample.lib.core.behavior.DisableableAppBarLayoutBehavior">
 
         <android.support.v7.widget.Toolbar

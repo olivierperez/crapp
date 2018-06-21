@@ -68,9 +68,9 @@ ext.ui = dependencyGroup {
 
 ext {
     version = [
-            dagger    : '2.13',
+            dagger    : '2.16',
             daggerMock: '0.8.4',
-            support   : '27.1.0',
+            support   : '27.1.1',
             parceler  : '1.0.3',
             dbflow    : '4.0.5',
             mockito   : '2.18.3'

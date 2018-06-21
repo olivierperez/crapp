@@ -4,7 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import fr.o80.crapp.data.entity.Project
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
@@ -28,6 +28,8 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
 
     @Inject
     lateinit var presenter: TimesheetEntriesPresenter
+
+    private var datePickerDialog: DatePickerDialog? = null
 
     private val adapter: TimesheetAdapter by lazy {
         TimesheetAdapter(
@@ -93,9 +95,18 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
     }
 
     override fun showDatePicker(cal: Calendar) {
-        DatePickerDialog(activity, { _, year, month, dayOfMonth ->
-            presenter.onDateSelected(year, month, dayOfMonth)
-        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+        val picker = datePickerDialog ?: DatePickerDialog(
+                activity,
+                { _, year, month, dayOfMonth ->
+                    presenter.onDateSelected(year, month, dayOfMonth)
+                },
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH))
+
+        if (!picker.isShowing) picker.show()
+
+        datePickerDialog = picker
     }
 
     override fun showError() {

@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 abstract class BaseDrawerActivity : AppCompatActivity(), LibNavigationView.Listener {
 
-    lateinit private var drawerToggle: ActionBarDrawerToggle
+    private lateinit var drawerToggle: ActionBarDrawerToggle
 
     @Inject
     lateinit var libConfiguration: LibConfiguration
