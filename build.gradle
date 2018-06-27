@@ -35,8 +35,8 @@ ext {
     cBuildToolsVersion = "27.0.3"
     cMinSdkVersion = 16
     cTargetSdkVersion = 27
-    cVersionCode = 5
-    cVersionName = '1.4'
+    cVersionCode = 6
+    cVersionName = '1.5'
 }
 
 ext {
