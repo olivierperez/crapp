@@ -8,7 +8,7 @@ import fr.o80.sample.lib.di.LibComponent
 /**
  * @author Olivier Perez
  */
-@Component(dependencies = arrayOf(LibComponent::class), modules = arrayOf())
+@Component(dependencies = [LibComponent::class], modules = [])
 @FeatureScope
 interface SummaryComponent {
     fun inject(fragment: SummaryFragment)

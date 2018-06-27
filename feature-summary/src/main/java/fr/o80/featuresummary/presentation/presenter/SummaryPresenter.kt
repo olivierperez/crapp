@@ -1,6 +1,7 @@
 package fr.o80.featuresummary.presentation.presenter
 
 import fr.o80.featuresummary.R
+import fr.o80.featuresummary.service.TimeToText
 import fr.o80.featuresummary.usecase.MonthSummary
 import fr.o80.sample.lib.prefs.User
 import fr.o80.sample.lib.core.presenter.Presenter
@@ -20,7 +21,7 @@ import javax.inject.Inject
  * @author Olivier Perez
  */
 @FeatureScope
-class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummary, private val user: User) : Presenter<SummaryView>() {
+class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummary, private val timeToText: TimeToText, private val user: User) : Presenter<SummaryView>() {
 
     private var data: LoadedSummaryUiModel? = null
 
@@ -93,7 +94,7 @@ class SummaryPresenter @Inject constructor(private val monthSummary: MonthSummar
                 body {
                     ul {
                         uiModel.summary.forEach { project ->
-                            li { +"${project.label} | ${project.code} | ${project.time}h" }
+                            li { +"${project.label} | ${project.code} | ${timeToText.convert(project.time)}" }
                         }
                     }
                 }

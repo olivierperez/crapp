@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import fr.o80.featuresummary.R
+import fr.o80.featuresummary.service.TimeToText
 import fr.o80.featuresummary.usecase.ProjectSummaryCallback
 import fr.o80.featuresummary.usecase.model.ProjectSummary
 
@@ -42,11 +43,7 @@ class SummaryProjectAdapter : RecyclerView.Adapter<SummaryProjectAdapter.Summary
             projectName.text = projectSummary.label
             projectCode.text = projectSummary.code
 
-            when {
-                projectSummary.time < 8 -> time.text = itemView.context.getString(R.string.summary_time_hours, projectSummary.time)
-                projectSummary.time % 8 == 0 -> time.text = itemView.context.getString(R.string.summary_time_days, projectSummary.time/8)
-                else -> time.text = itemView.context.getString(R.string.summary_time_days_hours, projectSummary.time/8, projectSummary.time - (projectSummary.time/8) * 8)
-            }
+            time.text = TimeToText(itemView.context).convert(projectSummary.time)
         }
 
     }
