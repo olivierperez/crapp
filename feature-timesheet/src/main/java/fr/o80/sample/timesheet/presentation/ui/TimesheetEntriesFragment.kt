@@ -62,7 +62,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         }
 
         fab.setOnClickListener { presenter.onAddClicked() }
-        recyclerView.itemAnimator = SlideInLeftAnimator()
+        recyclerView.itemAnimator.changeDuration = 0
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = adapter
 
