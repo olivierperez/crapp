@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.view.View
 import fr.o80.crapp.data.entity.Project
 import fr.o80.sample.lib.core.ui.BaseFragment
 import fr.o80.sample.timesheet.R
@@ -63,7 +62,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
         }
 
         fab.setOnClickListener { presenter.onAddClicked() }
-        recyclerView.itemAnimator = SlideInLeftAnimator()
+        recyclerView.itemAnimator.changeDuration = 0
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.adapter = adapter
 
@@ -78,7 +77,7 @@ class TimesheetEntriesFragment : BaseFragment(), TimesheetEntriesView {
                 Timber.d("Loaded, %s", viewModel.entries)
                 hideLoading()
 
-                adapter.setEntries(viewModel.entries)
+                adapter.submitList(viewModel.entries)
 
                 totalHours.text = getString(R.string.hours, viewModel.totalHours)
                 currentDate.text = DateFormat.getDateInstance(DateFormat.MEDIUM).format(viewModel.date)
