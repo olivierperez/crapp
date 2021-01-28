@@ -9,3 +9,11 @@ An application to log time you spend on each project. In french **Compte-Rendu d
 - Architecture:
   - MVP
   - 1 feature == 1 kotlin module
+
+TEST
+TEST3
+4
+6
+7
+8
+9
